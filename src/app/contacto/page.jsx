@@ -1,7 +1,7 @@
+'use server'
 import Card from '@/components/Card'
-import React from 'react'
 
-const Contacto = () => {
+const Contacto = async () => {
   return (
     <Card />
   )
