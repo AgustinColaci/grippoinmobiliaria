@@ -2,4 +2,147 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    color: #1A1A1A;
+    font-size: 62.5%;
+    list-style-type: none;
+}
+
+/* Variables - Colores */
+:root {
+    --color--white:#FFFFFF;
+    --color--black:#000000;
+    --color--azul:#000C79;
+    --color--rojo:#C6152B;
+    --color--verde:#13AA66;
+    --color--gray:#1A1A1A;
+    --color--disable:#909090;
+    --color--chip:#666666;
+}
+
+/* Header */
+
+.header {
+    margin-top: 3.2rem;
+    padding-bottom: 2.4rem;
+    display: flex;
+    justify-content: center;
+}
+
+.header .logo--grippo {
+    background-image: url(../img/logo--grippo.svg);
+    width: 24.8rem;
+    height: 10.7rem;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/* Banner */
+
+.section__banner {
+    height: 43.2rem;
+    background-image: url(../img/background--banner.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 3.2rem;
+}
+
+/* Filtros */
+
+.filtros {
+    background-color: var(--color--white);
+    border: .1rem solid var(--color--disable);
+    border-radius: 1.2rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: .8rem;
+    gap: .4rem;
+}
+
+.filtros select {
+    font-size: 2rem;
+    color: var(--color--disable);
+    border-color: var(--color--white);
+}
+
+.filtros .search--button {
+    width: 4.8rem;
+    height: 4.8rem;
+    background-color: var(--color--azul);
+    border-radius: 50%;
+    background-image: url(../icons/icon--buscar.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Footer */
+
+.footer {
+    margin-top: 10rem; /* ELIMINAR ESTA LINEA CUANDO ESTÉ EL CONTENIDO*/
+    background-color: var(--color--gray);
+    padding: 3.2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2.4rem;
+}
+
+.footer .footer__contacto,
+.footer .footer__ubicacion,
+.footer .footer__redes {
+    width: 32rem;
+}
+
+.footer .footer__logo {
+    background-image: url(../img/logo--grippo.svg);
+    width: 24.8rem;
+    height: 10.7rem;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.footer .link, 
+.footer h2 {
+    color: var(--color--white);
+    font-size: 2rem;
+}
+
+.footer .link {
+    padding-left: 2.8rem;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 1.2rem;
+}
+
+.contacto__wsp .link {
+    background-image: url(../icons/whatsapp.svg);
+    background-repeat: no-repeat;
+}
+
+.contacto__mail .link {
+    background-image: url(../icons/mail.svg);
+    background-repeat: no-repeat;
+}
+
+.ubicacion .link {    
+    background-image: url(../icons/icon--map.svg);
+    background-repeat: no-repeat;
+}
+
+.instagram .link {    
+    background-image: url(../icons/instagram.svg);
+    background-repeat: no-repeat;
+}
+
+.facebook .link {    
+    background-image: url(../icons/facebook.svg);
+    background-repeat: no-repeat;
 }
