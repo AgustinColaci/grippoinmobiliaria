@@ -1,5 +1,5 @@
 import Footer from '@/components/Footer';
-import '../css/styles.css'
+import '@/css/styles.css'
 
 //LAYOUT ESTATICO - HEADER - FOOTER
 export default function RootLayout({ children }) {

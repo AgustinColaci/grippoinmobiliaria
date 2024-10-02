@@ -53,8 +53,8 @@ const Autogestion = () => {
             <input type="text" id="direccion" name="direccion" placeholder="Ejemplo: Calle 1234" />
           </div>
 
-          <div className='section__form--inputs'>
-            <div className='input-sin-label'>  
+          <div className='section__form--inputs dos-cols'>
+            <div className='input-sin-label moneda'>  
               <label htmlFor="precioInmueble">Precio de inmueble*</label>
               <select id="precioInmueble" name="precioInmueble" defaultValue="">
                 <option value="" disabled>Moneda</option>
@@ -63,17 +63,32 @@ const Autogestion = () => {
               </select>            
             </div>  
             <div className='input-sin-label'>              
-              <label htmlFor="precioInmuebleValor"></label>
+              <label className="label--hidden" htmlFor="precioInmuebleValor"></label>
               <input type="text" id="precioInmuebleValor" name="precioInmuebleValor" placeholder="Ejemplo: 8000" />
             </div>
           </div>
 
-          <div className='section__form--inputs'>
-            <label>Paga expensas?</label>
+          <div className='section__form--inputs expensas'>
+            <label class="expensas-title">Paga expensas?</label>
             <input type="radio" id="si" name="pagaExpensas" value="si" />
             <label htmlFor="si">Sí</label>
             <input type="radio" id="no" name="pagaExpensas" value="no" />
             <label htmlFor="no">No</label>
+          </div>
+
+          <div className='section__form--inputs dos-cols'>
+            <div className='input-sin-label moneda'>  
+              <label className="label--hidden" htmlFor="precioExpensas"></label>
+              <select id="precioExpensas" name="precioExpensas" defaultValue="">
+                <option value="" disabled>Moneda</option>
+                <option value="ARS">ARS</option>
+                <option value="USD">USD</option>
+              </select>            
+            </div>  
+            <div className='input-sin-label'>              
+              <label className="label--hidden" htmlFor="precioExpensasValor"></label>
+              <input type="text" id="precioExpensasValor" name="precioExpensasValor" placeholder="Ejemplo: 8000" />
+            </div>
           </div>
 
           <div className='section__form--inputs'>
