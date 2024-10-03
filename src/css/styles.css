@@ -172,7 +172,8 @@
     font-size: 2rem;
 }
 
-.banner__autogestion .button.button--delete {
+.banner__autogestion .button.button--delete,
+.add__button .button--add {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -187,12 +188,12 @@
 
 .section__form {
     font-size: 2rem;
-    max-width: 65.2rem;
     padding: 3.2rem;
 }
 
 .section__form .title {
     font-size: 2rem;
+    font-weight: 400;
 }
 
 .section__form .section__form--inputs {
@@ -232,6 +233,8 @@
     border: .1rem solid var(--color--azul);
     color: var(--color--white);    
     background-color: var(--color--azul);
+    position: absolute;
+    right: 3.2rem;
 }
 
 .section__form--inputs.dos-cols {
@@ -268,4 +271,38 @@
 .expensas-title {
     font-size: 1.8rem;
     margin-right: 2rem;
+}
+
+.section__form .step-one {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 2.4rem;
+    border-bottom: 1px solid var(--color--disable);
+    gap: 7.2rem;
+}
+
+.column-left {
+    max-width: 65.2rem;
+}
+
+.column-right {
+    max-width: 65.2rem;
+    min-width: 65.2rem;
+}
+
+.google-maps {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.add__button .button--add {
+    width: 25.2rem;
+    margin-top: 2rem;
+}
+
+.column-right .paragraph {
+    font-size: 1.2rem;
+    font-style: italic;
+    margin-top: 1.2rem;
+    color: var(--color--azul);
 }
