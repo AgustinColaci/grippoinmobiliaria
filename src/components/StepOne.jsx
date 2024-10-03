@@ -37,7 +37,7 @@ const StepOne = ({ }) => {
                         </div>
 
                         <div className='section__form--inputs'>
-                            <label htmlFor="direccion">Ubicación:</label>
+                            <label htmlFor="direccion">Ubicación*</label>
                             <input type="text" id="direccion" name="direccion" placeholder="Ejemplo: Calle 1234" />
                         </div>
 
@@ -57,7 +57,7 @@ const StepOne = ({ }) => {
                         </div>
 
                         <div className='section__form--inputs expensas'>
-                            <label class="expensas-title">Paga expensas?</label>
+                            <label class="expensas-title">¿Paga expensas?</label>
                             <input type="radio" id="si" name="pagaExpensas" value="si" />
                             <label htmlFor="si">Sí</label>
                             <input type="radio" id="no" name="pagaExpensas" value="no" />
@@ -80,7 +80,7 @@ const StepOne = ({ }) => {
                         </div>
 
                         <div className='section__form--inputs'>
-                            <label htmlFor="codigo">Ubicación:</label>
+                            <label htmlFor="codigo">Ubicación*</label>
                             <input type="text" id="codigo" name="codigo" placeholder="Ejemplo: 1234" />
                         </div>
 
@@ -95,7 +95,7 @@ const StepOne = ({ }) => {
                         </div>
 
                         <div className='section__form--inputs'>
-                            <label htmlFor="link-maps">Ubicación:</label>
+                            <label htmlFor="link-maps">Ubicación*</label>
                             <input type="text" id="link-maps" name="link-maps" placeholder="Pegar link de Google maps" />
                         </div>
                     </div>

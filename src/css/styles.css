@@ -173,7 +173,8 @@
 }
 
 .banner__autogestion .button.button--delete,
-.add__button .button--add {
+.add__button .button--add,
+.button--previous {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -211,7 +212,8 @@
 
 .section__form option,
 .section__form input,
-.section__form select {
+.section__form select,
+.section__form textarea {
     border: .1rem solid var(--color--disable);
     border-radius: 1.2rem;
     height: 4.8rem;
@@ -256,7 +258,9 @@
     min-width: 16rem;
 }
 
-.section__form .section__form--inputs.expensas {
+.section__form .section__form--inputs.expensas,
+.section__form .section__form--inputs.cochera,
+.section__form .section__form--inputs.mascotas {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -268,7 +272,9 @@
     display: none;
 }
 
-.expensas-title {
+.expensas-title,
+.cochera-title,
+.mascotas-title {
     font-size: 1.8rem;
     margin-right: 2rem;
 }
@@ -305,4 +311,41 @@
     font-style: italic;
     margin-top: 1.2rem;
     color: var(--color--azul);
+}
+
+.descripcion textarea {
+    height: 12rem;
+    width: 100%;
+}
+
+.section__form .step-two option,
+.section__form .step-two input,
+.section__form .step-two select {
+    max-width: 65.2rem;
+    min-width: 65.2rem;
+}
+
+.step-two .section__form--inputs {
+    max-width: 100%;
+}
+
+.section__form--inputs.mascotas {
+    width: 20%;
+    max-width: 20%;
+    min-width: 20%;
+}
+
+.section__form .button.button--previous {
+    margin-top: 2.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 21.7rem;
+    height: 4.8rem;
+    border-radius: 1.2rem;
+    font-size: 1.8rem;
+    text-decoration: none;
+    border: .1rem solid var(--color--azul);
+    color: var(--color--azul);    
+    background-color: var(--color--white);
 }
