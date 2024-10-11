@@ -20,6 +20,14 @@
     --color--chip:#666666;
 }
 
+.viewport {
+    max-width: 144rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 3.2rem;
+    padding-right: 3.2rem;
+}
+
 /* Header */
 
 .header {
@@ -86,8 +94,10 @@
 /* Footer */
 
 .footer {
-    margin-top: 10rem; /* ELIMINAR ESTA LINEA CUANDO ESTÉ EL CONTENIDO*/
     background-color: var(--color--gray);
+}
+
+.footer__content {
     padding: 3.2rem;
     display: flex;
     flex-wrap: wrap;
@@ -95,13 +105,19 @@
     gap: 2.4rem;
 }
 
-.footer .footer__contacto,
-.footer .footer__ubicacion,
-.footer .footer__redes {
+.footer__content {
+    max-width: 144rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.footer__content .footer__contacto,
+.footer__content .footer__ubicacion,
+.footer__content .footer__redes {
     width: 32rem;
 }
 
-.footer .footer__logo {
+.footer__content .footer__logo {
     background-image: url(../img/logo--grippo.svg);
     width: 24.8rem;
     height: 10.7rem;
@@ -110,13 +126,13 @@
     background-repeat: no-repeat;
 }
 
-.footer .link, 
-.footer h2 {
+.footer__content .link, 
+.footer__content h2 {
     color: var(--color--white);
     font-size: 2rem;
 }
 
-.footer .link {
+.footer__content .link {
     padding-left: 2.8rem;
     text-decoration: none;
     display: inline-block;
@@ -477,4 +493,33 @@
     font-weight: 700;
     font-size: 2.4rem;
 }
+
+/* DETALLE PROPIEDAD */
+
+.section__detalle h2 {
+    font-size: 2.4rem;
+}
+
+.detalle__propiedad {
+    height: 5.6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.section__detalle--info {
+    display: flex;
+    gap: 2.4rem;
+    flex-wrap: wrap;
+}
+
+.detalle__propiedad--text .text {
+    display: block;
+    font-size: 2rem;
+    font-weight: 500;
+    margin-top: .4rem;
+}
+
+
 

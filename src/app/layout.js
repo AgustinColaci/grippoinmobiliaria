@@ -9,14 +9,16 @@ export default function RootLayout({ children }) {
   return (
     <html lang="es">
       <body>
-        <header className="header">
-          <div className="logo--grippo"></div>
-        </header>
+        <section className="viewport">
+          <header className="header">
+            <div className="logo--grippo"></div>
+          </header>
 
-        {children}
+          {children}
 
-        <section className="section__cards">
-          <Card />
+          <section className="section__cards">
+            <Card />
+          </section>
         </section>
         <Footer />
       </body>
