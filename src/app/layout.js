@@ -1,4 +1,5 @@
 import Footer from '@/components/Footer';
+import Card from "@/components/Card";
 import '@/css/styles.css'
 
 //LAYOUT ESTATICO - HEADER - FOOTER
@@ -14,8 +15,10 @@ export default function RootLayout({ children }) {
 
         {children}
 
+        <section className="section__cards">
+          <Card />
+        </section>
         <Footer />
-
       </body>
     </html>
   );
