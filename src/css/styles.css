@@ -494,9 +494,32 @@
     font-size: 2.4rem;
 }
 
+/* CARDS DETALLE */
+
+.Card__detalle {
+    position: relative;
+    width: 84.5rem;
+    height: 43.2rem;
+    border-radius: .8rem;
+    box-shadow: none;
+}
+
+.Card__detalle .slider {
+    height: 100%;
+    background-color: #7e88dd;
+    border-radius: .8rem;
+}
+
 /* DETALLE PROPIEDAD */
 
+.section__detalle {
+    margin-top: 2.4rem;
+    border-top: .1rem solid var(--color--gray);
+    padding-top: 2.4rem;
+}
+
 .section__detalle h2 {
+    font-weight: 700;
     font-size: 2.4rem;
 }
 
@@ -509,6 +532,7 @@
 }
 
 .section__detalle--info {
+    margin-top: 2.4rem;
     display: flex;
     gap: 2.4rem;
     flex-wrap: wrap;
@@ -521,5 +545,72 @@
     margin-top: .4rem;
 }
 
+.flex {
+    display: flex;
+    gap: 2.4rem;
+}
 
+.volver {
+    margin-bottom: 2.4rem;
+}
 
+.volver .link {
+    font-size: 2rem;
+    text-decoration: none;
+    background-image: url(../icons/arrow-left-black.svg);
+    background-position: left center;
+    background-repeat: no-repeat;
+    padding-left: 2.4rem;
+    font-weight: 500;
+}
+
+.detalle__legales {
+    border-bottom: .1rem solid var(--color--gray);
+    padding-bottom: 1.8rem;
+}
+
+.detalle__legales .paragraph {
+    font-size: 1.8rem;
+    font-weight: 400;
+    line-height: 2.2rem;
+}
+
+.contacto__detalle .card__buttons--verMas,
+.card__buttons--wsp .text {
+    display: none;
+}
+
+.contacto__detalle .card__buttons--wsp .text {
+    display: block;
+}
+
+.contacto__detalle .card__buttons .card__buttons--wsp {
+    width: fit-content;
+    border-radius: 4rem;
+    background-color: #13AA66;
+    background-image: url(/_next/static/media/whatsapp.7630e754.svg);
+    background-repeat: no-repeat;
+    background-position: 2rem center;
+    padding-left: 6rem;
+    padding-right: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contacto__detalle .card__buttons .card__buttons--wsp a {
+    text-decoration: none;
+}
+
+.contacto__detalle .card__buttons .card__buttons--wsp .text {
+    font-size: 1.8rem;
+    color: var(--color--white);
+}
+
+.contacto__detalle .card__buttons {
+    justify-content: flex-start;
+}
+
+.section__similares {
+    margin-top: 2.4rem;
+}

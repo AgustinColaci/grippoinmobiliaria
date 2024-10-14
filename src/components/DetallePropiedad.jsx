@@ -161,8 +161,14 @@ const DetallePropiedad = () => {
                         </div>
                     </div>
 
+                    <div className='detalle__legales'>
+                        <p className='paragraph'>VENTA Departamento monoambiente a estrenarsituado en un punto estratégico de la ciudad de Villa Bosch. A cuatrocientos metros de la estación de tren villa Bosch del ferrocarril Urquiza (que te lleva a la estación Federico Lacroze en 27 minutos), en dirección contraria nos acerca a la terminal general Lemos. En la estación Villa Bosch, contamos con cuatro ramales de colectivos, que nos facilitan el traslado a, caseros, San Martín, Loma Hermosa, Podestá.La propiedad cuenta con un gran caudal de luz, gracias a las ventanas de piso a techo con doble vidrio DVH laminado, cumpliendo con tres roles muy importantes, en primer lugar el ya mencionado aprovechamiento de la luz natural, en segundo lugar brinda una mayor seguridad, y por último, aislamiento acústico, que se traduce en un manto de Paz y tranquilidad.El suelo de porcelanato rectificado similar a la madera le suma una profunda sensación de calidez y elegancia.</p>
+                    </div>
                 </section>
-
+                <section className='section__similares'>
+                    <h2>Propiedades Similares</h2>
+                    /* ADJUNTAR CARDS PROP SIMILARES */
+                </section>
             </section>
         </>
     );
