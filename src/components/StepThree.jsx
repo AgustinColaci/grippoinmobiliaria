@@ -1,7 +1,10 @@
+import BannerDetalle from '@/components/BannerDetalle';
 
 const StepThree = () => {
   return (
-    <div>StepThree</div>
+    <>
+      <BannerDetalle />
+    </>
   )
 }
 
