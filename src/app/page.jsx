@@ -1,13 +1,10 @@
-'use server'
-// localhost:3000
+import Banner from "@/components/Banner";
+import '../globals.css'
 
-export default async function Home() {
-
-  const propiedades = await fetch('http://localhost:3000/api/propiedades', {method:'GET'}).then(res => res.json())
-
+export default function Home() {
   return (
-    <main>
-      Grippo inmobiliaria
-    </main>
+
+    <Banner />
+
   );
 }

@@ -2,4 +2,615 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    color: #1A1A1A;
+    font-size: 62.5%;
+    list-style-type: none;
+    font-family: "Roboto", sans-serif;
+}
+
+/* Variables - Colores */
+:root {
+    --color--white:#FFFFFF;
+    --color--black:#000000;
+    --color--azul:#000C79;
+    --color--rojo:#C6152B;
+    --color--verde:#13AA66;
+    --color--gray:#1A1A1A;
+    --color--disable:#909090;
+    --color--chip:#666666;
+}
+
+.viewport {
+    max-width: 144rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 3.2rem;
+    padding-right: 3.2rem;
+}
+
+/* Header */
+
+.header {
+    margin-top: 3.2rem;
+    padding-bottom: 2.4rem;
+    display: flex;
+    justify-content: center;
+}
+
+.header .logo--grippo {
+    background-image: url(../img/logo--grippo.svg);
+    width: 24.8rem;
+    height: 10.7rem;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/* Banner */
+
+.section__banner {
+    height: 43.2rem;
+    background-image: url(../img/background--banner.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 3.2rem;
+}
+
+/* Filtros */
+
+.filtros {
+    background-color: var(--color--white);
+    border: .1rem solid var(--color--disable);
+    border-radius: 1.2rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: .8rem;
+    gap: .4rem;
+}
+
+.filtros select {
+    font-size: 2rem;
+    color: var(--color--disable);
+    border-color: var(--color--white);
+}
+
+.filtros .search--button {
+    width: 4.8rem;
+    height: 4.8rem;
+    background-color: var(--color--azul);
+    border-radius: 50%;
+    background-image: url(../icons/icon--buscar.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Footer */
+
+.footer {
+    background-color: var(--color--gray);
+}
+
+.footer__content {
+    padding: 3.2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2.4rem;
+}
+
+.footer__content {
+    max-width: 144rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.footer__content .footer__contacto,
+.footer__content .footer__ubicacion,
+.footer__content .footer__redes {
+    width: 32rem;
+}
+
+.footer__content .footer__logo {
+    background-image: url(../img/logo--grippo.svg);
+    width: 24.8rem;
+    height: 10.7rem;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.footer__content .link, 
+.footer__content h2 {
+    color: var(--color--white);
+    font-size: 2rem;
+}
+
+.footer__content .link {
+    padding-left: 2.8rem;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 1.2rem;
+}
+
+.contacto__wsp .link {
+    background-image: url(../icons/whatsapp.svg);
+    background-repeat: no-repeat;
+}
+
+.contacto__mail .link {
+    background-image: url(../icons/mail.svg);
+    background-repeat: no-repeat;
+}
+
+.ubicacion .link {    
+    background-image: url(../icons/icon--map.svg);
+    background-repeat: no-repeat;
+}
+
+.instagram .link {    
+    background-image: url(../icons/instagram.svg);
+    background-repeat: no-repeat;
+}
+
+.facebook .link {    
+    background-image: url(../icons/facebook.svg);
+    background-repeat: no-repeat;
+}
+
+/* AUTOGESTION */
+
+.banner__autogestion {
+    background-color: #E6E7F2;
+    height: 11.8rem;
+    padding: 3.2rem;
+    display: flex;
+}
+
+.banner__autogestion .banner__content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.banner__autogestion .title {
+    font-size: 2.8rem;
+}
+
+.banner__autogestion .paragraph {
+    font-size: 2rem;
+}
+
+.banner__autogestion .button.button--delete,
+.add__button .button--add,
+.button--previous,
+.button--verMas {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18.5rem;
+    height: 4.8rem;
+    border-radius: 1.2rem;
+    font-size: 1.8rem;
+    text-decoration: none;
+    border: .1rem solid var(--color--azul);
+    color: var(--color--azul);
+}
+
+.section__form {
+    font-size: 2rem;
+    padding: 3.2rem;
+}
+
+.section__form .title {
+    font-size: 2rem;
+    font-weight: 400;
+}
+
+.section__form .section__form--inputs {
+    font-size: 1.4rem;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.section__form label {
+    font-size: 1.4rem;
+    margin-bottom: .8rem;
+    margin-top: .8rem;
+}
+
+.section__form option,
+.section__form input,
+.section__form select,
+.section__form textarea {
+    border: .1rem solid var(--color--disable);
+    border-radius: 1.2rem;
+    height: 4.8rem;
+    font-size: 1.8rem;
+    color: var(--color--disable);
+    padding: .8rem;
+}
+
+.section__form .button.button--next {
+    margin-top: 2.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18.5rem;
+    height: 4.8rem;
+    border-radius: 1.2rem;
+    font-size: 1.8rem;
+    text-decoration: none;
+    border: .1rem solid var(--color--azul);
+    color: var(--color--white);    
+    background-color: var(--color--azul);
+    position: absolute;
+    right: 3.2rem;
+}
+
+.section__form--inputs.dos-cols {
+    font-size: 1.4rem;
+    display: flex;
+    flex-direction: row;
+    gap: 2.4rem;
+    align-items: flex-end;
+}
+
+.input-sin-label {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.input-sin-label.moneda {
+    max-width: 16rem;
+    min-width: 16rem;
+}
+
+.section__form .section__form--inputs.expensas,
+.section__form .section__form--inputs.cochera,
+.section__form .section__form--inputs.mascotas {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: .6rem;
+}
+
+.section__form .section__form--inputs .label--hidden {
+    display: none;
+}
+
+.expensas-title,
+.cochera-title,
+.mascotas-title {
+    font-size: 1.8rem;
+    margin-right: 2rem;
+}
+
+.section__form .step-one {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 2.4rem;
+    border-bottom: 1px solid var(--color--disable);
+    gap: 7.2rem;
+}
+
+.column-left {
+    max-width: 65.2rem;
+}
+
+.column-right {
+    max-width: 65.2rem;
+    min-width: 65.2rem;
+}
+
+.google-maps {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.add__button .button--add {
+    width: 25.2rem;
+    margin-top: 2rem;
+}
+
+.column-right .paragraph {
+    font-size: 1.2rem;
+    font-style: italic;
+    margin-top: 1.2rem;
+    color: var(--color--azul);
+}
+
+.descripcion textarea {
+    height: 12rem;
+    width: 100%;
+}
+
+.section__form .step-two option,
+.section__form .step-two input,
+.section__form .step-two select {
+    max-width: 65.2rem;
+    min-width: 65.2rem;
+}
+
+.step-two .section__form--inputs {
+    max-width: 100%;
+}
+
+.section__form--inputs.mascotas {
+    width: 20%;
+    max-width: 20%;
+    min-width: 20%;
+}
+
+.section__form .button.button--previous {
+    margin-top: 2.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 21.7rem;
+    height: 4.8rem;
+    border-radius: 1.2rem;
+    font-size: 1.8rem;
+    text-decoration: none;
+    border: .1rem solid var(--color--azul);
+    color: var(--color--azul);    
+    background-color: var(--color--white);
+}
+
+/* CARDS */
+
+.section__cards {
+    padding: 3.2rem;
+}
+
+.Card {
+    width: 32rem;
+    height: 42rem;
+    padding: 1.2rem;
+    border-radius: .8rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 
+    0 6px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.Card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2), 
+    0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+.Card .slider__img--temporal {
+    width: 100%;
+    height: 17.6rem;
+    background-color: #7e88dd;
+    border-radius: .8rem;
+}
+
+.slider {
+    position: relative;
+    margin-bottom: 1.2rem;
+}
+
+.slider__pils {
+    position: absolute;
+    top: 1.2rem;
+    left: 1.2rem;
+    right: 1.2rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.slider__img__total,
+.slider__code {
+    font-size: 2rem;
+    color: var(--color--white);
+    background-color: var(--color--rojo);
+    border-radius: .8rem;
+    padding: .4rem;
+    padding-left: 2.4rem;
+    background-image: url(../icons/camera-white.svg);
+    background-repeat: no-repeat;
+    background-position: .2rem center;
+    background-size: 1.8rem;
+    max-width: fit-content;
+}
+
+.slider__code {
+    padding: .4rem;
+    background-image: none;
+}
+
+.card__buttons {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    justify-content: end;
+}
+
+.card__buttons .card__buttons--wsp {
+    width: 4.8rem;
+    height: 4.8rem;
+    border-radius: 50%;
+    background-color: #13AA66;
+    background-image: url(../icons/whatsapp.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 2.4rem;
+}
+
+.button--verMas {
+    width: 9.4rem;
+}
+
+.card__info {
+    display: flex;
+    justify-content: space-between;
+    padding-right: .8rem;
+}
+
+.card__info .mts,
+.card__info .amb,
+.card__info .dorm,
+.card__info .bano,
+.card__info .coch {
+    font-size: 1.4rem;
+}
+
+.card__info--expensas {
+    margin-top: 1.2rem;
+    margin-bottom: 1.2rem;
+}
+
+.card__info--expensas .valor, 
+.card__info--expensas .peso {
+    font-size: 1.4rem;
+}
+
+.card__info--direc {
+    margin-bottom: 1.2rem;
+    font-size: 1.8rem;
+    font-weight: 500;
+}
+
+.card__info--ubic .link {
+    font-size: 1.4rem;
+    text-decoration: none;
+}
+
+.card__info--valor, 
+.card__info--valor .usd {
+    margin-top: 1.2rem;
+    font-weight: 700;
+    font-size: 2.4rem;
+}
+
+/* CARDS DETALLE */
+
+.Card__detalle {
+    position: relative;
+    width: 84.5rem;
+    height: 43.2rem;
+    border-radius: .8rem;
+    box-shadow: none;
+}
+
+.Card__detalle .slider {
+    height: 100%;
+    background-color: #7e88dd;
+    border-radius: .8rem;
+}
+
+/* DETALLE PROPIEDAD */
+
+.section__detalle {
+    margin-top: 2.4rem;
+    border-top: .1rem solid var(--color--gray);
+    padding-top: 2.4rem;
+}
+
+.section__detalle h2 {
+    font-weight: 700;
+    font-size: 2.4rem;
+}
+
+.detalle__propiedad {
+    height: 5.6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.section__detalle--info {
+    margin-top: 2.4rem;
+    display: flex;
+    gap: 2.4rem;
+    flex-wrap: wrap;
+}
+
+.detalle__propiedad--text .text {
+    display: block;
+    font-size: 2rem;
+    font-weight: 500;
+    margin-top: .4rem;
+}
+
+.flex {
+    display: flex;
+    gap: 2.4rem;
+}
+
+.volver {
+    margin-bottom: 2.4rem;
+}
+
+.volver .link {
+    font-size: 2rem;
+    text-decoration: none;
+    background-image: url(../icons/arrow-left-black.svg);
+    background-position: left center;
+    background-repeat: no-repeat;
+    padding-left: 2.4rem;
+    font-weight: 500;
+}
+
+.detalle__legales {
+    border-bottom: .1rem solid var(--color--gray);
+    padding-bottom: 1.8rem;
+}
+
+.detalle__legales .paragraph {
+    font-size: 1.8rem;
+    font-weight: 400;
+    line-height: 2.2rem;
+}
+
+.contacto__detalle .card__buttons--verMas,
+.card__buttons--wsp .text {
+    display: none;
+}
+
+.contacto__detalle .card__buttons--wsp .text {
+    display: block;
+}
+
+.contacto__detalle .card__buttons .card__buttons--wsp {
+    width: fit-content;
+    border-radius: 4rem;
+    background-color: #13AA66;
+    background-image: url(/_next/static/media/whatsapp.7630e754.svg);
+    background-repeat: no-repeat;
+    background-position: 2rem center;
+    padding-left: 6rem;
+    padding-right: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contacto__detalle .card__buttons .card__buttons--wsp a {
+    text-decoration: none;
+}
+
+.contacto__detalle .card__buttons .card__buttons--wsp .text {
+    font-size: 1.8rem;
+    color: var(--color--white);
+}
+
+.contacto__detalle .card__buttons {
+    justify-content: flex-start;
+}
+
+.section__similares {
+    margin-top: 2.4rem;
 }
