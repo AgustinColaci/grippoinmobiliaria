@@ -16,9 +16,11 @@ export default function RootLayout({ children }) {
 
           {children}
 
-          <section className="section__cards">
-            <Card />
-          </section>
+          {/* <section className="section__cards"> */}
+
+            {/* LA CARD SE VE EN TODOS LADOS PORQUE EL LAYOUT ESTA EN TODA LA PAGINA */}
+            {/* <Card /> */}
+          {/* </section> */}
         </section>
         <Footer />
       </body>
