@@ -614,3 +614,35 @@
 .section__similares {
     margin-top: 2.4rem;
 }
+
+/* SLIDER */
+
+.banner__detalle .slider img {
+    max-width: 100%;
+}
+
+.Card .slider {
+    margin-bottom: 4rem;
+}
+
+.Card .slider img {
+    max-height: 14rem;
+    max-width: 100%;
+}
+
+.slider .slick-prev, .slider .slick-next {
+    border-radius: 50%;
+}
+
+.slider .slick-next {
+    right: .4rem;
+}
+
+.slider .slick-prev {
+    left: .4rem;
+    z-index: 1;
+}
+
+.slider .slick-prev:before, .slider .slick-next:before {
+    color: var(--color--gray);
+}
