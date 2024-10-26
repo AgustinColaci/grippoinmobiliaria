@@ -1,5 +1,5 @@
 import Footer from '@/components/Footer';
-import Card from "@/components/Card";
+import SectionCard from "@/components/SectionCard";
 import '@/css/styles.css'
 
 //LAYOUT ESTATICO - HEADER - FOOTER
@@ -16,11 +16,7 @@ export default function RootLayout({ children }) {
 
           {children}
 
-          {/* <section className="section__cards"> */}
-
-            {/* LA CARD SE VE EN TODOS LADOS PORQUE EL LAYOUT ESTA EN TODA LA PAGINA */}
-            {/* <Card /> */}
-          {/* </section> */}
+          <SectionCard />
         </section>
         <Footer />
       </body>
