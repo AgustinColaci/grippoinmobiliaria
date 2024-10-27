@@ -2,6 +2,7 @@ import '../globals.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Banner from '@/components/Banner'
+import SectionCard from '@/components/SectionCard'
 
 export default async function Home() {
   try {
@@ -20,6 +21,9 @@ export default async function Home() {
   }
 
   return (
-    <Banner />
+    <>
+      <Banner />
+      <SectionCard />
+    </>
   );
 }

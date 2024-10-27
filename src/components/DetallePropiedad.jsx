@@ -167,7 +167,7 @@ const DetallePropiedad = () => {
                     </div>
                 </section>
                 <section className='section__similares'>
-                    <h2>Propiedades Similares</h2>
+                    <h2 className='title'>Propiedades Similares</h2>
                     <Card />
                 </section>
             </section>

@@ -15,8 +15,6 @@ export default function RootLayout({ children }) {
           </header>
 
           {children}
-
-          <SectionCard />
         </section>
         <Footer />
       </body>

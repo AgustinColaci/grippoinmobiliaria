@@ -315,7 +315,13 @@
 
 .google-maps {
     margin-top: 2rem;
-    margin-bottom: 2rem;
+    margin-bottom: 2.4rem;
+}
+
+.google-maps .maps {
+    height: 32rem;
+    border: none;
+    border-radius: .5rem;
 }
 
 .add__button .button--add {
@@ -629,6 +635,11 @@
 
 .section__similares {
     margin-top: 2.4rem;
+    margin-bottom: 2.4rem;
+}
+
+.section__similares .title {
+    margin-bottom: 2.4rem;
 }
 
 /* SLIDER */
