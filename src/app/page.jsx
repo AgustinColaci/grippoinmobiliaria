@@ -6,7 +6,8 @@ import SectionCard from '@/components/SectionCard'
 
 export default async function Home() {
   try {
-    const properties = await fetch('http://localhost:3000/api/propiedades', {
+    const urlentorno = process.env.NEXT_URL_ENTORNO
+    const properties = await fetch(`${urlentorno}/api/propiedades`, {
       method: 'GET',
     }).then(res => {
       if (!res.ok) {
