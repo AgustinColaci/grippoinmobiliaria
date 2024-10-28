@@ -1,11 +1,22 @@
-import '../css/styles.css'
+import Footer from '@/components/Footer';
+import SectionCard from "@/components/SectionCard";
+import '@/css/styles.css'
 
 //LAYOUT ESTATICO - HEADER - FOOTER
 export default function RootLayout({ children }) {
+
+
   return (
     <html lang="es">
       <body>
-        {children}
+        <section className="viewport">
+          <header className="header">
+            <div className="logo--grippo"></div>
+          </header>
+
+          {children}
+        </section>
+        <Footer />
       </body>
     </html>
   );

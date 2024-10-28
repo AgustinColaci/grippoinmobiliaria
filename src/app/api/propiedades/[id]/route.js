@@ -1,14 +1,37 @@
+import { firestore } from "@/lib/firebase";
+import { doc, getDoc } from "firebase/firestore";
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+
 export async function GET(request, { params }) {
     const { id } = params;
     // Lógica para manejar GET por ID
     // Aca tendriamos que recuperar la propiedad de la base de datos
     ///
-    return new Response(JSON.stringify({ message: `propiedad con ID ${id}` }), {
-        status: 200,
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    });
+
+    const docRef = doc(firestore, 'Propiedades', id);
+    const docSnap = await getDoc(docRef)
+
+    if (docSnap.exists()) {
+        // El documento existe, aquí puedes acceder a los datos
+        console.log("Document data:", docSnap.data());
+        return new Response(JSON.stringify({ message: `propiedad con ID ${id}`, data:docSnap.data() }), {
+            status: 200,
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+    } else {
+        // El documento no existe
+        console.log("No such document!");
+        return new Response(JSON.stringify({ error: `propiedad con ID ${id} no encontrada` }), {
+            status: 200,
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+    }
+
 }
 
 export async function PUT(request, { params }) {
@@ -17,6 +40,7 @@ export async function PUT(request, { params }) {
     // Lógica para actualizar un propiedad
     // Ejemplo: actualizar la propiedad con el ID dado usando los datos en `body`
     ///
+
     return new Response(JSON.stringify({ message: `propiedad con ID ${id} actualizado`, updatedProperty: body }), {
         status: 200,
         headers: {
