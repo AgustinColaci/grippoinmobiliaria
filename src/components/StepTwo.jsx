@@ -17,19 +17,28 @@ const StepTwo = () => {
     const [permiteMascotas, setPermiteMascotas] = useState(false);
     const [descripcion, setDescripcion] = useState('');
 
-    const {substractStep, property} = useStore()
+    const { substractStep, property, steps } = useStore()
 
 
     useEffect(() => {
-        console.log(property, 'EIOSHA')   
+        console.log(property, 'EIOSHA')
     })
 
-  return (
-    <div className="step-two">
-      <div className='section__form--inputs'>
-          <label htmlFor="m2total">M² total*</label>
-          <input type="text" id="m2total" name="m2total" placeholder="Ejemplo: 20" />
-      </div>
+    const handleAddStep = () => {
+        console.log('pasamos al paso 3')
+    }
+
+    const handleSubstractStep = () => {
+        substractStep()
+    }
+
+    return (
+        <>
+        <div className="step-two">
+            <div className='section__form--inputs'>
+                <label htmlFor="m2total">M² total*</label>
+                <input type="text" id="m2total" name="m2total" placeholder="Ejemplo: 20" />
+            </div>
 
             <div className='section__form--inputs'>
                 <label htmlFor="m2cubierto">M² cubierto*</label>
@@ -58,13 +67,13 @@ const StepTwo = () => {
                 </select>
             </div>
 
-      <div className='section__form--inputs cochera'>
-          <label class="cochera-title">¿Tiene cochera?</label>
-          <input type="radio" id="si" name="tieneCochera" value="si" />
-          <label htmlFor="si">Sí</label>
-          <input type="radio" id="no" name="tieneCochera" value="no" />
-          <label htmlFor="no">No</label>
-      </div>
+            <div className='section__form--inputs cochera'>
+                <label className="cochera-title">¿Tiene cochera?</label>
+                <input type="radio" id="si" name="tieneCochera" value="si" />
+                <label htmlFor="si">Sí</label>
+                <input type="radio" id="no" name="tieneCochera" value="no" />
+                <label htmlFor="no">No</label>
+            </div>
 
             <div className='section__form--inputs dos-cols'>
                 <div className='input-sin-label cantidad-cochera'>
@@ -132,22 +141,27 @@ const StepTwo = () => {
                 <input type="text" id="anticipo" name="anticipo" placeholder="Ejemplo: 50%" />
             </div>
 
-      <div className='section__form--inputs mascotas'>
-          <label class="mascotas-title">¿Permite mascotas?</label>
-          <input type="radio" id="si" name="permiteMascotas" value="si" />
-          <label htmlFor="si">Sí</label>
-          <input type="radio" id="no" name="permiteMascotas" value="no" />
-          <label htmlFor="no">No</label>
-      </div>
+            <div className='section__form--inputs mascotas'>
+                <label className="mascotas-title">¿Permite mascotas?</label>
+                <input type="radio" id="si" name="permiteMascotas" value="si" />
+                <label htmlFor="si">Sí</label>
+                <input type="radio" id="no" name="permiteMascotas" value="no" />
+                <label htmlFor="no">No</label>
+            </div>
 
-      <div className='section__form--inputs descripcion'>
-          <label htmlFor="descripcion">Descripción*</label>
-          <textarea type="text" id="descripcion" name="descripcion" placeholder="Ejemplo: 1234" />
-      </div>
+            <div className='section__form--inputs descripcion'>
+                <label htmlFor="descripcion">Descripción*</label>
+                <textarea type="text" id="descripcion" name="descripcion" placeholder="Ejemplo: 1234" />
+            </div>
 
-      <button  type="button" className="button button--previous">Volver al paso anterior</button>
-    </div>
-  )
+        </div>
+        <div className="button--bar">
+                <button disabled={steps === 1} type="button" className="button button--previous" onClick={() => {handleSubstractStep()}}>Volver al paso anterior</button>
+                <button disabled={steps === 3} type="button" className="button button--next" onClick={() => { handleAddStep() }}>Siguiente paso</button>
+            </div>
+        </>
+
+    )
 }
 
 export default StepTwo

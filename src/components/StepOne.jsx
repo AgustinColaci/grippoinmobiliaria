@@ -1,3 +1,4 @@
+import { handleErrorsFromStep1 } from "@/actions/errors";
 import useStore from "@/store/useStore";
 import { useEffect, useState } from "react";
 
@@ -21,12 +22,12 @@ const StepOne = ({ }) => {
 
     const [errors, setErrors] = useState({})
 
-    const { steps, addStep, setProperty } = useStore();
+    const { steps, addStep, setProperty, property } = useStore();
 
 
     useEffect(() => {
-        console.log(steps, '')
-    }, [steps])
+        console.log('primer render',  property)
+    }, [])
 
 
     const sendImageToFirebase = async (file) => {
@@ -34,54 +35,50 @@ const StepOne = ({ }) => {
         if (!file) {
             return
         }
-        const formData = new FormData();
-        formData.append("file", file);
 
-        try {
-            const response = await fetch(`/api/imagenes`, {
-                method: "POST",
-                body: formData,
-            });
+        setFotos((prevFotos) => [...prevFotos, file]);
 
 
-            if (response.ok) {
-                const data = await response.json();
-                console.log(data)
-                console.log("URL de la imagen subida:", data.url);
-                setFotos((prevFotos) => [...prevFotos, { url: data.url, name: file.name }]);
-            } else {
-                console.error("Error al subir la imagen");
-            }
-        } catch (error) {
-            console.error("Error:", error);
-        }
+        // const formData = new FormData();
+        // formData.append("file", file);
+
+        // try {
+        //     const response = await fetch(`/api/imagenes`, {
+        //         method: "POST",
+        //         body: formData,
+        //     });
+
+
+        //     if (response.ok) {
+        //         const data = await response.json();
+        //         console.log(data)
+        //         console.log("URL de la imagen subida:", data.url);
+        // setFotos((prevFotos) => [...prevFotos, { url: data.url, name: file.name }]);
+        //     } else {
+        //         console.error("Error al subir la imagen");
+        //     }
+        // } catch (error) {
+        //     console.error("Error:", error);
+        // }
     }
 
 
     const handleAddStep = () => {
 
-        if (
-            tipoOperacion == '' ||
-            tipoInmueble == '' ||
-            zona == '' ||
-            direccion == '' ||
-            precioInmueble == '' ||
-            precioInmuebleValor == '' ||
-            (pagaExpensas && precioExpensas == '') ||
-            (pagaExpensas && precioExpensasValor == '') ||
-            codigo == '' ||
-            estadoVenta == '' ||
-            linkMaps == '' ||
-            fotos.length <= 0
-        ) {
-            console.log('errror')
-            return
-            //TENGO QUE CODEAR TODO EL SISTEMA DE ERRORES DEL FORMULARO
+        const propertyFromStep1 = { tipoOperacion, tipoInmueble, zona, direccion, precioInmueble, precioInmuebleValor, pagaExpensas, precioExpensas, precioExpensasValor, codigo, estadoVenta, linkMaps, fotos }
+
+        const errores = handleErrorsFromStep1(propertyFromStep1)
+        setErrors(errores)
+
+
+        for (const key in errores) {
+            if (errores[key] === true) {
+                console.log(`La propiedad '${key}' tiene el valor true.`);
+                return null
+            }
         }
 
-        const property = { tipoOperacion, tipoInmueble, zona, direccion, precioInmueble, precioInmuebleValor, pagaExpensas, precioExpensas, precioExpensasValor, codigo, estadoVenta, linkMaps, fotos }
-
-        setProperty(property)
+        setProperty(propertyFromStep1)
 
         if (steps < 3) {
             addStep()
@@ -148,7 +145,7 @@ const StepOne = ({ }) => {
                     </div>
 
                     <div className='section__form--inputs expensas'>
-                        <label classNameName="expensas-title">¿Paga expensas?</label>
+                        <label className="expensas-title">¿Paga expensas?</label>
                         <input onChange={(e) => setPagaExpensas(true)} type="radio" id="expensas-si" name="pagaExpensas" value="si" />
                         <label htmlFor="expensas-si">Sí</label>
                         <input onChange={(e) => setPagaExpensas(false)} type="radio" id="expensas-no" name="pagaExpensas" value="no" />
@@ -158,7 +155,7 @@ const StepOne = ({ }) => {
                     <div className='section__form--inputs dos-cols'>
                         <div className='input-sin-label moneda'>
                             <label className="label--hidden" htmlFor="precioExpensas"></label>
-                            <select value={precioExpensas} onChange={(e) => setPrecioExpensas(e.target.value)} id="precioExpensas" name="precioExpensas">
+                            <select disabled={!pagaExpensas} value={precioExpensas} onChange={(e) => setPrecioExpensas(e.target.value)} id="precioExpensas" name="precioExpensas">
                                 <option value="" disabled>Moneda</option>
                                 <option value="ARS">ARS</option>
                                 <option value="USD">USD</option>
@@ -166,7 +163,7 @@ const StepOne = ({ }) => {
                         </div>
                         <div className='input-sin-label'>
                             <label className="label--hidden" htmlFor="precioExpensasValor"></label>
-                            <input onChange={(e) => setPrecioExpensasValor(e.target.value)} value={precioExpensasValor} type="text" id="precioExpensasValor" name="precioExpensasValor" placeholder="Ejemplo: 8000" />
+                            <input disabled={!pagaExpensas} onChange={(e) => setPrecioExpensasValor(e.target.value)} value={precioExpensasValor} type="text" id="precioExpensasValor" name="precioExpensasValor" placeholder="Ejemplo: 8000" />
                         </div>
                     </div>
 
@@ -193,7 +190,7 @@ const StepOne = ({ }) => {
                 <div className="column-right">
                     <h2 className="title">Vista previa de Google Maps</h2>
                     <div className="google-maps">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.8731958097183!2d-58.60336282353169!3d-34.58207495635691!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb90a998a79f5%3A0xff796e0ff1e3bc60!2sGrippo%20Propiedades!5e0!3m2!1ses!2sar!4v1727916179247!5m2!1ses!2sar" width="100%" height="440" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.8731958097183!2d-58.60336282353169!3d-34.58207495635691!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb90a998a79f5%3A0xff796e0ff1e3bc60!2sGrippo%20Propiedades!5e0!3m2!1ses!2sar!4v1727916179247!5m2!1ses!2sar" width="100%" height="440" allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
                     </div>
 
                     <h2 className="title">Fotos*</h2>
@@ -204,8 +201,8 @@ const StepOne = ({ }) => {
                         {/* <label htmlFor="fotos">Subí fotos a tu publicación </label> */}
                         <div className="autogestion-img-container">
                             {fotos.map((foto, index) => {
-                                return (<div className="autogestion-img">
-                                    <p key={index}>{foto.name}</p>
+                                return (<div key={index} className="autogestion-img">
+                                    <p>{foto.name}</p>
                                     <button>X</button>
                                 </div>)
                             })}
@@ -216,7 +213,11 @@ const StepOne = ({ }) => {
                     <p className='paragraph'>Acepta jpg y png. Hasta 20 fotos.</p>
                 </div>
             </div>
-            <button disabled={steps === 3} type="button" className="button button--next" onClick={() => { handleAddStep() }}>Siguiente paso</button>
+            {/* <button disabled={steps === 3} type="button" className="button button--next" onClick={() => { handleAddStep() }}>Siguiente paso</button> */}
+            <div className="button--bar">
+                <button disabled={steps === 1} type="button" className="button button--previous">Volver al paso anterior</button>
+                <button disabled={steps === 3} type="button" className="button button--next" onClick={() => { handleAddStep() }}>Siguiente paso</button>
+            </div>
 
         </>
     )

@@ -12,7 +12,7 @@ const useStore = create((set) => ({
     ubicacion: '',
     precioInmueble: '',
     precioInmuebleValor: '',
-    PagaExpensas: false,
+    pagaExpensas: false,
     precioExpensas: '',
     precioExpensasValor: '',
     estadoVenta: '',
