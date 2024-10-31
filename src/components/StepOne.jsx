@@ -57,11 +57,11 @@ const StepOne = ({ }) => {
                         </div>
 
                         <div className='section__form--inputs expensas'>
-                            <label class="expensas-title">¿Paga expensas?</label>
-                            <input type="radio" id="si" name="pagaExpensas" value="si" />
-                            <label htmlFor="si">Sí</label>
-                            <input type="radio" id="no" name="pagaExpensas" value="no" />
-                            <label htmlFor="no">No</label>
+                            <label className="expensas-title">¿Paga expensas?</label>
+                            <input type="radio" id="expensas-si" name="pagaExpensas" value="si" />
+                            <label htmlFor="expensas-si">Sí</label>
+                            <input type="radio" id="expensas-no" name="pagaExpensas" value="no" />
+                            <label htmlFor="expensas-no">No</label>
                         </div>
 
                         <div className='section__form--inputs dos-cols'>
