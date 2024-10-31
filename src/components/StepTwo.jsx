@@ -1,5 +1,29 @@
+import useStore from "@/store/useStore";
+import { useEffect, useState } from "react"
 
 const StepTwo = () => {
+
+    const [m2total, setM2total] = useState('');
+    const [m2cubierto, setM2cubierto] = useState('');
+    const [ambientes, setAmbientes] = useState('');
+    const [banos, setBanos] = useState('');
+    const [tieneCochera, setTieneCochera] = useState(false);
+    const [cantidadCochera, setCantidadCochera] = useState('');
+    const [dormitorios, setDormitorios] = useState('');
+    const [estadoInmueble, setEstadoInmueble] = useState('');
+    const [numeroDePlantas, setNumeroDePlantas] = useState('');
+    const [ubicacionDelInmueble, setUbicacionDelImmueble] = useState('');
+    const [anticipo, setAnticipo] = useState('');
+    const [permiteMascotas, setPermiteMascotas] = useState(false);
+    const [descripcion, setDescripcion] = useState('');
+
+    const {substractStep, property} = useStore()
+
+
+    useEffect(() => {
+        console.log(property, 'EIOSHA')   
+    })
+
   return (
     <div className="step-two">
       <div className='section__form--inputs'>
@@ -35,7 +59,7 @@ const StepTwo = () => {
       </div>
 
       <div className='section__form--inputs cochera'>
-          <label class="cochera-title">¿Tiene cochera?</label>
+          <label className="cochera-title">¿Tiene cochera?</label>
           <input type="radio" id="si" name="tieneCochera" value="si" />
           <label htmlFor="si">Sí</label>
           <input type="radio" id="no" name="tieneCochera" value="no" />
@@ -109,7 +133,7 @@ const StepTwo = () => {
       </div>
 
       <div className='section__form--inputs mascotas'>
-          <label class="mascotas-title">¿Permite mascotas?</label>
+          <label className="mascotas-title">¿Permite mascotas?</label>
           <input type="radio" id="si" name="permiteMascotas" value="si" />
           <label htmlFor="si">Sí</label>
           <input type="radio" id="no" name="permiteMascotas" value="no" />
@@ -121,7 +145,7 @@ const StepTwo = () => {
           <textarea type="text" id="descripcion" name="descripcion" placeholder="Ejemplo: 1234" />
       </div>
 
-      <button  type="button" className="button button--previous">Volver al paso anterior</button>
+      <button onClick={() => substractStep()} type="button" className="button button--previous">Volver al paso anterior</button>
     </div>
   )
 }
