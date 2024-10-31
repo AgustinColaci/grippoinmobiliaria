@@ -1,5 +1,4 @@
 import Footer from '@/components/Footer';
-import SectionCard from "@/components/SectionCard";
 import '@/css/styles.css'
 
 //LAYOUT ESTATICO - HEADER - FOOTER
