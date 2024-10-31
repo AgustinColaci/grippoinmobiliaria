@@ -29,7 +29,10 @@ const ContainerForm = () => {
                 {steps === 1 && <StepOne />}
                 {steps === 2 && <StepTwo />}
                 {steps === 3 && <StepThree />}
-                <button disabled={steps === 3} type="button" className="button button--next" onClick={() => {handleAddStep()}}>Siguiente paso</button>
+                <div className="button--bar">
+                <button type="button" className="button button--previous">Volver al paso anterior</button>
+                    <button disabled={steps === 3} type="button" className="button button--next" onClick={() => {handleAddStep()}}>Siguiente paso</button>
+                </div>
             </form>
         </section>
     )

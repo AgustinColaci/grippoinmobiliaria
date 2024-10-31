@@ -1,5 +1,6 @@
 'use client'
 import useStore from '@/store/useStore';
+import Link from 'next/link';
 import React from 'react'
 
 const CardButtons = () => {
@@ -14,7 +15,7 @@ const CardButtons = () => {
                 </a>
             </div>
             <div className='card__buttons--verMas'>
-                <a className="button button--verMas" href="#">Ver más</a>
+                <Link className="button button--verMas" href="/detalle">Ver más</Link>
             </div>
         </div>
     )

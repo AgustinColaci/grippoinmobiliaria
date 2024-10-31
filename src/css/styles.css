@@ -75,7 +75,8 @@
     gap: .4rem;
 }
 
-.filtros select {
+.filtros select,
+.filtros option {
     font-size: 2rem;
     color: var(--color--disable);
     border-color: var(--color--white);
@@ -89,8 +90,13 @@
     background-image: url(../icons/icon--buscar.svg);
     background-repeat: no-repeat;
     background-position: center;
+    cursor: pointer;
+    transition: all ease .3s;
 }
 
+.filtros .search--button:hover {
+    opacity: .8;
+}
 /* Footer */
 
 .footer {
@@ -137,11 +143,20 @@
     text-decoration: none;
     display: inline-block;
     margin-top: 1.2rem;
+    transition: all ease .3s;
+}
+
+.footer__content .link:hover {
+    text-decoration: underline;
 }
 
 .contacto__wsp .link {
     background-image: url(../icons/whatsapp.svg);
     background-repeat: no-repeat;
+}
+
+.contacto__wsp .link:hover {
+    opacity: .8;
 }
 
 .contacto__mail .link {
@@ -202,6 +217,29 @@
     text-decoration: none;
     border: .1rem solid var(--color--azul);
     color: var(--color--azul);
+    transition: all ease .3s;
+}
+
+.banner__autogestion .button.button--delete:hover,
+.add__button .button--add:hover,
+.button--previous:hover,
+.button--verMas:hover {
+    color: var(--color--white);
+    background-color: var(--color--azul);
+}
+
+.banner__autogestion .button.button--delete:focus,
+.banner__autogestion .button.button--delete:active,
+.add__button .button--add:focus,
+.add__button .button--add:active,
+.button--previous:focus,
+.button--previous:active,
+.button--verMas:focus,
+.button--verMas:active {
+    outline: .2rem solid var(--color--black);
+    border: .1rem solid var(--color--azul);
+    color: var(--color--azul);
+    background-color: transparent;
 }
 
 .section__form {
@@ -239,8 +277,13 @@
     padding: .8rem;
 }
 
+.section__form .button--bar {
+    margin-top: 2.8rem;
+    display: flex;
+    justify-content: space-between;
+}
+
 .section__form .button.button--next {
-    margin-top: 2.4rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -252,8 +295,19 @@
     border: .1rem solid var(--color--azul);
     color: var(--color--white);    
     background-color: var(--color--azul);
-    position: absolute;
-    right: 3.2rem;
+    cursor: pointer;
+    transition: all ease .3s;
+}
+
+.section__form .button.button--next:hover {
+    background-color: var(--color--white);
+    border-color: var(--color--azul);
+    color: var(--color--azul);
+}
+
+.section__form .button.button--next:focus,
+.section__form .button.button--next:active {
+    outline: .2rem solid var(--color--black);
 }
 
 .section__form--inputs.dos-cols {
@@ -315,7 +369,13 @@
 
 .google-maps {
     margin-top: 2rem;
-    margin-bottom: 2rem;
+    margin-bottom: 2.4rem;
+}
+
+.google-maps .maps {
+    height: 32rem;
+    border: none;
+    border-radius: .5rem;
 }
 
 .add__button .button--add {
@@ -335,25 +395,15 @@
     width: 100%;
 }
 
-.section__form .step-two option,
-.section__form .step-two input,
-.section__form .step-two select {
+.section__form .step-two {
     max-width: 65.2rem;
-    min-width: 65.2rem;
 }
 
 .step-two .section__form--inputs {
     max-width: 100%;
 }
 
-.section__form--inputs.mascotas {
-    width: 20%;
-    max-width: 20%;
-    min-width: 20%;
-}
-
 .section__form .button.button--previous {
-    margin-top: 2.4rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -365,12 +415,35 @@
     border: .1rem solid var(--color--azul);
     color: var(--color--azul);    
     background-color: var(--color--white);
+    transition: all ease .3s;
+    cursor: pointer;
+}
+
+.section__form .button.button--previous:hover {
+    background-color: var(--color--azul);
+    color: var(--color--white);
 }
 
 /* CARDS */
 
 .section__cards {
-    padding: 3.2rem;
+    margin-top: 2.4rem;
+    margin-bottom: 2.4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 3rem;
+}
+
+.title--2 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    margin-top: 2.4rem;
+}
+
+.title--3 {
+    font-size: 2rem;
+    font-weight: 500;
+    margin-top: 2.4rem;
 }
 
 .Card {
@@ -446,6 +519,12 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: 2.4rem;
+    cursor: pointer;
+    transition: all ease .3s;
+}
+
+.card__buttons .card__buttons--wsp:hover {
+    opacity: .9;
 }
 
 .button--verMas {
@@ -588,7 +667,7 @@
     width: fit-content;
     border-radius: 4rem;
     background-color: #13AA66;
-    background-image: url(/_next/static/media/whatsapp.7630e754.svg);
+    background-image: url(../icons/whatsapp.svg);
     background-repeat: no-repeat;
     background-position: 2rem center;
     padding-left: 6rem;
@@ -613,4 +692,87 @@
 
 .section__similares {
     margin-top: 2.4rem;
+    margin-bottom: 2.4rem;
+}
+
+.section__similares .title {
+    margin-bottom: 2.4rem;
+}
+
+/* SLIDER */
+
+.banner__detalle {
+    margin-top: 2.4rem;
+}
+
+.banner__detalle .slider img {
+    max-width: 100%;
+}
+
+.Card .slider img {
+    max-height: 17.6rem;
+    max-width: 100%;
+    border-radius: .4rem;
+}
+
+.Card .slick-dots {
+    bottom: .4rem;
+}
+
+.slider .slick-prev, .slider .slick-next {
+    border-radius: 50%;
+}
+
+.slider .slick-next {
+    right: .4rem;
+}
+
+.slider .slick-prev {
+    left: .4rem;
+    z-index: 1;
+}
+
+.slider .slick-prev:before, .slider .slick-next:before {
+    color: var(--color--white);
+    font-size: 2.4rem;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .section__cards {
+        grid-template-columns: 1fr;
+        justify-items: center;
+    }
+
+    .filtros {
+        display: grid;
+        grid-template-columns: 1fr;
+        justify-items: flex-start;
+        gap: 1rem;
+    }
+
+    .filtros .search--button {
+        justify-self: flex-end;
+    }
+
+    .section__form .step-one {
+        flex-direction: column;
+    }
+
+    .Card__detalle {
+        max-width: 100%;
+        margin-top: 2.4rem;
+    }
+
+    .banner__detalle.flex {
+        flex-direction: column;
+    }
+}
+
+/* Tablet */
+@media (min-width: 768px) and (max-width: 1200px) {
+    .section__cards {
+        grid-template-columns: 1fr 1fr;
+        justify-items: center;
+    }
 }
