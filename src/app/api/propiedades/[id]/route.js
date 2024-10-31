@@ -1,6 +1,7 @@
 import { firestore } from "@/lib/firebase";
 import { doc, getDoc } from "firebase/firestore";
-
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 export async function GET(request, { params }) {
     const { id } = params;

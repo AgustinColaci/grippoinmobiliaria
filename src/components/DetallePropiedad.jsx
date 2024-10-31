@@ -1,6 +1,7 @@
 "use client";
 import React from 'react';
 import useStore from '@/store/useStore';
+import Card from "@/components/Card";
 import Image from 'next/image';
 import iconM from '@/icons/icon--metros2.svg';
 import iconMC from '@/icons/icon--metros-cubiertos.svg';
@@ -166,8 +167,8 @@ const DetallePropiedad = () => {
                     </div>
                 </section>
                 <section className='section__similares'>
-                    <h2>Propiedades Similares</h2>
-                    /* ADJUNTAR CARDS PROP SIMILARES */
+                    <h2 className='title'>Propiedades Similares</h2>
+                    <Card />
                 </section>
             </section>
         </>
