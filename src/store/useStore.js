@@ -17,7 +17,7 @@ const useStore = create((set) => ({
     precioExpensasValor: '',
     estadoVenta: '',
     linkMaps: '',
-    fotos: [{}],
+    fotos: [],
   },
   
   setProperty: (newProperty) => set((state) => ({

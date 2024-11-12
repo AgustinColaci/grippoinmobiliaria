@@ -20,14 +20,72 @@ const StepOne = ({ }) => {
     const [linkMaps, setLinkMaps] = useState('');
     const [fotos, setFotos] = useState([]);
 
+    const campos = ['tipoOperacion', 'tipoInmueble', 'zona', 'direccion', 'precioInmueble', 'precioInmuebleValor', 'pagaExpensas', 'precioExpensas', 'precioExpensasValor', 'codigo', 'estadoVenta', 'linkMaps', 'fotos']
+
     const [errors, setErrors] = useState({})
 
     const { steps, addStep, setProperty, property } = useStore();
 
 
     useEffect(() => {
-        console.log('primer render',  property)
+        campos.forEach((key) => {
+            if (property[key]) {
+                switchWithAll(key, property[key])
+            }
+        })
     }, [])
+
+
+    useEffect(() => {
+        console.log(errors)
+    }, [errors])
+
+
+    const switchWithAll = (key, valor) => {
+        switch (key) {
+            case 'tipoOperacion':
+                setTipoOperacion(valor)
+                break
+            case 'tipoInmueble':
+                setTipoInmueble(valor)
+                break
+            case 'zona':
+                setZona(valor)
+                break
+            case 'direccion':
+                setDireccion(valor)
+                break
+            case 'precioInmueble':
+                setPrecioInmueble(valor)
+                break
+            case 'precioInmuebleValor':
+                setPrecioInmuebleValor(valor)
+                break
+            case 'pagaExpensas':
+                setPagaExpensas(valor)
+                break
+            case 'precioExpensas':
+                setPrecioExpensas(valor)
+                break
+            case 'precioExpensasValor':
+                setPrecioExpensasValor(valor)
+                break
+            case 'codigo':
+                setCodigo(valor)
+                break
+            case 'estadoVenta':
+                setEstadoVenta(valor)
+                break
+            case 'linkMaps':
+                setLinkMaps(valor)
+                break
+            case 'fotos':
+                setFotos(valor)
+                break
+            default:
+                return
+        }
+    }
 
 
     const sendImageToFirebase = async (file) => {
@@ -68,7 +126,7 @@ const StepOne = ({ }) => {
         const propertyFromStep1 = { tipoOperacion, tipoInmueble, zona, direccion, precioInmueble, precioInmuebleValor, pagaExpensas, precioExpensas, precioExpensasValor, codigo, estadoVenta, linkMaps, fotos }
 
         const errores = handleErrorsFromStep1(propertyFromStep1)
-        setErrors(errores)
+        setErrors({...errors, ...errores})
 
 
         for (const key in errores) {
@@ -78,11 +136,35 @@ const StepOne = ({ }) => {
             }
         }
 
-        setProperty(propertyFromStep1)
+        setProperty({...property,...propertyFromStep1})
 
         if (steps < 3) {
             addStep()
         }
+    }
+
+    const deleteErrorAndClass = (id) => {
+
+        const newErrors = errors;
+        newErrors[id] = false;
+        setErrors(newErrors);
+    }
+
+
+    const handleLinkMaps = (iframeHTML) => {
+        deleteErrorAndClass('linkMapsIncorrecto')
+        deleteErrorAndClass('linkMaps')
+
+        const srcMatch = iframeHTML?.match(/src="([^"]+)"/);
+        const src = srcMatch ? srcMatch[1] : null;
+
+        console.log(src)
+        if(!src){
+            setErrors({...errors, linkMapsIncorrecto:true})
+            setLinkMaps(iframeHTML)
+            return
+        }
+        setLinkMaps(src)
     }
 
 
@@ -95,109 +177,134 @@ const StepOne = ({ }) => {
                 <div className="column-left">
                     <div className='section__form--inputs'>
                         <label htmlFor="tipoOperacion">Tipo de operación*</label>
-                        <select value={tipoOperacion} onChange={(e) => setTipoOperacion(e.target.value)} id="tipoOperacion" name="tipoOperacion" >
-                            <option value="" disabled>Selecciona una opción</option>
-                            <option value="venta">Venta</option>
-                            <option value="alquiler">Alquiler</option>
+                        <select className={`${errors.tipoOperacion ? 'error--empty' : ''}`} value={tipoOperacion} onChange={(e) => { setTipoOperacion(e.target.value); deleteErrorAndClass(e.target.id) }} id="tipoOperacion" name="tipoOperacion" >
+                            <option className={`${errors.tipoOperacion ? 'error--empty' : ''}`} value="" disabled>Selecciona una opción</option>
+                            <option className={`${errors.tipoOperacion ? 'error--empty' : ''}`} value="venta">Venta</option>
+                            <option className={`${errors.tipoOperacion ? 'error--empty' : ''}`} value="alquiler">Alquiler</option>
                         </select>
+                        {errors.tipoOperacion && <p className="error--text">Este campo es obligatorio</p>}
+
                     </div>
 
                     <div className='section__form--inputs'>
                         <label htmlFor="tipoInmueble">Tipo de inmueble*</label>
-                        <select onChange={(e) => setTipoInmueble(e.target.value)} id="tipoInmueble" name="tipoInmueble" value={tipoInmueble}>
-                            <option value="" disabled>Selecciona una opción</option>
-                            <option value="casa">Casa</option>
-                            <option value="departamento">Departamento</option>
+                        <select className={`${errors.tipoInmueble ? 'error--empty' : ''}`} onChange={(e) => {setTipoInmueble(e.target.value) ; deleteErrorAndClass(e.target.id)}} id="tipoInmueble" name="tipoInmueble" value={tipoInmueble}>
+                            <option className={`${errors.tipoInmueble ? 'error--empty' : ''}`} value="" disabled>Selecciona una opción</option>
+                            <option className={`${errors.tipoInmueble ? 'error--empty' : ''}`} value="casa">Casa</option>
+                            <option className={`${errors.tipoInmueble ? 'error--empty' : ''}`} value="departamento">Departamento</option>
                         </select>
+                        {errors.tipoInmueble && <p className="error--text">Este campo es obligatorio</p>}
+
                     </div>
 
                     <div className='section__form--inputs'>
                         <label htmlFor="zona">Zona*</label>
-                        <select onChange={(e) => setZona(e.target.value)} id="zona" name="zona" value={tipoInmueble}>
-                            <option value="" disabled>Selecciona una opción</option>
-                            <option value="Martin Coronado">Martín Coronado</option>
-                            <option value="Villa Bosch">Villa Bosch</option>
-                            <option value="Ciudad Jardin">Ciudad Jardin</option>
-                            <option value="Pablo Podesta">Pablo Podesta</option>
-                            <option value="Loma Hermosa">Loma Hermosa</option>
-                            <option value="Altos De Podesta">Barrio Altos de Podesta</option>
+                        <select className={`${errors.zona ? 'error--empty' : ''}`} onChange={(e) => {setZona(e.target.value); deleteErrorAndClass(e.target.id)}} id="zona" name="zona" value={zona}>
+                            <option className={`${errors.zona ? 'error--empty' : ''}`} value="" disabled>Selecciona una opción</option>
+                            <option className={`${errors.zona ? 'error--empty' : ''}`} value="Martin Coronado">Martín Coronado</option>
+                            <option className={`${errors.zona ? 'error--empty' : ''}`} value="Villa Bosch">Villa Bosch</option>
+                            <option className={`${errors.zona ? 'error--empty' : ''}`} value="Ciudad Jardin">Ciudad Jardin</option>
+                            <option className={`${errors.zona ? 'error--empty' : ''}`} value="Pablo Podesta">Pablo Podesta</option>
+                            <option className={`${errors.zona ? 'error--empty' : ''}`} value="Loma Hermosa">Loma Hermosa</option>
+                            <option className={`${errors.zona ? 'error--empty' : ''}`} value="Altos De Podesta">Barrio Altos de Podesta</option>
                         </select>
+                        {errors.zona && <p className="error--text">Este campo es obligatorio</p>}
                     </div>
 
                     <div className='section__form--inputs'>
-                        <label htmlFor="direccion">Ubicación*</label>
-                        <input value={direccion} onChange={(e) => setDireccion(e.target.value)} type="text" id="direccion" name="direccion" placeholder="Ejemplo: Calle 1234" />
+                        <label htmlFor="direccion">Dirección*</label>
+                        <input className={`${errors.direccion ? 'error--empty' : ''}`} value={direccion} onChange={(e) => {setDireccion(e.target.value); deleteErrorAndClass(e.target.id)}} type="text" id="direccion" name="direccion" placeholder="Ejemplo: Calle 1234" />
+                        {errors.direccion && <p className="error--text">Este campo es obligatorio</p>}
+
                     </div>
 
                     <div className='section__form--inputs dos-cols'>
                         <div className='input-sin-label moneda'>
                             <label htmlFor="precioInmueble">Precio de inmueble*</label>
-                            <select onChange={(e) => setPrecioInmueble(e.target.value)} id="precioInmueble" name="precioInmueble" value={precioInmueble}>
-                                <option value="" disabled>Moneda</option>
-                                <option value="ARS">ARS</option>
-                                <option value="USD">USD</option>
+                            <select className={`${errors.precioInmueble ? 'error--empty' : ''}`} onChange={(e) => {setPrecioInmueble(e.target.value); deleteErrorAndClass(e.target.id)}} id="precioInmueble" name="precioInmueble" value={precioInmueble}>
+                                <option className={`${errors.precioInmueble ? 'error--empty' : ''}`} value="" disabled>Moneda</option>
+                                <option className={`${errors.precioInmueble ? 'error--empty' : ''}`} value="ARS">ARS</option>
+                                <option className={`${errors.precioInmueble ? 'error--empty' : ''}`} value="USD">USD</option>
                             </select>
+                            {errors.precioInmueble && <p className="error--text">Este campo es obligatorio</p>}
+
                         </div>
                         <div className='input-sin-label'>
                             <label className="label--hidden" htmlFor="precioInmuebleValor"></label>
-                            <input value={precioInmuebleValor} onChange={(e) => setPrecioInmuebleValor(e.target.value)} type="text" id="precioInmuebleValor" name="precioInmuebleValor" placeholder="Ejemplo: 8000" />
+                            <input className={`${errors.precioInmuebleValor ? 'error--empty' : ''}`} value={precioInmuebleValor} onChange={(e) => {setPrecioInmuebleValor(e.target.value); deleteErrorAndClass(e.target.id)}} type="text" id="precioInmuebleValor" name="precioInmuebleValor" placeholder="Ejemplo: 8000" />
+                            {errors.precioInmuebleValor && <p className="error--text">Este campo es obligatorio</p>}
+
                         </div>
                     </div>
 
                     <div className='section__form--inputs expensas'>
                         <label className="expensas-title">¿Paga expensas?</label>
-                        <input onChange={(e) => setPagaExpensas(true)} type="radio" id="expensas-si" name="pagaExpensas" value="si" />
+                        <input className={`${errors.pagaExpensas ? 'error--empty' : ''}`} checked={pagaExpensas} onChange={(e) => {setPagaExpensas(true); deleteErrorAndClass(e.target.name)}} type="radio" id="expensas-si" name="pagaExpensas" value="si" />
                         <label htmlFor="expensas-si">Sí</label>
-                        <input onChange={(e) => setPagaExpensas(false)} type="radio" id="expensas-no" name="pagaExpensas" value="no" />
+                        <input className={`${errors.pagaExpensas ? 'error--empty' : ''}`} checked={!pagaExpensas} onChange={(e) =>{setPagaExpensas(false); deleteErrorAndClass(e.target.name)}} type="radio" id="expensas-no" name="pagaExpensas" value="no" />
                         <label htmlFor="expensas-no">No</label>
+                        {errors.pagaExpensas && <p className="error--text">Este campo es obligatorio</p>}
+
                     </div>
 
-                    <div className='section__form--inputs dos-cols'>
+
+                    {pagaExpensas && <div className='section__form--inputs dos-cols'>
                         <div className='input-sin-label moneda'>
                             <label className="label--hidden" htmlFor="precioExpensas"></label>
-                            <select disabled={!pagaExpensas} value={precioExpensas} onChange={(e) => setPrecioExpensas(e.target.value)} id="precioExpensas" name="precioExpensas">
+                            <select className={`${errors.precioExpensas ? 'error--empty' : ''}`} disabled={!pagaExpensas} value={precioExpensas} onChange={(e) => {setPrecioExpensas(e.target.value);deleteErrorAndClass(e.target.id)}} id="precioExpensas" name="precioExpensas">
                                 <option value="" disabled>Moneda</option>
                                 <option value="ARS">ARS</option>
                                 <option value="USD">USD</option>
                             </select>
+                            {errors.precioExpensas && <p className="error--text">Este campo es obligatorio</p>}
+
                         </div>
                         <div className='input-sin-label'>
                             <label className="label--hidden" htmlFor="precioExpensasValor"></label>
-                            <input disabled={!pagaExpensas} onChange={(e) => setPrecioExpensasValor(e.target.value)} value={precioExpensasValor} type="text" id="precioExpensasValor" name="precioExpensasValor" placeholder="Ejemplo: 8000" />
+                            <input className={`${errors.precioExpensasValor ? 'error--empty' : ''}`} disabled={!pagaExpensas} onChange={(e) => {setPrecioExpensasValor(e.target.value); deleteErrorAndClass(e.target.id)}} value={precioExpensasValor} type="text" id="precioExpensasValor" name="precioExpensasValor" placeholder="Ejemplo: 8000" />
+                            {errors.precioExpensasValor && <p className="error--text">Este campo es obligatorio</p>}
+
                         </div>
-                    </div>
+                    </div>}
 
                     <div className='section__form--inputs'>
-                        <label htmlFor="codigo">Ubicación*</label>
-                        <input value={codigo} onChange={(e) => setCodigo(e.target.value)} type="text" id="codigo" name="codigo" placeholder="Ejemplo: 1234" />
+                        <label htmlFor="codigo">Código*</label>
+                        <input className={`${errors.codigo ? 'error--empty' : ''}`} value={codigo} onChange={(e) => {setCodigo(e.target.value); deleteErrorAndClass(e.target.id)}} type="text" id="codigo" name="codigo" placeholder="Ejemplo: 1234" />
+                        {errors.codigo && <p className="error--text">Este campo es obligatorio</p>}
+
                     </div>
 
                     <div className='section__form--inputs'>
                         <label htmlFor="estadoVenta">Estado de la venta*</label>
-                        <select id="estadoVenta" name="estadoVenta" value={estadoVenta} onChange={(e) => setEstadoVenta(e.target.value)} >
+                        <select className={`${errors.estadoVenta ? 'error--empty' : ''}`} id="estadoVenta" name="estadoVenta" value={estadoVenta} onChange={(e) => {setEstadoVenta(e.target.value); deleteErrorAndClass(e.target.id)}} >
                             <option value="" disabled>Selecciona una opción</option>
                             <option value="disponible">Disponible</option>
                             <option value="vendida">Vendida</option>
                             <option value="alquilada">Alquilada</option>
                         </select>
+                        {errors.estadoVenta && <p className="error--text">Este campo es obligatorio</p>}
+
                     </div>
 
                     <div className='section__form--inputs'>
-                        <label htmlFor="link-maps">Ubicación*</label>
-                        <input value={linkMaps} onChange={(e) => setLinkMaps(e.target.value)} type="text" id="link-maps" name="link-maps" placeholder="Pegar link de Google maps" />
+                        <label htmlFor="link-maps">Link de Maps*</label>
+                        <input className={`${errors.linkMaps ? 'error--empty' : ''}`} value={linkMaps} onChange={(e) => { handleLinkMaps(e.target.value) }} type="text" id="link-maps" name="link-maps" placeholder="Pegar link de Google maps" />
+                        {errors.linkMaps && <p className="error--text">Este campo es obligatorio</p>}
+                        {errors.linkMapsIncorrecto && <p className="error--text">Enlace incorrecto. Recorda pegar el mapa como HTML</p>}
+
                     </div>
                 </div>
                 <div className="column-right">
                     <h2 className="title">Vista previa de Google Maps</h2>
                     <div className="google-maps">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.8731958097183!2d-58.60336282353169!3d-34.58207495635691!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb90a998a79f5%3A0xff796e0ff1e3bc60!2sGrippo%20Propiedades!5e0!3m2!1ses!2sar!4v1727916179247!5m2!1ses!2sar" width="100%" height="440" allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
+                        <iframe src={errors.linkMapsIncorrecto ? 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.8731958097223!2d-58.603362823511155!3d-34.5820749563568!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb90a998a79f5%3A0xff796e0ff1e3bc60!2sGrippo%20Propiedades!5e0!3m2!1ses!2sar!4v1731379938048!5m2!1ses!2sar' : linkMaps} width="100%" height="440" allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
                     </div>
 
                     <h2 className="title">Fotos*</h2>
 
                     <div className='add__button'>
                         <a className="button button--add" href="#"> Subí fotos a tu publicación</a>
-                        <input id="fotos" name="fotos" type="file" onChange={((e) => { sendImageToFirebase(e.target.files[0]) })} />
+                        <input className={`${errors.fotos ? 'error--empty' : ''}`} id="fotos" name="fotos" type="file" onChange={((e) => { sendImageToFirebase(e.target.files[0]); deleteErrorAndClass(e.target.id)})} />
                         {/* <label htmlFor="fotos">Subí fotos a tu publicación </label> */}
                         <div className="autogestion-img-container">
                             {fotos.map((foto, index) => {
@@ -211,6 +318,9 @@ const StepOne = ({ }) => {
                     </div>
 
                     <p className='paragraph'>Acepta jpg y png. Hasta 20 fotos.</p>
+
+                    {errors.fotos && <p className="error--text">Este campo es obligatorio</p>}
+
                 </div>
             </div>
             {/* <button disabled={steps === 3} type="button" className="button button--next" onClick={() => { handleAddStep() }}>Siguiente paso</button> */}
