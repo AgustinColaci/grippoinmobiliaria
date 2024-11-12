@@ -719,26 +719,20 @@
     margin-top: 2.4rem;
 }
 
-.banner__detalle .slider img {
-    max-width: 100%;
+.slider .slick-dots {
+    bottom: 1.4rem;
 }
 
-.Card .slider img {
-    max-height: 17.6rem;
-    max-width: 100%;
-    border-radius: .4rem;
-}
-
-.Card .slick-dots {
-    bottom: .4rem;
-}
-
-.slider .slick-prev, .slider .slick-next {
-    border-radius: 50%;
+.Card .slider .slick-dots {
+    bottom: .8rem;
 }
 
 .slider .slick-next {
     right: .4rem;
+}
+
+.slick-next {
+    margin-right: .4rem;
 }
 
 .slider .slick-prev {
@@ -793,19 +787,24 @@
 
 .image-container,
 .modal-image-container {
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  height: 17.6rem;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 17.6rem;
+}
+
+.slick-slider .slick-track, 
+.slick-slider .slick-list {
+    border-radius: .8rem;
 }
 
 .banner__detalle .image-container,
 .banner__detalle .modal-image-container {
-  height: 43.2rem;
+    height: 43.2rem;
 }
 
 
-/* Modal styles */
+/* Modal styles
 .modal {
   display: flex;
   align-items: center;
@@ -833,4 +832,4 @@
   font-size: 3rem;
   color: var(--color--white);
   cursor: pointer;
-}
+} */
