@@ -277,6 +277,19 @@
     padding: .8rem;
 }
 
+.section__form option.error--empty,
+.section__form input.error--empty,
+.section__form select.error--empty,
+.section__form textarea.error--empty {
+    border: .1rem solid var(--color--rojo);
+}
+
+.error--text {
+    color: var(--color--rojo);
+    font-size: 1.4rem;
+    margin-top: .4rem;
+}
+
 .section__form .button--bar {
     margin-top: 2.8rem;
     display: flex;
