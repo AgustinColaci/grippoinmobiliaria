@@ -785,6 +785,7 @@
     }
 }
 
+
 .image-container,
 .modal-image-container {
     background-size: cover;
@@ -833,3 +834,67 @@
   color: var(--color--white);
   cursor: pointer;
 } */
+
+
+/* AUTOGESTION IMAGENES QUE SE CARGAN*/
+.autogestion-img-container{
+    display: flex;
+    flex-direction: row;
+    gap:5px;
+}
+
+.autogestion-img{
+    display: flex;
+    background-color: #000C79;
+    align-items: center;
+    gap: 5px;
+    border-radius: 5px;
+    padding:5px;
+    margin-top:5px;
+}
+
+.autogestion-img p{
+    font-size: 18px;
+    color: #e6e7f2;
+}
+
+.autogestion-img button{
+    background-color: transparent;
+    border: 0;
+    font-size: 18px;
+    color: #E6E7F2;
+    border: 1px solid #E6E7F2;
+    padding:5px;
+    cursor: pointer;
+}
+
+.autogestion-img-container{
+    display: flex;
+    flex-direction: row;
+    gap:5px;
+}
+
+.autogestion-img{
+    display: flex;
+    background-color: #000C79;
+    align-items: center;
+    gap: 5px;
+    border-radius: 5px;
+    padding:5px;
+    margin-top:5px;
+}
+
+.autogestion-img p{
+    font-size: 18px;
+    color: #e6e7f2;
+}
+
+.autogestion-img button{
+    background-color: transparent;
+    border: 0;
+    font-size: 18px;
+    color: #E6E7F2;
+    border: 1px solid #E6E7F2;
+    padding:5px;
+    cursor: pointer;
+}
