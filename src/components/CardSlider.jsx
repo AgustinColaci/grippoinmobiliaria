@@ -2,7 +2,6 @@
 import useStore from '@/store/useStore';
 import React, { useState } from 'react';
 import Slider from 'react-slick';
-import Image from 'next/image';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import bgB from '../img/background--banner.png';
@@ -37,36 +36,44 @@ const CardSlider = () => {
     setIsModalOpen(false);
   };
 
+  const images = [bgB, SMOro1, SMOro2, SMOro3, SMOro4, SMOro5, SMOro6];
+  const images2 = [bgB, SMOro1, SMOro2, SMOro3, SMOro4, SMOro5, SMOro6];
+
   return (
     <div className="slider">
       <Slider {...settings}>
-        {[bgB, SMOro1, bgB, bgB, bgB].map((image, index) => (
+        {images.map((image, index) => (
           <div key={index} onClick={() => handleImageClick(index)}>
-            <Image src={image} alt={`Image ${index + 1}`} />
+            <div
+              className="image-container"
+              style={{ backgroundImage: `url(${image.src})` }}
+            ></div>
           </div>
         ))}
       </Slider>
 
       <div className="slider__pils">
-        <div className="slider__img__total">5/5</div>
+        <div className="slider__img__total">{images.length}/{images.length}</div>
         <div className="slider__code">Cod.1234</div>
       </div>
 
       {/* Modal */}
-      {isModalOpen && (
-        <div className="modal">
-          <span className="modal__close" onClick={closeModal}>&times;</span>
+      {/* {isModalOpen && (
+        <div className="modal" onClick={closeModal}>
+          <span className="modal__close">&times;</span>
           <div className="modal__content">
             <Slider {...settings} initialSlide={currentSlide}>
-              {[bgB, SMOro1, bgB, bgB, bgB].map((image, index) => (
-                <div key={index}>
-                  <Image src={image} alt={`Modal Image ${index + 1}`}/>
-                </div>
+              {images2.map((image, index) => (
+                <div
+                key={index}
+                className="modal-image-container"
+                style={{ backgroundImage: `url(${image.src})` }}
+                ></div>
               ))}
             </Slider>
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 };
