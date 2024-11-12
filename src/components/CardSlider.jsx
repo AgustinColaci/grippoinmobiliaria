@@ -53,7 +53,7 @@ const CardSlider = () => {
       </Slider>
 
       <div className="slider__pils">
-        <div className="slider__img__total">{images.length}/{images.length}</div>
+        <div className="slider__img__total">{currentSlide + 1}/{images.length}</div>
         <div className="slider__code">Cod.1234</div>
       </div>
 
