@@ -10,7 +10,7 @@ const CardButtons = () => {
     return (
         <div className='card__buttons'>
             <div className='card__buttons--wsp'>
-                <a href="#">
+                <a href="https://wa.link/q4e8za">
                     <span className='text'>Contactanos por WhatsApp</span>
                 </a>
             </div>
