@@ -9,10 +9,13 @@ const Footer = () => {
                     <h2>Contacto</h2>
                     <ul>
                         <li className="contacto__wsp">
-                            <a className="link" href="#">+54 11 11111111</a>
+                            <a className="link" target="_blank" href="https://wa.link/q4e8za">1167173602</a>
+                        </li>
+                        <li className="contacto__tel">
+                            <a className="link" target="_blank" href="tel:54343860">54343860</a>
                         </li>
                         <li className="contacto__mail">
-                            <a className="link" href="#">mail@mail.com</a>
+                            <a className="link" target="_blank" href="mailto:grippopropiedades@gmail.com">grippopropiedades@gmail.com</a>
                         </li>
                     </ul>
                 </div>
@@ -20,7 +23,7 @@ const Footer = () => {
                     <h2>Ubicación</h2>
                     <ul>
                         <li className="ubicacion">
-                            <a className="link" href="#">+54 11 11111111</a>
+                            <a className="link" target="_blank" href="https://maps.app.goo.gl/fBHNGj7QsE715zvT6">San Lorenzo 1711 - M. Coronado</a>
                         </li>
                     </ul>
                 </div>
@@ -28,10 +31,10 @@ const Footer = () => {
                     <h2>Redes sociales</h2>
                     <ul>
                         <li className="instagram">
-                            <a className="link" href="#">Instagram</a>
+                            <a className="link" target="_blank" href="https://www.instagram.com/inmobiliariagrippo">inmobiliariagrippo</a>
                         </li>
                         <li className="facebook">
-                            <a className="link" href="#">Facebook</a>
+                            <a className="link" target="_blank" href="https://www.facebook.com/inmobiliariagrippo">inmobiliariagrippo</a>
                         </li>
                     </ul>
                 </div>

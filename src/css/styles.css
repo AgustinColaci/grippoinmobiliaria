@@ -130,12 +130,17 @@
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    border-radius: 1.2rem;
 }
 
-.footer__content .link, 
 .footer__content h2 {
-    color: var(--color--white);
     font-size: 2rem;
+    color: var(--color--white);
+}
+
+.footer__content .link {
+    font-size: 1.8rem;
+    color: var(--color--white);
 }
 
 .footer__content .link {
@@ -153,30 +158,45 @@
 .contacto__wsp .link {
     background-image: url(../icons/whatsapp.svg);
     background-repeat: no-repeat;
+    background-size: contain;
 }
 
 .contacto__wsp .link:hover {
     opacity: .8;
 }
 
+.contacto__tel .link {
+    background-image: url(../icons/icon--phone.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.contacto__tel .link:hover {
+    opacity: .8;
+}
+
 .contacto__mail .link {
     background-image: url(../icons/mail.svg);
     background-repeat: no-repeat;
+    background-size: contain;
 }
 
 .ubicacion .link {    
     background-image: url(../icons/icon--map.svg);
     background-repeat: no-repeat;
+    background-size: contain;
 }
 
 .instagram .link {    
     background-image: url(../icons/instagram.svg);
     background-repeat: no-repeat;
+    background-size: contain;
 }
 
 .facebook .link {    
     background-image: url(../icons/facebook.svg);
     background-repeat: no-repeat;
+    background-size: contain;
 }
 
 /* AUTOGESTION */
@@ -523,6 +543,10 @@
     justify-content: end;
 }
 
+.card__buttons .wsp--link {
+    text-decoration: none;
+}
+
 .card__buttons .card__buttons--wsp {
     width: 4.8rem;
     height: 4.8rem;
@@ -622,6 +646,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 14rem;
+    text-align: center;
 }
 
 .section__detalle--info {
@@ -774,6 +800,22 @@
 
     .banner__detalle.flex {
         flex-direction: column;
+    }
+
+    .footer__content h2 {
+        font-size: 1.8rem;
+    }
+
+    .footer__content .link {
+        font-size: 1.6rem;
+    }
+
+    .footer__content {
+        justify-content: center;
+    }
+
+    .section__detalle--info {
+        justify-content: center;
     }
 }
 

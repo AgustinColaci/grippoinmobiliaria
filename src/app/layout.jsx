@@ -10,7 +10,10 @@ export default function RootLayout({ children }) {
       <body>
         <section className="viewport">
           <header className="header">
-            <div className="logo--grippo"></div>
+            <a href="./">
+              <div className="logo--grippo">
+              </div>
+            </a>
           </header>
 
           {children}
