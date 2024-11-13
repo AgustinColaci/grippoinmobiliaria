@@ -543,6 +543,10 @@
     justify-content: end;
 }
 
+.card__buttons .wsp--link {
+    text-decoration: none;
+}
+
 .card__buttons .card__buttons--wsp {
     width: 4.8rem;
     height: 4.8rem;
@@ -642,6 +646,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 14rem;
+    text-align: center;
 }
 
 .section__detalle--info {
@@ -805,6 +811,10 @@
     }
 
     .footer__content {
+        justify-content: center;
+    }
+
+    .section__detalle--info {
         justify-content: center;
     }
 }
