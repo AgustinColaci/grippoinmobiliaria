@@ -2,20 +2,20 @@
 import useStore from '@/store/useStore';
 import React from 'react'
 
-const CardInfoDetalle = () => {
+const CardInfoDetalle = ({direccion, precioValor, precioMoneda, urlMaps}) => {
 
   const { steps } = useStore();
 
   return (
     <>
       <div className='card__info--direc'>
-        Dirección 1234
+        {direccion}
       </div>
       <div className='card__info--ubic'>
-        <a className='link' href="https://maps.app.goo.gl/igLACjzeGR771tNA8">Ubicación</a>
+        <a className='link' href={urlMaps}>Ubicación</a> 
       </div>
       <div className='card__info--valor'>
-        <span className='usd'>USD</span> 40.000
+        <span className='usd'>{precioMoneda}</span> ${precioValor}
       </div>
     </>
   )

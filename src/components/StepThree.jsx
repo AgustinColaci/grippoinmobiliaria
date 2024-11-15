@@ -6,10 +6,6 @@ const StepThree = () => {
 
   const { substractStep, property, steps, setProperty, addStep } = useStore();
 
-
-  useEffect(() => {
-    console.log(property, 'PROPIEDAD EN EL PASO 3')
-  },[])
   return (
     <>
       <BannerDetalle />

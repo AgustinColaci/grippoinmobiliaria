@@ -20,7 +20,7 @@ import iconAnticipo from '@/icons/icon--anticipo.svg';
 import iconCodigo from '@/icons/icon--codigo.svg';
 
 const DetallePropiedad = () => {
-    const { steps } = useStore();
+    const { steps, property } = useStore();
 
     return (
         <>
@@ -32,7 +32,7 @@ const DetallePropiedad = () => {
                             <Image src={iconM} alt="Icono de metros cuadrados total" />
                         </div>
                         <div className='detalle__propiedad--text'>
-                            <span className="text mts">44 m² total</span>
+                            <span className="text mts">{property.m2total} m² total</span>
                         </div>
                     </div>
 
@@ -41,7 +41,7 @@ const DetallePropiedad = () => {
                             <Image src={iconMC} alt="Icono de metros cuadrados cubiertos" />
                         </div>
                         <div className='detalle__propiedad--text'>
-                            <span className="text mts">20 m² cubierto</span>
+                            <span className="text mts">{property.m2cubierto} m² cubierto</span>
                         </div>
                     </div>
 
@@ -50,7 +50,7 @@ const DetallePropiedad = () => {
                             <Image src={iconAmbientes} alt="Icono de ambientes" />
                         </div>
                         <div className='detalle__propiedad--text'>
-                            <span className="text mts">2 Ambientes</span>
+                            <span className="text mts">{property.ambientes} Ambientes</span>
                         </div>
                     </div>
 
@@ -59,7 +59,7 @@ const DetallePropiedad = () => {
                             <Image src={iconBano} alt="Icono de baño" />
                         </div>
                         <div className='detalle__propiedad--text'>
-                            <span className="text mts">1 Baño</span>
+                            <span className="text mts">{property.banos} Baño</span>
                         </div>
                     </div>
 
@@ -68,7 +68,7 @@ const DetallePropiedad = () => {
                             <Image src={iconCocheras} alt="Icono de cochera" />
                         </div>
                         <div className='detalle__propiedad--text'>
-                            <span className="text mts">1 Cochera</span>
+                            <span className="text mts">{property.tieneCochera ? `${property.cantidadCocheras} Cochera` :  ' 0 Cochera'}</span>
                         </div>
                     </div>
 
@@ -77,7 +77,7 @@ const DetallePropiedad = () => {
                             <Image src={iconDormitorio} alt="Icono de dormitorio" />
                         </div>
                         <div className='detalle__propiedad--text'>
-                            <span className="text mts">1 Dormitorio</span>
+                            <span className="text mts">{property.dormitorios} Dormitorio</span>
                         </div>
                     </div>
 
@@ -86,7 +86,7 @@ const DetallePropiedad = () => {
                             <Image src={iconAlquiler} alt="Icono de alquiler" />
                         </div>
                         <div className='detalle__propiedad--text'>
-                            <span className="text mts">Alquiler</span>
+                            <span className="text mts">{property.tipoOperacion}</span>
                         </div>
                     </div>
 
@@ -95,7 +95,7 @@ const DetallePropiedad = () => {
                             <Image src={iconLocalidad} alt="Icono de localidad" />
                         </div>
                         <div className='detalle__propiedad--text'>
-                            <span className="text mts">Localidad</span>
+                            <span className="text mts">{property.zona}</span>
                         </div>
                     </div>
 
@@ -104,25 +104,25 @@ const DetallePropiedad = () => {
                             <Image src={iconMascotas} alt="Icono de mascotas" />
                         </div>
                         <div className='detalle__propiedad--text'>
-                            <span className="text mts">No permiten mascotas</span>
+                            <span className="text mts">{property.permiteMascotas ? 'Permite mascotas' : 'No permiten mascotas'}</span>
                         </div>
                     </div>
 
-                    <div className='detalle__propiedad'>
+                    {/* <div className='detalle__propiedad'>
                         <div className='detalle__propiedad--icon'>
                             <Image src={iconAntiguedad} alt="Icono de antiguedad" />
                         </div>
                         <div className='detalle__propiedad--text'>
                             <span className="text mts">20 años</span>
                         </div>
-                    </div>
+                    </div> */}
 
                     <div className='detalle__propiedad'>
                         <div className='detalle__propiedad--icon'>
                             <Image src={iconPlantas} alt="Icono de plantas" />
                         </div>
                         <div className='detalle__propiedad--text'>
-                            <span className="text mts">1 Planta</span>
+                            <span className="text mts">{property.numeroDePlantas} Planta</span>
                         </div>
                     </div>
 
@@ -131,7 +131,7 @@ const DetallePropiedad = () => {
                             <Image src={iconVista} alt="Icono de vista" />
                         </div>
                         <div className='detalle__propiedad--text'>
-                            <span className="text mts">Frente</span>
+                            <span className="text mts">{property.ubicacionDelInmueble}</span>
                         </div>
                     </div>
 
@@ -140,7 +140,7 @@ const DetallePropiedad = () => {
                             <Image src={iconOrientacion} alt="Icono de orientación" />
                         </div>
                         <div className='detalle__propiedad--text'>
-                            <span className="text mts">Noroeste</span>
+                            <span className="text mts">{property.orientacion}</span>
                         </div>
                     </div>
 
@@ -149,7 +149,7 @@ const DetallePropiedad = () => {
                             <Image src={iconAnticipo} alt="Icono de anticipo" />
                         </div>
                         <div className='detalle__propiedad--text'>
-                            <span className="text mts">50% Anticipo</span>
+                            <span className="text mts">{property.anticipo} Anticipo</span>
                         </div>
                     </div>
 
@@ -158,12 +158,12 @@ const DetallePropiedad = () => {
                             <Image src={iconCodigo} alt="Icono de código de la propiedad" />
                         </div>
                         <div className='detalle__propiedad--text'>
-                            <span className="text mts">Cod.123</span>
+                            <span className="text mts">Cod.{property.codigo}</span>
                         </div>
                     </div>
 
                     <div className='detalle__legales'>
-                        <p className='paragraph'>VENTA Departamento monoambiente a estrenarsituado en un punto estratégico de la ciudad de Villa Bosch. A cuatrocientos metros de la estación de tren villa Bosch del ferrocarril Urquiza (que te lleva a la estación Federico Lacroze en 27 minutos), en dirección contraria nos acerca a la terminal general Lemos. En la estación Villa Bosch, contamos con cuatro ramales de colectivos, que nos facilitan el traslado a, caseros, San Martín, Loma Hermosa, Podestá.La propiedad cuenta con un gran caudal de luz, gracias a las ventanas de piso a techo con doble vidrio DVH laminado, cumpliendo con tres roles muy importantes, en primer lugar el ya mencionado aprovechamiento de la luz natural, en segundo lugar brinda una mayor seguridad, y por último, aislamiento acústico, que se traduce en un manto de Paz y tranquilidad.El suelo de porcelanato rectificado similar a la madera le suma una profunda sensación de calidez y elegancia.</p>
+                        <p className='paragraph'>{property.detalle}</p>
                     </div>
                 </section>
                 <section className='section__similares'>

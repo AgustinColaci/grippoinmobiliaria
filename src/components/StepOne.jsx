@@ -18,6 +18,7 @@ const StepOne = ({ }) => {
     const [codigo, setCodigo] = useState('');
     const [estadoVenta, setEstadoVenta] = useState('');
     const [linkMaps, setLinkMaps] = useState('');
+    const [urlMaps, setUrlMaps] = useState('');
     const [fotos, setFotos] = useState([]);
 
     const campos = ['tipoOperacion', 'tipoInmueble', 'zona', 'direccion', 'precioInmueble', 'precioInmuebleValor', 'pagaExpensas', 'precioExpensas', 'precioExpensasValor', 'codigo', 'estadoVenta', 'linkMaps', 'fotos']
@@ -123,10 +124,10 @@ const StepOne = ({ }) => {
 
     const handleAddStep = () => {
 
-        const propertyFromStep1 = { tipoOperacion, tipoInmueble, zona, direccion, precioInmueble, precioInmuebleValor, pagaExpensas, precioExpensas, precioExpensasValor, codigo, estadoVenta, linkMaps, fotos }
+        const propertyFromStep1 = { tipoOperacion, tipoInmueble, zona, direccion, precioInmueble, precioInmuebleValor, pagaExpensas, precioExpensas, precioExpensasValor, codigo, estadoVenta, linkMaps, fotos, urlMaps }
 
         const errores = handleErrorsFromStep1(propertyFromStep1)
-        setErrors({...errors, ...errores})
+        setErrors({ ...errors, ...errores })
 
 
         for (const key in errores) {
@@ -136,7 +137,7 @@ const StepOne = ({ }) => {
             }
         }
 
-        setProperty({...property,...propertyFromStep1})
+        setProperty({ ...property, ...propertyFromStep1 })
 
         if (steps < 3) {
             addStep()
@@ -159,12 +160,20 @@ const StepOne = ({ }) => {
         const src = srcMatch ? srcMatch[1] : null;
 
         console.log(src)
-        if(!src){
-            setErrors({...errors, linkMapsIncorrecto:true})
+        if (!src) {
+            setErrors({ ...errors, linkMapsIncorrecto: true })
             setLinkMaps(iframeHTML)
             return
         }
         setLinkMaps(src)
+
+        const url = new URL(src);
+        const params = url.searchParams.get('pb');
+        const addressPart = params.split('!2s')[1].split('!')[0];
+        const address = decodeURIComponent(addressPart);
+        const mapsUrl = `https://www.google.com/maps?q=${encodeURIComponent(address)}`;
+
+        setUrlMaps(mapsUrl)
     }
 
 
@@ -188,7 +197,7 @@ const StepOne = ({ }) => {
 
                     <div className='section__form--inputs'>
                         <label htmlFor="tipoInmueble">Tipo de inmueble*</label>
-                        <select className={`${errors.tipoInmueble ? 'error--empty' : ''}`} onChange={(e) => {setTipoInmueble(e.target.value) ; deleteErrorAndClass(e.target.id)}} id="tipoInmueble" name="tipoInmueble" value={tipoInmueble}>
+                        <select className={`${errors.tipoInmueble ? 'error--empty' : ''}`} onChange={(e) => { setTipoInmueble(e.target.value); deleteErrorAndClass(e.target.id) }} id="tipoInmueble" name="tipoInmueble" value={tipoInmueble}>
                             <option className={`${errors.tipoInmueble ? 'error--empty' : ''}`} value="" disabled>Selecciona una opción</option>
                             <option className={`${errors.tipoInmueble ? 'error--empty' : ''}`} value="casa">Casa</option>
                             <option className={`${errors.tipoInmueble ? 'error--empty' : ''}`} value="departamento">Departamento</option>
@@ -199,7 +208,7 @@ const StepOne = ({ }) => {
 
                     <div className='section__form--inputs'>
                         <label htmlFor="zona">Zona*</label>
-                        <select className={`${errors.zona ? 'error--empty' : ''}`} onChange={(e) => {setZona(e.target.value); deleteErrorAndClass(e.target.id)}} id="zona" name="zona" value={zona}>
+                        <select className={`${errors.zona ? 'error--empty' : ''}`} onChange={(e) => { setZona(e.target.value); deleteErrorAndClass(e.target.id) }} id="zona" name="zona" value={zona}>
                             <option className={`${errors.zona ? 'error--empty' : ''}`} value="" disabled>Selecciona una opción</option>
                             <option className={`${errors.zona ? 'error--empty' : ''}`} value="Martin Coronado">Martín Coronado</option>
                             <option className={`${errors.zona ? 'error--empty' : ''}`} value="Villa Bosch">Villa Bosch</option>
@@ -213,70 +222,78 @@ const StepOne = ({ }) => {
 
                     <div className='section__form--inputs'>
                         <label htmlFor="direccion">Dirección*</label>
-                        <input className={`${errors.direccion ? 'error--empty' : ''}`} value={direccion} onChange={(e) => {setDireccion(e.target.value); deleteErrorAndClass(e.target.id)}} type="text" id="direccion" name="direccion" placeholder="Ejemplo: Calle 1234" />
+                        <input className={`${errors.direccion ? 'error--empty' : ''}`} value={direccion} onChange={(e) => { setDireccion(e.target.value); deleteErrorAndClass(e.target.id) }} type="text" id="direccion" name="direccion" placeholder="Ejemplo: Calle 1234" />
                         {errors.direccion && <p className="error--text">Este campo es obligatorio</p>}
 
                     </div>
 
-                    <div className='section__form--inputs dos-cols'>
-                        <div className='input-sin-label moneda'>
-                            <label htmlFor="precioInmueble">Precio de inmueble*</label>
-                            <select className={`${errors.precioInmueble ? 'error--empty' : ''}`} onChange={(e) => {setPrecioInmueble(e.target.value); deleteErrorAndClass(e.target.id)}} id="precioInmueble" name="precioInmueble" value={precioInmueble}>
-                                <option className={`${errors.precioInmueble ? 'error--empty' : ''}`} value="" disabled>Moneda</option>
-                                <option className={`${errors.precioInmueble ? 'error--empty' : ''}`} value="ARS">ARS</option>
-                                <option className={`${errors.precioInmueble ? 'error--empty' : ''}`} value="USD">USD</option>
-                            </select>
-                            {errors.precioInmueble && <p className="error--text">Este campo es obligatorio</p>}
+                    <div>
 
-                        </div>
-                        <div className='input-sin-label'>
-                            <label className="label--hidden" htmlFor="precioInmuebleValor"></label>
-                            <input className={`${errors.precioInmuebleValor ? 'error--empty' : ''}`} value={precioInmuebleValor} onChange={(e) => {setPrecioInmuebleValor(e.target.value); deleteErrorAndClass(e.target.id)}} type="text" id="precioInmuebleValor" name="precioInmuebleValor" placeholder="Ejemplo: 8000" />
-                            {errors.precioInmuebleValor && <p className="error--text">Este campo es obligatorio</p>}
+                        <div className='section__form--inputs dos-cols'>
+                            <div className='input-sin-label moneda'>
+                                <label htmlFor="precioInmueble">Precio de inmueble*</label>
+                                <select className={`${errors.precioInmueble ? 'error--empty' : ''}`} onChange={(e) => { setPrecioInmueble(e.target.value); deleteErrorAndClass(e.target.id) }} id="precioInmueble" name="precioInmueble" value={precioInmueble}>
+                                    <option className={`${errors.precioInmueble ? 'error--empty' : ''}`} value="" disabled>Moneda</option>
+                                    <option className={`${errors.precioInmueble ? 'error--empty' : ''}`} value="ARS">ARS</option>
+                                    <option className={`${errors.precioInmueble ? 'error--empty' : ''}`} value="USD">USD</option>
+                                </select>
 
+                            </div>
+                            <div className='input-sin-label'>
+                                <label className="label--hidden" htmlFor="precioInmuebleValor"></label>
+                                <input className={`${errors.precioInmuebleValor ? 'error--empty' : ''}`} value={precioInmuebleValor} onChange={(e) => { setPrecioInmuebleValor(e.target.value); deleteErrorAndClass(e.target.id) }} type="text" id="precioInmuebleValor" name="precioInmuebleValor" placeholder="Ejemplo: 8000" />
+
+                            </div>
                         </div>
+                        {(errors.precioInmuebleValor || errors.precioInmueble) && <p className="error--text">Este campo es obligatorio</p>}
                     </div>
+
 
                     <div className='section__form--inputs expensas'>
                         <label className="expensas-title">¿Paga expensas?</label>
-                        <input className={`${errors.pagaExpensas ? 'error--empty' : ''}`} checked={pagaExpensas} onChange={(e) => {setPagaExpensas(true); deleteErrorAndClass(e.target.name)}} type="radio" id="expensas-si" name="pagaExpensas" value="si" />
+                        <input className={`${errors.pagaExpensas ? 'error--empty' : ''}`} checked={pagaExpensas} onChange={(e) => { setPagaExpensas(true); deleteErrorAndClass(e.target.name) }} type="radio" id="expensas-si" name="pagaExpensas" value="si" />
                         <label htmlFor="expensas-si">Sí</label>
-                        <input className={`${errors.pagaExpensas ? 'error--empty' : ''}`} checked={!pagaExpensas} onChange={(e) =>{setPagaExpensas(false); deleteErrorAndClass(e.target.name)}} type="radio" id="expensas-no" name="pagaExpensas" value="no" />
+                        <input className={`${errors.pagaExpensas ? 'error--empty' : ''}`} checked={!pagaExpensas} onChange={(e) => { setPagaExpensas(false); deleteErrorAndClass(e.target.name) }} type="radio" id="expensas-no" name="pagaExpensas" value="no" />
                         <label htmlFor="expensas-no">No</label>
                         {errors.pagaExpensas && <p className="error--text">Este campo es obligatorio</p>}
 
                     </div>
 
 
-                    {pagaExpensas && <div className='section__form--inputs dos-cols'>
-                        <div className='input-sin-label moneda'>
-                            <label className="label--hidden" htmlFor="precioExpensas"></label>
-                            <select className={`${errors.precioExpensas ? 'error--empty' : ''}`} disabled={!pagaExpensas} value={precioExpensas} onChange={(e) => {setPrecioExpensas(e.target.value);deleteErrorAndClass(e.target.id)}} id="precioExpensas" name="precioExpensas">
-                                <option value="" disabled>Moneda</option>
-                                <option value="ARS">ARS</option>
-                                <option value="USD">USD</option>
-                            </select>
-                            {errors.precioExpensas && <p className="error--text">Este campo es obligatorio</p>}
+                    {pagaExpensas &&
+                        <div>
 
-                        </div>
-                        <div className='input-sin-label'>
-                            <label className="label--hidden" htmlFor="precioExpensasValor"></label>
-                            <input className={`${errors.precioExpensasValor ? 'error--empty' : ''}`} disabled={!pagaExpensas} onChange={(e) => {setPrecioExpensasValor(e.target.value); deleteErrorAndClass(e.target.id)}} value={precioExpensasValor} type="text" id="precioExpensasValor" name="precioExpensasValor" placeholder="Ejemplo: 8000" />
-                            {errors.precioExpensasValor && <p className="error--text">Este campo es obligatorio</p>}
+                            <div className='section__form--inputs dos-cols'>
+                                <div className='input-sin-label moneda'>
+                                    <label className="label--hidden" htmlFor="precioExpensas"></label>
+                                    <select className={`${errors.precioExpensas ? 'error--empty' : ''}`} disabled={!pagaExpensas} value={precioExpensas} onChange={(e) => { setPrecioExpensas(e.target.value); deleteErrorAndClass(e.target.id) }} id="precioExpensas" name="precioExpensas">
+                                        <option value="" disabled>Moneda</option>
+                                        <option value="ARS">ARS</option>
+                                        <option value="USD">USD</option>
+                                    </select>
 
+                                </div>
+                                <div className='input-sin-label'>
+                                    <label className="label--hidden" htmlFor="precioExpensasValor"></label>
+                                    <input className={`${errors.precioExpensasValor ? 'error--empty' : ''}`} disabled={!pagaExpensas} onChange={(e) => { setPrecioExpensasValor(e.target.value); deleteErrorAndClass(e.target.id) }} value={precioExpensasValor} type="text" id="precioExpensasValor" name="precioExpensasValor" placeholder="Ejemplo: 8000" />
+
+                                </div>
+
+                            </div>
+                            {(errors.precioExpensasValor || errors.precioExpensa) && <p className="error--text">Este campo es obligatorio</p>}
                         </div>
-                    </div>}
+                    }
 
                     <div className='section__form--inputs'>
                         <label htmlFor="codigo">Código*</label>
-                        <input className={`${errors.codigo ? 'error--empty' : ''}`} value={codigo} onChange={(e) => {setCodigo(e.target.value); deleteErrorAndClass(e.target.id)}} type="text" id="codigo" name="codigo" placeholder="Ejemplo: 1234" />
+                        <input className={`${errors.codigo ? 'error--empty' : ''}`} value={codigo} onChange={(e) => { setCodigo(e.target.value); deleteErrorAndClass(e.target.id) }} type="text" id="codigo" name="codigo" placeholder="Ejemplo: 1234" />
                         {errors.codigo && <p className="error--text">Este campo es obligatorio</p>}
 
                     </div>
 
                     <div className='section__form--inputs'>
                         <label htmlFor="estadoVenta">Estado de la venta*</label>
-                        <select className={`${errors.estadoVenta ? 'error--empty' : ''}`} id="estadoVenta" name="estadoVenta" value={estadoVenta} onChange={(e) => {setEstadoVenta(e.target.value); deleteErrorAndClass(e.target.id)}} >
+                        <select className={`${errors.estadoVenta ? 'error--empty' : ''}`} id="estadoVenta" name="estadoVenta" value={estadoVenta} onChange={(e) => { setEstadoVenta(e.target.value); deleteErrorAndClass(e.target.id) }} >
                             <option value="" disabled>Selecciona una opción</option>
                             <option value="disponible">Disponible</option>
                             <option value="vendida">Vendida</option>
@@ -304,7 +321,7 @@ const StepOne = ({ }) => {
 
                     <div className='add__button'>
                         <a className="button button--add" href="#"> Subí fotos a tu publicación</a>
-                        <input className={`${errors.fotos ? 'error--empty' : ''}`} id="fotos" name="fotos" type="file" onChange={((e) => { sendImageToFirebase(e.target.files[0]); deleteErrorAndClass(e.target.id)})} />
+                        <input className={`${errors.fotos ? 'error--empty' : ''}`} id="fotos" name="fotos" type="file" onChange={((e) => { sendImageToFirebase(e.target.files[0]); deleteErrorAndClass(e.target.id) })} />
                         {/* <label htmlFor="fotos">Subí fotos a tu publicación </label> */}
                         <div className="autogestion-img-container">
                             {fotos.map((foto, index) => {

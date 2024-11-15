@@ -1,21 +1,15 @@
 'use client';
 import useStore from '@/store/useStore';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import bgB from '../img/background--banner.png';
-import SMOro1 from '../img/SMOro-1.jpg';
-import SMOro2 from '../img/SMOro-2.jpg';
-import SMOro3 from '../img/SMOro-3.jpg';
-import SMOro4 from '../img/SMOro-4.jpg';
-import SMOro5 from '../img/SMOro-5.jpg';
-import SMOro6 from '../img/SMOro-6.jpg';
 
-const CardSlider = () => {
+const CardSlider = ({ codigo, images }) => {
   const { steps } = useStore();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [imagesForRender, setImagesForRender] = useState([]);
 
   const settings = {
     dots: true,
@@ -36,26 +30,44 @@ const CardSlider = () => {
     setIsModalOpen(false);
   };
 
-  const images = [bgB, SMOro1, SMOro2, SMOro3, SMOro4, SMOro5, SMOro6];
-  const images2 = [bgB, SMOro1, SMOro2, SMOro3, SMOro4, SMOro5, SMOro6];
+  useEffect(() => {
+    if (images) {
+      // Convertir los objetos File a URLs utilizables por el navegador
+      const fileURLs = images.map((file) => URL.createObjectURL(file));
+      setImagesForRender(fileURLs);
+
+      // Liberar memoria cuando el componente se desmonte
+      return () => {
+        fileURLs.forEach((url) => URL.revokeObjectURL(url));
+      };
+    }
+  }, [images]);
 
   return (
     <div className="slider">
       <Slider {...settings}>
-        {images.map((image, index) => (
+        {imagesForRender.map((image, index) => (
           <div key={index} onClick={() => handleImageClick(index)}>
             <div
               className="image-container"
-              style={{ backgroundImage: `url(${image.src})` }}
+              style={{ backgroundImage: `url(${image})` }}
             ></div>
           </div>
         ))}
       </Slider>
 
       <div className="slider__pils">
-        <div className="slider__img__total">{currentSlide + 1}/{images.length}</div>
-        <div className="slider__code">Cod.1234</div>
+        <div className="slider__img__total">
+          {currentSlide + 1}/{imagesForRender.length}
+        </div>
+        <div className="slider__code">Cod.{codigo}</div>
       </div>
+    </div>
+    
+  );
+};
+
+export default CardSlider;
 
       {/* Modal */}
       {/* {isModalOpen && (
@@ -74,8 +86,3 @@ const CardSlider = () => {
           </div>
         </div>
       )} */}
-    </div>
-  );
-};
-
-export default CardSlider;
