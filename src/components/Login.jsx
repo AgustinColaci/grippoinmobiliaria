@@ -71,7 +71,9 @@ const LoginForm = () => {
                         />
                     </div>
                     <button type="submit" className="login-button">Ingresar</button>
-                    <Link href="/">Volver al sitio</Link>
+                    <div className="volver">
+                        <Link className="link" href="/">Volver al sitio</Link>
+                    </div>
                 </form>
             )}
         </div>

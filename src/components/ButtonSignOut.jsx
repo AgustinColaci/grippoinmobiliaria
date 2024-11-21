@@ -9,7 +9,7 @@ const ButtonSignOut = () => {
     }
 
     return (
-        <button onClick={() => handleUser()}>Salir de mi usuario</button>
+        <button className="button button--logout" onClick={() => handleUser()}>Salir de mi usuario</button>
 
     )
 }

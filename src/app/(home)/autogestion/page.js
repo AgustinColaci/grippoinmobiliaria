@@ -13,8 +13,8 @@ const Autogestion = () => {
 
   return (
     <div className='menu-autogestion'>
-      <Link href={'/autogestion/nueva-propiedad'}>Crear una nueva propiedad</Link>
-      <Link href={'/autogestion/lista-de-propiedades'}>Ver todas las propiedades</Link>
+      <Link className="button button--nueva" href={'/autogestion/nueva-propiedad'}>Crear una nueva propiedad</Link>
+      <Link className="button button--propiedades" href={'/autogestion/lista-de-propiedades'}>Ver todas las propiedades</Link>
       <ButtonSignOut />
     </div>
   );

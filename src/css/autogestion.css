@@ -14,5 +14,22 @@
 
 
 .list-properties{
-    font-size: 26px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 2.6rem;
+    min-height: 50rem;
+}
+
+.text--propiedad {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.volver--menu {
+    margin-bottom: 2rem;
+}
+
+.list-properties-all {
+    display: flex;
 }

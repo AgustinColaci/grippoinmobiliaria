@@ -226,7 +226,9 @@
 .banner__autogestion .button.button--delete,
 .add__button .button--add,
 .button--previous,
-.button--verMas {
+.button--verMas, 
+.button--nueva,
+.button--propiedades {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -241,25 +243,37 @@
 }
 
 .banner__autogestion .button.button--delete:hover,
-.add__button .button--add:hover,
 .button--previous:hover,
-.button--verMas:hover {
+.button--verMas:hover,
+.button--nueva:hover,
+.button--propiedades:hover {
     color: var(--color--white);
     background-color: var(--color--azul);
 }
 
 .banner__autogestion .button.button--delete:focus,
 .banner__autogestion .button.button--delete:active,
-.add__button .button--add:focus,
-.add__button .button--add:active,
 .button--previous:focus,
 .button--previous:active,
 .button--verMas:focus,
-.button--verMas:active {
+.button--verMas:active
+.button--nueva:active,
+.button--propiedades:active
+.button--nueva:focus,
+.button--propiedades:focus {
     outline: .2rem solid var(--color--black);
     border: .1rem solid var(--color--azul);
     color: var(--color--azul);
     background-color: transparent;
+}
+
+.add__button .button--add {
+    min-width: fit-content;
+}
+
+.button--nueva,
+.button--propiedades {
+    min-width: fit-content;
 }
 
 .section__form {
@@ -316,7 +330,8 @@
     justify-content: space-between;
 }
 
-.section__form .button.button--next {
+.section__form .button.button--next,
+.button--logout {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -332,14 +347,17 @@
     transition: all ease .3s;
 }
 
-.section__form .button.button--next:hover {
+.section__form .button.button--next:hover,
+.button--logout:hover {
     background-color: var(--color--white);
     border-color: var(--color--azul);
     color: var(--color--azul);
 }
 
 .section__form .button.button--next:focus,
-.section__form .button.button--next:active {
+.section__form .button.button--next:active,
+.button--logout:focus,
+.button--logout:active {
     outline: .2rem solid var(--color--black);
 }
 
@@ -414,6 +432,7 @@
 .add__button .button--add {
     width: 25.2rem;
     margin-top: 2rem;
+    margin-bottom: .8rem;
 }
 
 .column-right .paragraph {
@@ -896,17 +915,17 @@
 }
 
 .autogestion-img p{
-    font-size: 18px;
-    color: #e6e7f2;
+    font-size: 1.2rem;
+    color: var(--color--white);
 }
 
 .autogestion-img button{
     background-color: transparent;
     border: 0;
     font-size: 18px;
-    color: #E6E7F2;
-    border: 1px solid #E6E7F2;
-    padding:5px;
+    color: var(--color--white);
+    border: .1rem solid var(--color--white);
+    padding: .5rem;
     cursor: pointer;
 }
 
@@ -918,25 +937,34 @@
 
 .autogestion-img{
     display: flex;
-    background-color: #000C79;
+    background-color: var(--color--azul);
     align-items: center;
-    gap: 5px;
-    border-radius: 5px;
-    padding:5px;
+    border-radius: .5rem;
+    padding:.2rem;
     margin-top:5px;
 }
 
 .autogestion-img p{
-    font-size: 18px;
-    color: #e6e7f2;
+    font-size: 1.2rem;
+    color: var(--color--white);
 }
 
 .autogestion-img button{
-    background-color: transparent;
     border: 0;
-    font-size: 18px;
-    color: #E6E7F2;
-    border: 1px solid #E6E7F2;
-    padding:5px;
+    font-size: 1.2rem;
+    padding:.5rem;
     cursor: pointer;
+}
+
+.button--editar {
+    border: .1rem solid var(--color--white);
+    background-color: var(--color--azul);
+    color: var(--color--white);
+    font-size: 1.6rem;
+    padding-left: .8rem;
+    padding-right: .8rem;
+    padding-top: .2rem;
+    padding-bottom: .2rem;
+    border-radius: .4rem;
+
 }

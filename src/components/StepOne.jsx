@@ -319,11 +319,10 @@ const StepOne = ({ }) => {
                         <iframe src={errors.linkMapsIncorrecto ? 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.8731958097223!2d-58.603362823511155!3d-34.5820749563568!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb90a998a79f5%3A0xff796e0ff1e3bc60!2sGrippo%20Propiedades!5e0!3m2!1ses!2sar!4v1731379938048!5m2!1ses!2sar' : linkMaps} width="100%" height="440" allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
                     </div>
 
-                    <h2 className="title">Fotos*</h2>
+                    <h2 className="title">Subí fotos a tu publicación*</h2>
 
                     <div className='add__button'>
-                        <a className="button button--add" href="#"> Subí fotos a tu publicación</a>
-                        <input className={`${errors.files ? 'error--empty' : ''}`} id="files" name="files" type="file" onChange={((e) => { sendImageToFirebase(e.target.files[0]); deleteErrorAndClass(e.target.id) })} />
+                        <input className={`${errors.files ? 'error--empty' : ''} button button--add`} id="files" name="files" type="file" onChange={((e) => { sendImageToFirebase(e.target.files[0]); deleteErrorAndClass(e.target.id) })} />
                         {/* <label htmlFor="fotos">Subí fotos a tu publicación </label> */}
                         <div className="autogestion-img-container">
                             {files.map((foto, index) => {

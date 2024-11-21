@@ -1,10 +1,32 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #1A1A1A;
+  font-size: 62.5%;
+  list-style-type: none;
+  font-family: "Roboto", sans-serif;
+}
+
+/* Variables - Colores */
+:root {
+  --color--white:#FFFFFF;
+  --color--black:#000000;
+  --color--azul:#000C79;
+  --color--rojo:#C6152B;
+  --color--verde:#13AA66;
+  --color--gray:#1A1A1A;
+  --color--disable:#909090;
+  --color--chip:#666666;
+}
+
 /* styles/LoginForm.css */
 .login-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #F5F5F5;
+    background-color: #000c792f;
   }
   
   .login-form {
@@ -51,12 +73,11 @@
   .login-button {
     width: 100%;
     padding: 1.2rem;
-    background-color: #0070F3;
+    background-color: #000C79;
     color: #FFFFFF;
     border: none;
     border-radius: 0.4rem;
     font-size: 1.6rem;
-    font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
@@ -65,3 +86,17 @@
     background-color: #005BB5;
   }
   
+
+.volver {
+    margin-top: 1.2rem;
+}
+
+.volver .link {
+    font-size: 1.8rem;
+    text-decoration: none;
+    background-image: url(../icons/arrow-left-black.svg);
+    background-position: left center;
+    background-repeat: no-repeat;
+    padding-left: 2.4rem;
+    font-weight: 500;
+}
