@@ -1,0 +1,18 @@
+.menu-autogestion{
+    font-size: 26px;
+    display: flex;
+    gap: 10px;
+    min-height: 500px;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu-autogestion a{
+    padding: 5px;
+    border: 1px solid black;
+}
+
+
+.list-properties{
+    font-size: 26px;
+}

@@ -21,7 +21,9 @@ const StepOne = ({ }) => {
     const [urlMaps, setUrlMaps] = useState('');
     const [fotos, setFotos] = useState([]);
 
-    const campos = ['tipoOperacion', 'tipoInmueble', 'zona', 'direccion', 'precioInmueble', 'precioInmuebleValor', 'pagaExpensas', 'precioExpensas', 'precioExpensasValor', 'codigo', 'estadoVenta', 'linkMaps', 'fotos']
+    const [files, setFiles] = useState([])
+
+    const campos = ['tipoOperacion', 'tipoInmueble', 'zona', 'direccion', 'precioInmueble', 'precioInmuebleValor', 'pagaExpensas', 'precioExpensas', 'precioExpensasValor', 'codigo', 'estadoVenta', 'linkMaps', 'fotos', 'files']
 
     const [errors, setErrors] = useState({})
 
@@ -95,7 +97,7 @@ const StepOne = ({ }) => {
             return
         }
 
-        setFotos((prevFotos) => [...prevFotos, file]);
+        setFiles((prevFiles) => [...prevFiles, file]);
 
 
         // const formData = new FormData();
@@ -124,7 +126,7 @@ const StepOne = ({ }) => {
 
     const handleAddStep = () => {
 
-        const propertyFromStep1 = { tipoOperacion, tipoInmueble, zona, direccion, precioInmueble, precioInmuebleValor, pagaExpensas, precioExpensas, precioExpensasValor, codigo, estadoVenta, linkMaps, fotos, urlMaps }
+        const propertyFromStep1 = { tipoOperacion, tipoInmueble, zona, direccion, precioInmueble, precioInmuebleValor, pagaExpensas, precioExpensas, precioExpensasValor, codigo, estadoVenta, linkMaps, files, urlMaps }
 
         const errores = handleErrorsFromStep1(propertyFromStep1)
         setErrors({ ...errors, ...errores })
@@ -321,10 +323,10 @@ const StepOne = ({ }) => {
 
                     <div className='add__button'>
                         <a className="button button--add" href="#"> Subí fotos a tu publicación</a>
-                        <input className={`${errors.fotos ? 'error--empty' : ''}`} id="fotos" name="fotos" type="file" onChange={((e) => { sendImageToFirebase(e.target.files[0]); deleteErrorAndClass(e.target.id) })} />
+                        <input className={`${errors.files ? 'error--empty' : ''}`} id="files" name="files" type="file" onChange={((e) => { sendImageToFirebase(e.target.files[0]); deleteErrorAndClass(e.target.id) })} />
                         {/* <label htmlFor="fotos">Subí fotos a tu publicación </label> */}
                         <div className="autogestion-img-container">
-                            {fotos.map((foto, index) => {
+                            {files.map((foto, index) => {
                                 return (<div key={index} className="autogestion-img">
                                     <p>{foto.name}</p>
                                     <button>X</button>
@@ -336,7 +338,7 @@ const StepOne = ({ }) => {
 
                     <p className='paragraph'>Acepta jpg y png. Hasta 20 fotos.</p>
 
-                    {errors.fotos && <p className="error--text">Este campo es obligatorio</p>}
+                    {errors.files && <p className="error--text">Este campo es obligatorio</p>}
 
                 </div>
             </div>

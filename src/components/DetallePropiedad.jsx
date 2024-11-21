@@ -22,6 +22,12 @@ import iconCodigo from '@/icons/icon--codigo.svg';
 const DetallePropiedad = () => {
     const { steps, property } = useStore();
 
+    function capitalizeFirstLetter(text) {
+        if (!text) return ''; // Verifica si la cadena está vacía o es null
+        return text.charAt(0).toUpperCase() + text.slice(1);
+      }
+      
+
     return (
         <>
             <section className='section__detalle'>
@@ -86,7 +92,7 @@ const DetallePropiedad = () => {
                             <Image src={iconAlquiler} alt="Icono de alquiler" />
                         </div>
                         <div className='detalle__propiedad--text'>
-                            <span className="text mts">{property.tipoOperacion}</span>
+                            <span className="text mts">{capitalizeFirstLetter(property.tipoOperacion)}</span>
                         </div>
                     </div>
 
@@ -108,14 +114,14 @@ const DetallePropiedad = () => {
                         </div>
                     </div>
 
-                    {/* <div className='detalle__propiedad'>
+                    <div className='detalle__propiedad'>
                         <div className='detalle__propiedad--icon'>
                             <Image src={iconAntiguedad} alt="Icono de antiguedad" />
                         </div>
                         <div className='detalle__propiedad--text'>
-                            <span className="text mts">20 años</span>
+                            <span className="text mts">{property.antiguedad || '0 años'}</span>
                         </div>
-                    </div> */}
+                    </div>
 
                     <div className='detalle__propiedad'>
                         <div className='detalle__propiedad--icon'>
@@ -131,7 +137,7 @@ const DetallePropiedad = () => {
                             <Image src={iconVista} alt="Icono de vista" />
                         </div>
                         <div className='detalle__propiedad--text'>
-                            <span className="text mts">{property.ubicacionDelInmueble}</span>
+                            <span className="text mts">{capitalizeFirstLetter(property.ubicacionDelInmueble)}</span>
                         </div>
                     </div>
 
@@ -149,7 +155,7 @@ const DetallePropiedad = () => {
                             <Image src={iconAnticipo} alt="Icono de anticipo" />
                         </div>
                         <div className='detalle__propiedad--text'>
-                            <span className="text mts">{property.anticipo} Anticipo</span>
+                            <span className="text mts">{property.anticipo > 0 ? `${property.anticipo}% Anticipo` : 'Sin anticipo'}</span>
                         </div>
                     </div>
 

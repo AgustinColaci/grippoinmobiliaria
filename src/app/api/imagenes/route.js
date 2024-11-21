@@ -4,7 +4,6 @@ import { firestore, storage } from "@/lib/firebase";
 
 export async function POST(request) {
 
-    console.log('hola llegue')
 
     try {
 

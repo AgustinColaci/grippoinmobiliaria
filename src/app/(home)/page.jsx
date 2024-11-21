@@ -1,4 +1,4 @@
-import '../globals.css';
+import '../../globals.css'
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Banner from '@/components/Banner'
@@ -15,8 +15,6 @@ export default async function Home() {
       }
       return res.json();
     });
-
-    console.log(properties.data);
   } catch (error) {
     console.error('Error fetching properties:', error);
   }

@@ -1,5 +1,5 @@
 import { firestore } from "@/lib/firebase";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, doc, getDocs, setDoc } from "firebase/firestore";
 
 
 export async function GET(request) {
@@ -22,14 +22,31 @@ export async function GET(request) {
 
 
 export async function POST(request) {
-    const body = await request.json();
-    // Lógica para manejar POST
-    return new Response(JSON.stringify({ message: 'propiedad creado', user: body }), {
-        status: 201,
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    });
+
+    const formData = await request.formData(); // Usa await aquí
+    const propiedad = JSON.parse(formData.get('propiedad')); // Extrae los datos específicos
+    console.log(propiedad);
+
+
+    try{
+        const snap = await setDoc(doc(firestore, 'Propiedades', JSON.stringify(propiedad.id)), propiedad)
+        return new Response(JSON.stringify({ message: 'propiedad creada'}), {
+            status: 201,
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+    }catch(error){
+        console.log(error)
+        return new Response(JSON.stringify({ message: 'error creando la propiedad'}), {
+            status: 400,
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+    }
+
+
 }
 
 

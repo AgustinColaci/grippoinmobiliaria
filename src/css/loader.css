@@ -1,0 +1,34 @@
+.loading{
+    position: fixed; /* Fija el elemento en la pantalla */
+    top: 0;
+    left: 0;
+    width: 100vw; /* Cubre todo el ancho de la ventana */
+    height: 100vh; /* Cubre todo el alto de la ventana */
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo negro con opacidad del 50% */
+    z-index: 9999; /* Asegura que esté por encima de todos los elementos */
+    display: flex; /* Centrado del contenido */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.loading p{
+    color: white;
+    font-size: 20px;
+}
+
+.loader {
+    border: 4px solid rgba(255, 255, 255, 0.3); /* Borde semitransparente */
+    border-top: 4px solid white; /* Borde superior blanco */
+    border-radius: 50%; /* Forma circular */
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite; /* Animación de rotación */
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }

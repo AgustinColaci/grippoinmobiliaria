@@ -18,10 +18,11 @@ const StepTwo = () => {
     const [anticipo, setAnticipo] = useState('');
     const [permiteMascotas, setPermiteMascotas] = useState(false);
     const [descripcion, setDescripcion] = useState('');
+    const [antiguedad, setAntiguedad] = useState('')
 
     const { substractStep, property, steps, setProperty, addStep } = useStore();
 
-    const campos = ['m2total', 'm2cubierto', 'ambientes', 'banos', 'tieneCochera', 'cantidadCochera', 'dormitorios', 'estadoInmueble', 'numeroDePlantas', 'ubicacionDelInmueble', 'orientacion', 'anticipo', 'permiteMascotas', 'descripcion']
+    const campos = ['m2total', 'm2cubierto', 'ambientes', 'banos', 'tieneCochera', 'cantidadCochera', 'dormitorios', 'estadoInmueble', 'numeroDePlantas', 'ubicacionDelInmueble', 'orientacion', 'anticipo', 'permiteMascotas', 'descripcion', 'antiguedad']
 
     const [errors, setErrors] = useState({})
 
@@ -150,6 +151,14 @@ const StepTwo = () => {
                     {errors.m2cubierto && <p className="error--text">Este campo es obligatorio</p>}
 
                 </div>
+
+                <div className='section__form--inputs'>
+                    <label htmlFor="antiguedad">Antigüedad de la propiedad*</label>
+                    <input className={`${errors.antiguedad ? 'error--empty' : ''}`} value={antiguedad} onChange={(e) => { setAntiguedad(e.target.value); deleteErrorAndClass(e.target.id) }} type="text" id="antiguedad" name="antiguedad" placeholder="Ejemplo: 20 años" />
+                    {errors.antiguedad && <p className="error--text">Este campo es obligatorio</p>}
+
+                </div>
+
 
                 <div className='section__form--inputs'>
                     <label htmlFor="ambientes">Ambientes*</label>

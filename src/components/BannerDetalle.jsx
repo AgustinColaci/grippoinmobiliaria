@@ -4,11 +4,18 @@ import DetallePropiedad from '@/components/DetallePropiedad';
 import CardSlider from '@/components/CardSlider';
 import CardInfoDetalle from '@/components/CardInfoDetalle';
 import CardButtons from '@/components/CardButtons';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 const BannerDetalle = () => {
 
     const { steps, property } = useStore();
+
+    const [filePhotos, setfilePhotos] = useState()
+
+    useEffect(() => {
+        console.log(property)
+        setfilePhotos(property.files)
+    }, [])
 
 
 
@@ -17,7 +24,7 @@ const BannerDetalle = () => {
         <>
             <section className='banner__detalle flex'>
                 <div className='Card__detalle'>
-                    <CardSlider codigo={property?.codigo} images={property?.fotos} />
+                    <CardSlider codigo={property?.codigo} images={filePhotos} />
                 </div>
                 <div>
                     <CardInfoDetalle urlMaps={property.urlMaps} direccion={property.direccion} precioMoneda={property.precioInmueble} precioValor={property.precioInmuebleValor} />
