@@ -1,47 +1,76 @@
 'use client'
-import React from 'react'
+import useStore from '@/store/useStore';
+import React, { useState } from 'react'
 
-const Banner = () => {
+const Banner = ({ tiposDeOperacion, inmuebles, cantAmbientes, monedas, zonas }) => {
+
+    const [operacion, setOperacion] = useState('Venta');
+    const [inmueble, setInmueble] = useState('Casa');
+    const [ambientes, setAmbientes] = useState('2 ambientes');
+    const [zona, setZona]= useState('');
+    const [moneda, setMoneda] = useState('USD');
+    const [order, setOrder] = useState('Valor minimo')
+    const {properties} = useStore()
+
+
+    const handleSearch = () => {
+
+        console.log('empeza a buscar makina')
+        console.log(properties, 'PRORPS')
+        // const filterProperties = properties
+
+    }
+
     return (
         <section className='section__banner'>
             <div className='filtros'>
                 <label htmlFor="operacion"></label>
-                <select id="operacion">
-                    <option value="tipo-de-operacion">Tipo de operación</option>
-                    <option value="venta">Venta</option>
-                    <option value="alquiler">Alquiler</option>
+                <select onChange={(e)=> setOperacion(e.target.value)} defaultValue={operacion} id="operacion">
+                    {
+                        tiposDeOperacion?.map((tipo, index) => {
+                            return <option key={index} value={tipo.titulo}>{tipo.titulo}</option>
+                        })
+                    }
                 </select>
                 <label htmlFor="inmueble"></label>
-                <select id="inmueble">
-                    <option value="tipo-de-inmueble">Tipo de inmueble</option>
-                    <option value="op2">op2</option>
-                    <option value="op3">op3</option>
+                <select onChange={(e)=> setInmueble(e.target.value)} defaultValue={inmueble} id="inmueble">
+                    {
+                        inmuebles.map((inm, index) => {
+                            return <option key={index} value={inm.tipo}>{inm.tipo}</option>
+                        })
+                    }
                 </select>
                 <label htmlFor="ambientes"></label>
-                <select id="ambientes">
-                    <option value="cantidad-de-ambientes">Cantidad de ambientes</option>
-                    <option value="op2">op2</option>
-                    <option value="op3">op3</option>
+                <select onChange={(e)=> setAmbientes(e.target.value)} defaultValue={ambientes} id="ambientes">
+                    {
+                        cantAmbientes.map((amb, index) => {
+                            return <option key={index} value={amb.tipo}>{amb.tipo}</option>
+                        })
+                    }
                 </select>
-                <label htmlFor="valor-min"></label>
-                <select id="valor-min">
-                    <option value="valor-minimo">Valor mínimo</option>
-                    <option value="op2">op2</option>
-                    <option value="op3">op3</option>
+
+                <label htmlFor="zonas"></label>
+                <select onChange={(e) => setZona(e.target.value)} defaultValue={zona} id="zonas">
+                    {
+                        zonas.map((z, i) => {
+                            return <option key={i} value={z.titulo}>{z.titulo}</option>
+                        })
+                    }
                 </select>
-                <label htmlFor="valor-max"></label>
-                <select id="valor-max">
-                    <option value="valor-maximo">Valor máximo</option>
-                    <option value="op2">op2</option>
-                    <option value="op3">op3</option>
+
+                <label htmlFor="ordenar"></label>
+                <select defaultValue={order} onChange={(e)=> setOrder(e.target.value)} id="ordenar">
+                    <option value="ordenar-por">Ordenar por</option>
+                    <option value="valor-min">Valor mínimo</option>
+                    <option value="valor-max">Valor máximo</option>
                 </select>
                 <label htmlFor="moneda"></label>
-                <select id="moneda">
-                    <option value="moneda">Moneda</option>
-                    <option value="op2">op2</option>
-                    <option value="op3">op3</option>
+                <select onChange={(e) => setMoneda(e.target.value)} defaultValue={moneda} id="moneda">
+                    {monedas.map((mon, index) => {
+                        return <option value={mon.display} key={index}>{mon.display}</option>
+                    })}
                 </select>
-                <div className="search--button"></div>
+                <div onClick={() => handleSearch()} className="search--button"></div>
             </div>
         </section>
     )

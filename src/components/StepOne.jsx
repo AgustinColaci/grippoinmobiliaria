@@ -1,11 +1,13 @@
 import { handleErrorsFromStep1 } from "@/actions/errors";
 import useStore from "@/store/useStore";
 import { useEffect, useState } from "react";
+import Toastify from 'toastify-js'
+import "toastify-js/src/toastify.css"
 
 
 const StepOne = ({ }) => {
 
-
+    // const toastify = Toastify;
     const [tipoOperacion, setTipoOperacion] = useState('');
     const [tipoInmueble, setTipoInmueble] = useState('');
     const [zona, setZona] = useState('');
@@ -23,7 +25,7 @@ const StepOne = ({ }) => {
 
     const [files, setFiles] = useState([])
 
-    const campos = ['tipoOperacion', 'tipoInmueble', 'zona', 'direccion', 'precioInmueble', 'precioInmuebleValor', 'pagaExpensas', 'precioExpensas', 'precioExpensasValor', 'codigo', 'estadoVenta', 'linkMaps', 'fotos', 'files']
+    const campos = ['tipoOperacion', 'tipoInmueble', 'zona', 'direccion', 'precioInmueble', 'precioInmuebleValor', 'pagaExpensas', 'precioExpensas', 'precioExpensasValor', 'codigo', 'estadoVenta', 'linkMaps','urlMaps', 'fotos', 'files']
 
     const [errors, setErrors] = useState({})
 
@@ -85,6 +87,12 @@ const StepOne = ({ }) => {
             case 'fotos':
                 setFotos(valor)
                 break
+            case 'files':
+                setFiles(valor)
+                break
+            case 'urlMaps':
+                setUrlMaps(valor)
+                break
             default:
                 return
         }
@@ -94,6 +102,20 @@ const StepOne = ({ }) => {
     const sendImageToFirebase = async (file) => {
         console.log(file)
         if (!file) {
+            return
+        }
+
+        const lookingForRepeatImage = files.find(archivo => archivo.name === file.name)
+
+        if(lookingForRepeatImage){
+            Toastify({
+                text: "Ya subiste esta imagen",
+                className: "warning",
+                gravity: "bottom", // `top` or `bottom`
+                style:{
+                    fontSize:'1.5rem'
+                }
+            }).showToast()
             return
         }
 
@@ -176,6 +198,19 @@ const StepOne = ({ }) => {
         const mapsUrl = `https://www.google.com/maps?q=${encodeURIComponent(address)}`;
 
         setUrlMaps(mapsUrl)
+    }
+
+
+    const handleDeletePhoto = (nameFile) => {
+
+        console.log(property)
+
+        console.log(files, 'FILES')
+
+        console.log(fotos, 'FOTOS')
+
+        const filteredFiles = files?.filter(file => file.name !== nameFile)
+        setFiles(filteredFiles)
     }
 
 
@@ -328,7 +363,7 @@ const StepOne = ({ }) => {
                             {files.map((foto, index) => {
                                 return (<div key={index} className="autogestion-img">
                                     <p>{foto.name}</p>
-                                    <button>X</button>
+                                    <button type="button" onClick={(() => handleDeletePhoto(foto.name))}>X</button>
                                 </div>)
                             })}
                         </div>

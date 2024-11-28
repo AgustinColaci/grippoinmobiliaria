@@ -24,7 +24,7 @@ const BannerDetalle = () => {
         <>
             <section className='banner__detalle flex'>
                 <div className='Card__detalle'>
-                    <CardSlider codigo={property?.codigo} images={filePhotos} />
+                    <CardSlider codigo={property?.codigo} images={filePhotos} createURL={true} />
                 </div>
                 <div>
                     <CardInfoDetalle urlMaps={property.urlMaps} direccion={property.direccion} precioMoneda={property.precioInmueble} precioValor={property.precioInmuebleValor} />

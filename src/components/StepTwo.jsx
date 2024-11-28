@@ -97,7 +97,7 @@ const StepTwo = () => {
             tieneCochera,
             cantidadCochera,
             dormitorios,
-            estadoInmueble,
+            // estadoInmueble,
             numeroDePlantas,
             ubicacionDelInmueble,
             orientacion,
@@ -221,7 +221,7 @@ const StepTwo = () => {
 
                 </div>
 
-                <div className='section__form--inputs'>
+                {/* <div className='section__form--inputs'>
                     <label htmlFor="estadoInmueble">Estado del inmueble*</label>
                     <select className={`${errors.estadoInmueble ? 'error--empty' : ''}`} onChange={(e) => { setEstadoInmueble(e.target.value); deleteErrorAndClass(e.target.id) }} id="estadoInmueble" name="estadoInmueble" value={estadoInmueble}>
                         <option className={`${errors.estadoInmueble ? 'error--empty' : ''}`} value="" disabled>Selecciona cantidad</option>
@@ -231,7 +231,7 @@ const StepTwo = () => {
                     </select>
                     {errors.estadoInmueble && <p className="error--text">Este campo es obligatorio</p>}
 
-                </div>
+                </div> */}
 
                 <div className='section__form--inputs'>
                     <label htmlFor="plantas">Número de plantas*</label>

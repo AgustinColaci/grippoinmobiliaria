@@ -74,7 +74,7 @@ const DetallePropiedad = () => {
                             <Image src={iconCocheras} alt="Icono de cochera" />
                         </div>
                         <div className='detalle__propiedad--text'>
-                            <span className="text mts">{property.tieneCochera ? `${property.cantidadCocheras} Cochera` :  ' 0 Cochera'}</span>
+                            <span className="text mts">{property.tieneCochera ? `${property.cantidadCocheras} Cochera` :  'Sin cochera'}</span>
                         </div>
                     </div>
 
@@ -119,7 +119,7 @@ const DetallePropiedad = () => {
                             <Image src={iconAntiguedad} alt="Icono de antiguedad" />
                         </div>
                         <div className='detalle__propiedad--text'>
-                            <span className="text mts">{property.antiguedad || '0 años'}</span>
+                            <span className="text mts">{property.antiguedad || 'A estrenar'}</span>
                         </div>
                     </div>
 
@@ -174,7 +174,7 @@ const DetallePropiedad = () => {
                 </section>
                 <section className='section__similares'>
                     <h2 className='title'>Propiedades Similares</h2>
-                    <Card />
+                    {/* <Card /> */}
                 </section>
             </section>
         </>

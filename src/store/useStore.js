@@ -22,7 +22,14 @@ const useStore = create((set) => ({
   
   setProperty: (newProperty) => set((state) => ({
     property: { ...state.property, ...newProperty }
-  }))
+  })),
+
+  properties:[],
+
+  setProperties:(newProperties) => set((state) => ({
+    properties: newProperties
+  })),
+
 }));
 
 export default useStore;

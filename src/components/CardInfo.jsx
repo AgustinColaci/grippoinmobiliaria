@@ -3,25 +3,32 @@ import useStore from '@/store/useStore';
 import React from 'react'
 import CardInfoDetalle from "@/components/CardInfoDetalle";
 
-const CardInfo = () => {
+const CardInfo = ({ mts, ambientes, dormitorios, banos, cocheras, tieneCochera, pagaExpensas, precioExpensasValor, precioExpensas, urlMaps, precioInmuebleValor, precioInmueble, direccion}) => {
 
   const { steps } = useStore();
 
   return (
     <>
       <div className='card__info'>
-        <span className='mts'>44m2</span>
-        <span className='amb'>2 amb.</span>
-        <span className='dorm'>1 dorm.</span>
-        <span className='bano'>1 baño</span>
-        <span className='coch'>1 coch.</span>
+        <span className='mts'>{mts}</span>
+        <span className='amb'>{ambientes} amb.</span>
+        <span className='dorm'>{dormitorios} dorm.</span>
+        <span className='bano'>{banos} baño</span>
+        {tieneCochera && <span className='coch'>{cocheras} coch.</span>}
       </div>
       <div className='card__info--expensas'>
-        <span className='valor'>
-          <span className='peso'>$</span> 20.000 Expensas
-        </span>
+        {
+          pagaExpensas ? 
+          <span className='valor'>
+            <span className='peso'>$</span> {precioExpensasValor} Expensas
+          </span>
+          :
+          <span className='valor'>
+            No paga expensas
+          </span>
+        }
       </div>
-      <CardInfoDetalle />
+      <CardInfoDetalle precioMoneda={precioInmueble} precioValor={precioInmuebleValor} urlMaps={urlMaps} direccion={direccion} />
     </>
   )
 }

@@ -2,11 +2,16 @@ import BannerDetalle from '@/components/BannerDetalle';
 import useStore from '@/store/useStore';
 import { useEffect, useState } from 'react';
 import '../css/loader.css'
+import { auth } from '@/lib/firebase';
+import { useRouter } from 'next/navigation';
+import Toastify from 'toastify-js'
+import "toastify-js/src/toastify.css"
 
 const StepThree = () => {
 
-  const { substractStep, property, steps, setProperty, addStep } = useStore();
+  const { substractStep, property, steps } = useStore();
   const [loading, setLoading] = useState(false);
+  const router = useRouter()
 
 
   useEffect(() => {
@@ -15,55 +20,59 @@ const StepThree = () => {
 
 
   const handleSubmitProperty = async () => {
+    setLoading(true);
+    let isEditing = true
 
-    setLoading(true)
-
-    property.id = Date.now()
-
-    const formData = new FormData()
-    formData.append('propiedad', JSON.stringify(property))
-
-    
-    const responsePhotos = await uploadPhotos(property.files)
-
-    console.log(responsePhotos, 'esta es la response amiguito')
-    // if(responsePhotos){
-    //   property.fotos = responsePhotos
-    // }
-
-    delete property.files
-    console.log(property, 'AMIGO, ESTA ES LA PROPERTY WACHIN')
-
-    try {
-      const response = await fetch('/api/propiedades', {
-        method: 'POST',
-        body: formData,
-      })
-
-      if (response.status == 201) {
-        console.log('propiedad creada')
-        setLoading(false)
-
-        //lo retornaria a la lista de propiedades
-
-
-      } else {
-        console.log('hubo un error')
-        console.log(response)
-        setLoading(false)
-
-      }
-
-    } catch (error) {
-      console.log(error)
-      setLoading(false)
+    if (!property.id) {
+      property.id = Date.now();
+      isEditing = false
     }
 
 
-  }
+    if (property.files) {
+      property.fotos.push(...await uploadPhotos(property.files))
+      delete property.files
+    }
+
+
+    const formData = new FormData();
+    formData.append("propiedad", JSON.stringify(property));
+
+    if (isEditing) {
+
+    } else {
+      try {
+        const response = await fetch("/api/propiedades", {
+          method: "POST",
+          body: formData,
+        });
+
+        if (response.status === 201) {
+          console.log("Propiedad creada");
+          setLoading(false);
+          router.push('/autogestion/lista-de-propiedades')
+        } else {
+          console.log("Hubo un error");
+          setLoading(false);
+          Toastify({
+            text: "Hubo un error",
+            className: "warning",
+            gravity: "bottom", // `top` or `bottom`
+            style: {
+              fontSize: '1.5rem'
+            }
+          }).showToast()
+        }
+      } catch (error) {
+        console.log(error);
+        setLoading(false);
+      }
+    }
+
+  };
 
   const uploadPhotos = async (files) => {
-    if(!files) return
+    if (!files) return
     const fotos = []
 
     for (let file of files) {
@@ -78,8 +87,6 @@ const StepThree = () => {
 
         if (response.ok) {
           const data = await response.json();
-          console.log(data)
-          console.log("URL de la imagen subida:", data.url);
           fotos.push({ url: data.url, name: file.name })
           property.fotos.push({ url: data.url, name: file.name })
         } else {
