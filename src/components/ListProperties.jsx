@@ -16,16 +16,17 @@ const ListProperties = ({ properties }) => {
     }
 
     return (
-        <div className="list-properties">
-            {properties?.map((propiedad, index) => {
-                return <div className="list-properties-all" key={propiedad.id || index}>
-                    <p className="text--propiedad">{propiedad.direccion || propiedad.Direccion}</p>
-                    <button className="button button--editar" onClick={(() => handleEdit(propiedad.id))}>Editar</button>
-                </div>
-            })}
+        <div className="properties-main">
+            <div className="list-properties">
+                {properties?.map((propiedad, index) => {
+                    return <div className="list-properties-all" key={propiedad.id || index}>
+                        <p className="text--propiedad">{propiedad.direccion || propiedad.Direccion}</p>
+                        <button className="button button--editar" onClick={(() => handleEdit(propiedad.id))}>Editar</button>
+                    </div>
+                })}
 
-
-            <Link className="volver--menu" href={'/autogestion'}>Volver al menu</Link>
+                <Link className="volver--menu" href={'/autogestion'}>Volver al menu</Link>
+            </div>
         </div>
     )
 }
