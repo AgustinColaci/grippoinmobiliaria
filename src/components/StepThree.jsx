@@ -87,8 +87,8 @@ const StepThree = () => {
 
         if (response.ok) {
           const data = await response.json();
-          fotos.push({ url: data.url, name: file.name })
-          property.fotos.push({ url: data.url, name: file.name })
+          fotos.push({ url: data.url, name: data.name })
+          // property.fotos.push({ url: data.url, name: file.name })
         } else {
           console.error("Error al subir la imagen");
         }

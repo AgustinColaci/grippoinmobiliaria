@@ -370,7 +370,7 @@ const StepOne = ({ }) => {
 
                     </div>
 
-                    <p className='paragraph'>Acepta jpg y png. Hasta 20 fotos.</p>
+                    <p className='paragraph'>Acepta jpg y png. Hasta 18 fotos.</p>
 
                     {errors.files && <p className="error--text">Este campo es obligatorio</p>}
 

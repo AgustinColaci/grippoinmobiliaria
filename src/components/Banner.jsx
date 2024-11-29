@@ -17,7 +17,9 @@ const Banner = ({ tiposDeOperacion, inmuebles, cantAmbientes, monedas, zonas }) 
 
         console.log('empeza a buscar makina')
         console.log(properties, 'PRORPS')
-        // const filterProperties = properties
+        // const filterProperties = properties.filter((p) => {
+        //     return p.
+        // })
 
     }
 

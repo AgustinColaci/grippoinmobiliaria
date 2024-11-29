@@ -169,7 +169,7 @@ const DetallePropiedad = () => {
                     </div>
 
                     <div className='detalle__legales'>
-                        <p className='paragraph'>{property.detalle}</p>
+                        <p className='paragraph'>{property.descripcion}</p>
                     </div>
                 </section>
                 <section className='section__similares'>

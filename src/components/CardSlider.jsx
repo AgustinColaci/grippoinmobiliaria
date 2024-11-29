@@ -32,6 +32,7 @@ const CardSlider = ({ codigo, images, createURL }) => {
   };
 
   useEffect(() => {
+    console.log(images)
     if (images) {
 
       if (createURL) {
