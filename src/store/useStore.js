@@ -30,6 +30,24 @@ const useStore = create((set) => ({
     properties: newProperties
   })),
 
+  filters:null,
+
+  setFilters:(obj) => set((state) => ({
+    filters: obj
+  })),
+
+  filteredProperties:null,
+
+  setFilteredProperties:(array) => set((state) => ({
+    filteredProperties:array
+  })),
+
+
+  similarProperties:[],
+  setSimilarProperties:(array) => set(()=> ({
+    similarProperties:array
+  }))
+
 }));
 
 export default useStore;

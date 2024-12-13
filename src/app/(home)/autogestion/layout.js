@@ -11,7 +11,6 @@ export default function RootLayout({ children }) {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      console.log('acaaa')
       if (!currentUser) {
         router.push("/login"); // Redirige si no hay usuario autenticado
       } else {

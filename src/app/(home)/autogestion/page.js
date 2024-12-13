@@ -4,9 +4,6 @@ import Link from 'next/link';
 
 const Autogestion = () => {
 
-  console.log('estoy en autogestion')
-
-
   // const handleUser = async () => {
   //   const exit = await signOut()
   // }

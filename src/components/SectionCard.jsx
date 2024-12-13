@@ -8,11 +8,11 @@ const SectionCard = ({ properties }) => {
   const [propertiesForSale, setPropertiesForSale] = useState()
   const [propertiesForRent, setPorpertiesForRent] = useState()
   const [loading, setLoading] = useState(true)
-  const {setProperties} = useStore()
+  const { setProperties, filteredProperties, similarProperties, setFilteredProperties, filters, setFilters } = useStore()
 
   useEffect(() => {
 
-    
+
     if (properties.length > 0) {
       setProperties(properties)
       setPropertiesForSale(properties.filter((prop) => prop.tipoOperacion?.toLowerCase() === 'venta'))
@@ -22,9 +22,10 @@ const SectionCard = ({ properties }) => {
   }, [])
 
 
-  useEffect(() => {
-
-  }, [])
+  const handleResetFilters = () => {
+    setFilteredProperties(null)
+    setFilters(null)
+  }
 
   return (
     <>
@@ -32,31 +33,63 @@ const SectionCard = ({ properties }) => {
         <p>Cargando...</p>
         <div className="loader"></div>
       </div>}
-      <h2 className="title--2">Agregados recientemente</h2>
-      <h3 className="title--3">Venta</h3>
-      <section className="section__cards">
-        {
-          propertiesForSale?.length > 0 ?
-            propertiesForSale?.map((el) => {
-              return <Card key={el.id} propiedad={el} />
-            })
-            :
-            <p>No hay propiedades disponibles</p>
-        }
+      {
+        filteredProperties ?
 
-      </section>
+          filteredProperties.length > 0 ?
+            <>
 
-      <h3 className="title--3">Alquiler</h3>
-      <section className="section__cards">
-        {
-          propertiesForRent?.length > 0 ?
-            propertiesForRent?.map((el) => {
-              return <Card key={el.id} propiedad={el} />
-            })
+              {/* <h2 className="title--2"></h2> */}
+              <h3 className="title--3">Se encontraron {filteredProperties.length} resultado(s) a tu búsqueda</h3>
+              <section className="section__cards">
+                {filteredProperties.map((el) => {
+                  return <Card key={el.id} propiedad={el} />
+
+                })}
+              </section>
+            </>
             :
-            <p>No hay propiedades disponibles</p>
-        }
-      </section>
+            <>
+              <p>No hay resultados para tu búsqueda</p>
+              <h3 className="title--3"></h3>
+              <section className="section__cards">
+                <button onClick={() => handleResetFilters()}>Resetear búsqueda</button>
+                {/* {filteredProperties.map((el) => {
+                  return <Card key={el.id} propiedad={el} />
+
+                })} */}
+              </section>
+            </>
+          :
+          <>
+
+            <h2 className="title--2">Agregados recientemente</h2>
+            <h3 className="title--3">Venta</h3>
+            <section className="section__cards">
+              {
+                propertiesForSale?.length > 0 ?
+                  propertiesForSale?.map((el) => {
+                    return <Card key={el.id} propiedad={el} />
+                  })
+                  :
+                  <p>No hay propiedades disponibles</p>
+              }
+
+            </section>
+
+            <h3 className="title--3">Alquiler</h3>
+            <section className="section__cards">
+              {
+                propertiesForRent?.length > 0 ?
+                  propertiesForRent?.map((el) => {
+                    return <Card key={el.id} propiedad={el} />
+                  })
+                  :
+                  <p>No hay propiedades disponibles</p>
+              }
+            </section>
+          </>
+      }
     </>
   )
 }

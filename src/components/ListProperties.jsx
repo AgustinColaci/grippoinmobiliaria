@@ -10,8 +10,6 @@ const ListProperties = ({ properties }) => {
     const router = useRouter()
 
     const handleEdit = (id) => {
-        console.log('Vamos a editar la propiedad: ', id)
-
         router.push(`/${autogestion}`)
     }
 

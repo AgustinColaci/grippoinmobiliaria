@@ -107,7 +107,7 @@ const StepThree = () => {
         <p>Guardando propiedad</p>
         <div className="loader"></div>
       </div>}
-      <BannerDetalle />
+      <BannerDetalle isCreating={true} />
       <div className="button--bar">
         <button disabled={steps === 1} type="button" className="button button--previous" onClick={() => { substractStep() }}>Volver al paso anterior</button>
         <button type="button" className="button button--next" onClick={() => { handleSubmitProperty() }}>Confirmar propiedad</button>

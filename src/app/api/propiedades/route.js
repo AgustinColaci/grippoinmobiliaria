@@ -23,38 +23,6 @@ export async function GET(request) {
 
 }
 
-// export async function POST(request) {
-
-
-
-//     try {
-//         // Verifica el token
-//         const decodedToken = await admin.auth().verifyIdToken(token);
-//         console.log("Usuario autenticado:", decodedToken.email);
-
-//         const formData = await request.formData();
-//         const propiedad = JSON.parse(formData.get("propiedad"));
-
-//         await setDoc(doc(firestore, "Propiedades", JSON.stringify(propiedad.id)), propiedad);
-
-//         return new Response(JSON.stringify({ message: "propiedad creada" }), {
-//             status: 201,
-//             headers: {
-//                 "Content-Type": "application/json",
-//             },
-//         });
-//     } catch (error) {
-//         console.error("Error de autenticación:", error);
-//         return new Response(JSON.stringify({ message: "No autorizado" }), {
-//             status: 401,
-//             headers: {
-//                 "Content-Type": "application/json",
-//             },
-//         });
-//     }
-
-// }
-
 
 export async function POST(request) {
 

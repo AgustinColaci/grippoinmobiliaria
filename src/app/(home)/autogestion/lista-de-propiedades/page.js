@@ -15,7 +15,6 @@ const ListaDePropiedades = async () => {
       return res.json();
     });
 
-    console.log(properties)
 
     return (
       <ListProperties properties={properties.data} />

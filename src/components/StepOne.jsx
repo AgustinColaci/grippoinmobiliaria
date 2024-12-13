@@ -100,7 +100,6 @@ const StepOne = ({ }) => {
 
 
     const sendImageToFirebase = async (file) => {
-        console.log(file)
         if (!file) {
             return
         }
@@ -120,29 +119,6 @@ const StepOne = ({ }) => {
         }
 
         setFiles((prevFiles) => [...prevFiles, file]);
-
-
-        // const formData = new FormData();
-        // formData.append("file", file);
-
-        // try {
-        //     const response = await fetch(`/api/imagenes`, {
-        //         method: "POST",
-        //         body: formData,
-        //     });
-
-
-        //     if (response.ok) {
-        //         const data = await response.json();
-        //         console.log(data)
-        //         console.log("URL de la imagen subida:", data.url);
-        // setFotos((prevFotos) => [...prevFotos, { url: data.url, name: file.name }]);
-        //     } else {
-        //         console.error("Error al subir la imagen");
-        //     }
-        // } catch (error) {
-        //     console.error("Error:", error);
-        // }
     }
 
 
@@ -183,7 +159,6 @@ const StepOne = ({ }) => {
         const srcMatch = iframeHTML?.match(/src="([^"]+)"/);
         const src = srcMatch ? srcMatch[1] : null;
 
-        console.log(src)
         if (!src) {
             setErrors({ ...errors, linkMapsIncorrecto: true })
             setLinkMaps(iframeHTML)
@@ -202,13 +177,6 @@ const StepOne = ({ }) => {
 
 
     const handleDeletePhoto = (nameFile) => {
-
-        console.log(property)
-
-        console.log(files, 'FILES')
-
-        console.log(fotos, 'FOTOS')
-
         const filteredFiles = files?.filter(file => file.name !== nameFile)
         setFiles(filteredFiles)
     }

@@ -12,7 +12,6 @@ const sendImageToFirebase = async (file) => {
 
         if (response.ok) {
             const data = await response.json();
-            console.log(data)
             console.log("URL de la imagen subida:", data.url);
             return data
             // setFotos((prevFotos) => [...prevFotos, { url: data.url, name: file.name }]);

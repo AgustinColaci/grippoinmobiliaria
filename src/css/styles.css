@@ -977,3 +977,16 @@ p {
     border-radius: .4rem;
 
 }
+
+
+.container__filtered-properties{
+    display: flex;
+    flex-direction: row;
+}
+
+.container__filtered-properties div{
+    width: 50%;
+    height: 100%;
+    border:1px solid black;
+    margin:2px;
+}

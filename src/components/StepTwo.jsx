@@ -87,7 +87,6 @@ const StepTwo = () => {
     }
 
     const handleAddStep = () => {
-        console.log('pasamos al paso 3')
 
         const propertyFromStep2 = {
             m2total,
@@ -116,7 +115,6 @@ const StepTwo = () => {
             }
         }
 
-        console.log(errores, 'ERRORES')
 
         setProperty({...property, ...propertyFromStep2})
         if (steps < 3) {

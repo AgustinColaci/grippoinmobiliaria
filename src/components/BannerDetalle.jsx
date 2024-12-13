@@ -5,26 +5,99 @@ import CardSlider from '@/components/CardSlider';
 import CardInfoDetalle from '@/components/CardInfoDetalle';
 import CardButtons from '@/components/CardButtons';
 import React, { useEffect, useState } from 'react'
+import { filtrarPropiedadesSimilares } from '@/actions/filtros';
+import { getAllProperties } from '@/actions/propiedades';
 
-const BannerDetalle = () => {
+const BannerDetalle = ({ isCreating, propiedad, propiedadesSimilares }) => {
 
-    const { steps, property } = useStore();
+    const { steps, property, setProperty, setSimilarProperties, properties, similarProperties, setProperties } = useStore();
+    const [loading, setLoading] = useState(true)
 
     const [filePhotos, setfilePhotos] = useState()
 
+
     useEffect(() => {
-        console.log(property)
-        setfilePhotos(property.files)
+
+        console.log(propiedadesSimilares)
+
+        if(isCreating){
+            setfilePhotos(property.files)
+        }else{
+            setProperty(propiedad.data)
+            setLoading(false)
+            setfilePhotos(propiedad.data.fotos)
+        }
     }, [])
+
+    // useEffect(() => {
+
+    //     const functionForGetProperties = async () => {
+    //         const p = await getAllProperties()
+    //         setProperties(p.data)
+    //     }
+
+    //     if (isCreating) {
+    //         setfilePhotos(property.files)
+    //     } else {
+    //         setProperty(propiedad.data)
+    //     }
+
+    //     if(properties.length == 0){
+    //         functionForGetProperties()
+    //     }
+    // }, [])
+
+    // useEffect(() => {
+
+    //     if (property.codigo !== '') {
+    //         setLoading(false)
+    //         if (properties.length > 0) {
+    //             const propiedadesSimilares = filtrarPropiedadesSimilares(properties, {
+    //                 tipoOperacion: property.tipoOperacion,
+    //                 tipoInmueble: property.tipoInmueble,
+    //                 precioInmueble: property.precioInmueble,
+    //                 ambientes: property.ambientes,
+    //                 zona: property.zona
+    //             })
+    //             setSimilarProperties(propiedadesSimilares)
+    //         }
+    //     }
+
+    //     if (!isCreating) {
+    //         setfilePhotos(property.fotos)
+    //     }
+
+    // }, [property])
+
+
+    // useEffect(() => {
+    //     if(property){
+
+    //         const propiedadesSimilares = filtrarPropiedadesSimilares(properties, {
+    //             tipoOperacion: property.tipoOperacion,
+    //             tipoInmueble: property.tipoInmueble,
+    //             precioInmueble: property.precioInmueble,
+    //             ambientes: property.ambientes,
+    //             zona: property.zona
+    //         })
+    //         setSimilarProperties(propiedadesSimilares)
+    //     }
+    // }, [properties])
 
 
 
 
     return (
         <>
+
+            {loading && <div className='loading'>
+                <p>Cargando...</p>
+                <div className="loader"></div>
+            </div>}
+
             <section className='banner__detalle flex'>
                 <div className='Card__detalle'>
-                    <CardSlider codigo={property?.codigo} images={filePhotos} createURL={true} />
+                    <CardSlider codigo={property?.codigo} images={filePhotos} createURL={isCreating} />
                 </div>
                 <div>
                     <CardInfoDetalle urlMaps={property.urlMaps} direccion={property.direccion} precioMoneda={property.precioInmueble} precioValor={property.precioInmuebleValor} />
@@ -34,11 +107,13 @@ const BannerDetalle = () => {
                 </div>
             </section>
             <section className='contacto__detalle'>
-                <CardButtons />
+                <CardButtons id={property.id} />
             </section>
             <section>
-                <DetallePropiedad />
+                <DetallePropiedad id={property.id} />
             </section>
+
+
         </>
     )
 }

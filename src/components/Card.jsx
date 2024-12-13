@@ -32,7 +32,7 @@ const Card = ({propiedad}) => {
       direccion={propiedad.direccion}
       />
 
-      <CardButtons />
+      <CardButtons id={propiedad.id} />
     </div>
   )
 }

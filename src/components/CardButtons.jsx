@@ -3,7 +3,7 @@ import useStore from '@/store/useStore';
 import Link from 'next/link';
 import React from 'react'
 
-const CardButtons = () => {
+const CardButtons = ({id}) => {
 
     const { steps } = useStore();
 
@@ -15,7 +15,7 @@ const CardButtons = () => {
                 </div>
             </a>
             <div className='card__buttons--verMas'>
-                <Link className="button button--verMas" href="/detalle">Ver más</Link>
+                <Link className="button button--verMas" href={`propiedades/${id}`}>Ver más</Link>
             </div>
         </div>
     )
