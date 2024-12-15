@@ -99,7 +99,7 @@ const BannerDetalle = ({ isCreating, propiedad, propiedadesSimilares }) => {
                 <div className='Card__detalle'>
                     <CardSlider codigo={property?.codigo} images={filePhotos} createURL={isCreating} />
                 </div>
-                <div>
+                <div className='info__detalle'>
                     <CardInfoDetalle urlMaps={property.urlMaps} direccion={property.direccion} precioMoneda={property.precioInmueble} precioValor={property.precioInmuebleValor} />
                     <div className="google-maps">
                         <iframe className='maps' src={property?.linkMaps} allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>

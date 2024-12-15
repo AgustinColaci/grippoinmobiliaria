@@ -432,6 +432,7 @@ p {
 }
 
 .google-maps .maps {
+    width: 100%;
     height: 32rem;
     border: none;
     border-radius: .5rem;
@@ -539,6 +540,29 @@ p {
 .banner__detalle .slider__pils {
     left: 2.4rem;
     right: 2.4rem;
+}
+
+.banner__detalle .info__detalle {
+    display: flex;
+    flex-direction: column;
+    min-width: 50rem;
+}
+
+.banner__detalle .card__info--direc {
+    font-size: 2.4rem;
+    font-weight: 700;
+}
+
+.banner__detalle .card__info--valor, 
+.banner__detalle .card__info--valor .usd {
+    margin-top: 0;
+    margin-bottom: 1.2rem;
+    order: -2;
+}
+
+.banner__detalle .card__info--direc {
+    margin-bottom: .4rem;
+
 }
 
 .slider__img__total,
@@ -847,6 +871,12 @@ p {
 
     .banner__detalle.flex {
         flex-direction: column;
+    }
+
+    .banner__detalle .info__detalle {
+        display: flex;
+        flex-direction: column;
+        min-width: auto;
     }
 
     .footer__content h2 {
