@@ -20,7 +20,7 @@ import iconAnticipo from '@/icons/icon--anticipo.svg';
 import iconCodigo from '@/icons/icon--codigo.svg';
 
 const DetallePropiedad = () => {
-    const { steps, property } = useStore();
+    const { steps, property, similarProperties } = useStore();
 
     function capitalizeFirstLetter(text) {
         if (!text) return ''; // Verifica si la cadena está vacía o es null
@@ -174,6 +174,9 @@ const DetallePropiedad = () => {
                 <section className='section__similares'>
                     <h2 className='title'>Propiedades Similares</h2>
                     {/* <Card /> */}
+                    {similarProperties && similarProperties.map((el) =>{
+                        return <Card propiedad={el} key={el.id} />
+                    })}
                 </section>
             </section>
         </>

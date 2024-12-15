@@ -18,14 +18,13 @@ const BannerDetalle = ({ isCreating, propiedad, propiedadesSimilares }) => {
 
     useEffect(() => {
 
-        console.log(propiedadesSimilares)
-
         if(isCreating){
             setfilePhotos(property.files)
         }else{
             setProperty(propiedad.data)
             setLoading(false)
             setfilePhotos(propiedad.data.fotos)
+            setSimilarProperties(propiedadesSimilares)
         }
     }, [])
 

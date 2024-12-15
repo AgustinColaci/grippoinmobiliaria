@@ -13,7 +13,7 @@ const PropiedadesPorId = async ({ params }) => {
 
   const property = await fetch(`${urlentorno}/api/propiedades/${id}`).then((res) => res.json() )
 
-  const similarProperties = await getSimilarProperties(property.data.zona, property.data.tipoOperacion)
+  const similarProperties = await getSimilarProperties(property.data.zona, property.data.tipoOperacion, property.data.id || 0)
 
   return (
     <>

@@ -17,8 +17,8 @@ export const getAllProperties = async () => {
 
 
 
-export const getSimilarProperties = async (zona, operacion) => {
-  const response = await fetch(`${urlentorno}/api/propiedades/similar?zona=${encodeURIComponent(zona)}&operacion=${encodeURIComponent(operacion)}`, {
+export const getSimilarProperties = async (zona, operacion, id) => {
+  const response = await fetch(`${urlentorno}/api/propiedades/similar?zona=${encodeURIComponent(zona)}&operacion=${encodeURIComponent(operacion)}&id=${encodeURIComponent(id)}`, {
     method: 'GET',
   }).then(res => {
     if (!res.ok) {
