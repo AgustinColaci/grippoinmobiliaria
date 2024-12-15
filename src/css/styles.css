@@ -522,13 +522,6 @@ p {
     0 12px 40px rgba(0, 0, 0, 0.2);
 }
 
-.Card .slider__img--temporal {
-    width: 100%;
-    height: 17.6rem;
-    background-color: #7e88dd;
-    border-radius: .8rem;
-}
-
 .slider {
     position: relative;
     margin-bottom: 1.2rem;
@@ -541,6 +534,11 @@ p {
     right: 1.2rem;
     display: flex;
     justify-content: space-between;
+}
+
+.banner__detalle .slider__pils {
+    left: 2.4rem;
+    right: 2.4rem;
 }
 
 .slider__img__total,
@@ -654,7 +652,6 @@ p {
 
 .Card__detalle .slider {
     height: 100%;
-    background-color: #7e88dd;
     border-radius: .8rem;
 }
 
@@ -794,12 +791,20 @@ p {
 }
 
 .slick-next {
-    margin-right: .4rem;
+    margin-right: 1.2rem;
 }
 
 .slider .slick-prev {
-    left: .4rem;
+    left: 1.2rem;
     z-index: 1;
+}
+
+.banner__detalle .slick-next {
+    margin-right: 2.4rem;
+}
+
+.banner__detalle .slider .slick-prev {
+    left: 2.4rem;
 }
 
 .slider .slick-prev:before, .slider .slick-next:before {
@@ -824,6 +829,12 @@ p {
     .filtros .search--button {
         justify-self: flex-end;
     }
+
+    .filtros select,
+    .filtros option {
+        width: 100%;
+    }
+
 
     .section__form .step-one {
         flex-direction: column;
