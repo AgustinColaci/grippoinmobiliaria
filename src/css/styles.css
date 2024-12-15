@@ -335,7 +335,8 @@ p {
 }
 
 .section__form .button.button--next,
-.button--logout {
+.button--logout,
+.button--resetear {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -352,7 +353,8 @@ p {
 }
 
 .section__form .button.button--next:hover,
-.button--logout:hover {
+.button--logout:hover,
+.button--resetear:hover {
     background-color: var(--color--white);
     border-color: var(--color--azul);
     color: var(--color--azul);
@@ -361,7 +363,9 @@ p {
 .section__form .button.button--next:focus,
 .section__form .button.button--next:active,
 .button--logout:focus,
-.button--logout:active {
+.button--logout:active,
+.button--resetear:focus,
+.button--resetear:active {
     outline: .2rem solid var(--color--black);
 }
 
@@ -689,6 +693,11 @@ p {
     font-size: 2rem;
     font-weight: 500;
     margin-top: .4rem;
+}
+
+.detalle__legales {
+    display: block;
+    margin-top: 4rem;
 }
 
 .flex {

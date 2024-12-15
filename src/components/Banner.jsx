@@ -79,9 +79,9 @@ const Banner = ({ tiposDeOperacion, inmuebles, cantAmbientes, monedas, zonas }) 
                 <select onChange={(e)=> setAmbientes(e.target.value)} value={ambientes} id="ambientes">
                     <option value=''>Ambientes</option>
                     {
-                        cantAmbientes.map((amb, index) => {
-                            return <option key={index} value={amb.value.toString()}>{amb.tipo}</option>
-                        })
+                        cantAmbientes?.map((amb, index) => (
+                            <option key={index} value={amb.value?.toString()}>{amb.tipo}</option>
+                        ))
                     }
                 </select>
 

@@ -50,10 +50,10 @@ const SectionCard = ({ properties }) => {
             </>
             :
             <>
-              <p>No hay resultados para tu búsqueda</p>
+              <h3 className="title--3">No hay resultados para tu búsqueda</h3>
               <h3 className="title--3"></h3>
               <section className="section__cards">
-                <button onClick={() => handleResetFilters()}>Resetear búsqueda</button>
+                <button className="button button--resetear" onClick={() => handleResetFilters()}>Resetear búsqueda</button>
                 {/* {filteredProperties.map((el) => {
                   return <Card key={el.id} propiedad={el} />
 

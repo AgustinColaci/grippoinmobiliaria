@@ -167,11 +167,10 @@ const DetallePropiedad = () => {
                             <span className="text mts">Cod.{property.codigo}</span>
                         </div>
                     </div>
-
-                    <div className='detalle__legales'>
-                        <p className='paragraph'>{property.descripcion}</p>
-                    </div>
                 </section>
+                <div className='detalle__legales'>
+                    <p className='paragraph'>{property.descripcion}</p>
+                </div>
                 <section className='section__similares'>
                     <h2 className='title'>Propiedades Similares</h2>
                     {/* <Card /> */}
