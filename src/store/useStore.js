@@ -24,6 +24,10 @@ const useStore = create((set) => ({
     property: { ...state.property, ...newProperty }
   })),
 
+  clearProperty:() => set(()=>({
+    property:null
+  })),
+
   properties:[],
 
   setProperties:(newProperties) => set((state) => ({

@@ -6,21 +6,19 @@ import { auth } from '@/lib/firebase';
 import { useRouter } from 'next/navigation';
 import Toastify from 'toastify-js'
 import "toastify-js/src/toastify.css"
+import { revalidatePath } from 'next/cache';
+import { crearNuevaPropiedad } from '@/actions/propiedades';
 
 const StepThree = () => {
 
-  const { substractStep, property, steps } = useStore();
+  const { substractStep, property, steps, setSteps } = useStore();
   const [loading, setLoading] = useState(false);
   const router = useRouter()
 
 
-  useEffect(() => {
-    setLoading(false)
-  }, [])
-
-
   const handleSubmitProperty = async () => {
     setLoading(true);
+
     let isEditing = true
 
     if (!property.id) {
@@ -40,20 +38,15 @@ const StepThree = () => {
 
     if (isEditing) {
 
+      console.log('estamos editando')
+      router.push('/autogestion/lista-de-propiedades')
+
     } else {
       try {
-        const response = await fetch("/api/propiedades", {
-          method: "POST",
-          body: formData,
-        });
 
-        if (response.status === 201) {
-          console.log("Propiedad creada");
-          setLoading(false);
-          router.push('/autogestion/lista-de-propiedades')
-        } else {
-          console.log("Hubo un error");
-          setLoading(false);
+        const response = await crearNuevaPropiedad(property)
+
+        if (response.error) {
           Toastify({
             text: "Hubo un error",
             className: "warning",
@@ -62,7 +55,16 @@ const StepThree = () => {
               fontSize: '1.5rem'
             }
           }).showToast()
+          setLoading(false)
+          return
+        } else {
+          setLoading(false);
+          setSteps(1)
+          router.push('/autogestion/lista-de-propiedades')
         }
+
+
+
       } catch (error) {
         console.log(error);
         setLoading(false);

@@ -171,13 +171,13 @@ const DetallePropiedad = () => {
                 <div className='detalle__legales'>
                     <p className='paragraph'>{property.descripcion}</p>
                 </div>
-                <section className='section__similares'>
+                {similarProperties?.length > 0 && <section className='section__similares'>
                     <h2 className='title'>Propiedades Similares</h2>
                     {/* <Card /> */}
-                    {similarProperties && similarProperties.map((el) =>{
+                    {similarProperties.map((el) =>{
                         return <Card propiedad={el} key={el.id} />
                     })}
-                </section>
+                </section>}
             </section>
         </>
     );

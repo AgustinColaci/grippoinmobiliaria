@@ -4,10 +4,11 @@ import useStore from "@/store/useStore";
 import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
 import StepThree from "./StepThree";
+import { useEffect } from "react";
 
-const ContainerForm = () => {
+const ContainerForm = ({tiposDeOperacion, zonas, monedas, cantAmbientes, inmuebles, loadedProperty}) => {
 
-    const { steps, addStep, substractStep } = useStore();
+    const { steps, addStep, substractStep, setProperty } = useStore();
 
     const handleAddStep = () => {
         if (steps < 3) {
@@ -21,12 +22,27 @@ const ContainerForm = () => {
         }
     }
 
+    useEffect(() => {
+
+        if(loadedProperty){
+            setProperty(loadedProperty)
+        }
+
+    },[])
+
     return (
         <section className='section__form'>
             <h2 className="title">Información principal</h2>
             <form>
 
-                {steps === 1 && <StepOne />}
+                {steps === 1 && <StepOne
+                qRooms={cantAmbientes.data}
+                zones={zonas.data}
+                operations={tiposDeOperacion.data}
+                building={inmuebles.data}
+                money={monedas.data}
+                loadedProperty={loadedProperty}
+                />}
                 {steps === 2 && <StepTwo />}
                 {steps === 3 && <StepThree />}
                 {/* <div className="button--bar">

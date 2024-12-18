@@ -4,14 +4,24 @@ import Link from "next/link"
 import '../css/autogestion.css'
 
 import { useRouter } from "next/navigation"
+import { useEffect } from "react"
+import useStore from "@/store/useStore"
 
 const ListProperties = ({ properties }) => {
 
     const router = useRouter()
+    const {property, setProperty, clearProperty} = useStore()
 
     const handleEdit = (id) => {
-        router.push(`/${autogestion}`)
+        router.push(`/autogestion/editar-propiedad/${id}`)
     }
+    
+    useEffect(() => {
+
+        return () => {
+            setProperty(null)
+        }
+    }, [])
 
     return (
         <div className="properties-main">

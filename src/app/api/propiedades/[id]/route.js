@@ -1,7 +1,8 @@
-import { firestore } from "@/lib/firebase";
-import { doc, getDoc } from "firebase/firestore";
+import { auth, firestore } from "@/lib/firebase";
+import { deleteDoc, doc, getDoc } from "firebase/firestore";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 export async function GET(request, { params }) {
     const { id } = params;
@@ -15,7 +16,7 @@ export async function GET(request, { params }) {
     if (docSnap.exists()) {
         // El documento existe, aquí puedes acceder a los datos
         console.log("Document data:", docSnap.data());
-        return new Response(JSON.stringify({ message: `propiedad con ID ${id}`, data:docSnap.data() }), {
+        return new Response(JSON.stringify({ message: `propiedad con ID ${id}`, data: docSnap.data() }), {
             status: 200,
             headers: {
                 'Content-Type': 'application/json',
@@ -25,7 +26,7 @@ export async function GET(request, { params }) {
         // El documento no existe
         console.log("No such document!");
         return new Response(JSON.stringify({ error: `propiedad con ID ${id} no encontrada` }), {
-            status: 200,
+            status: 404,
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -54,10 +55,36 @@ export async function DELETE(request, { params }) {
     // Lógica para eliminar una propiedad
     // codigo para eliminar la propiedad de la base de datos
     ///
-    return new Response(JSON.stringify({ message: `propiedad con ID ${id} eliminado` }), {
-        status: 200,
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    });
+
+    if(!auth.currentUser){
+        const email = process.env.FIREBASE_ADMIN_EMAIL
+        const password = process.env.FIREBASE_ADMIN_PASSWORD
+
+        console.log('se inicio sesion en este usuario:', email)
+        await signInWithEmailAndPassword(auth, email, password)
+    }
+
+    console.log(id, '------------ID')
+    const docRef = doc(firestore, 'Propiedades', id);
+
+    try {
+        const response = await deleteDoc(docRef)
+        return new Response(JSON.stringify({ message: `propiedad con ID ${id} eliminado` }), {
+            status: 200,
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+    } catch (error) {
+        console.log("No such document!");
+        return new Response(JSON.stringify({ error: `propiedad con ID ${id} no encontrada` }), {
+            status: 404,
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+    }
+
+
 }

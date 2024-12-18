@@ -2,11 +2,13 @@ import ButtonSignOut from '@/components/ButtonSignOut';
 import '../../../css/autogestion.css'
 import Link from 'next/link';
 
-const Autogestion = () => {
+const Autogestion = async () => {
 
   // const handleUser = async () => {
   //   const exit = await signOut()
   // }
+
+
 
   return (
     <div className='menu-autogestion'>

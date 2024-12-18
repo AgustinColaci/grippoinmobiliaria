@@ -15,7 +15,7 @@ const CardButtons = ({id}) => {
                 </div>
             </a>
             <div className='card__buttons--verMas'>
-                <Link className="button button--verMas" href={`propiedades/${id}`}>Ver más</Link>
+                <Link className="button button--verMas" href={`/propiedades/${id}`}>Ver más</Link>
             </div>
         </div>
     )

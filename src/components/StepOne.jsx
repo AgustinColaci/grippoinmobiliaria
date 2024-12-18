@@ -1,11 +1,12 @@
 import { handleErrorsFromStep1 } from "@/actions/errors";
 import useStore from "@/store/useStore";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Toastify from 'toastify-js'
 import "toastify-js/src/toastify.css"
 
 
-const StepOne = ({ }) => {
+const StepOne = ({ operations, building, zones, money, qRooms, loadedProperty }) => {
 
     // const toastify = Toastify;
     const [tipoOperacion, setTipoOperacion] = useState('');
@@ -22,28 +23,44 @@ const StepOne = ({ }) => {
     const [linkMaps, setLinkMaps] = useState('');
     const [urlMaps, setUrlMaps] = useState('');
     const [fotos, setFotos] = useState([]);
+    const [loading, setLoading] = useState(true)
+    const router = useRouter()
 
     const [files, setFiles] = useState([])
 
-    const campos = ['tipoOperacion', 'tipoInmueble', 'zona', 'direccion', 'precioInmueble', 'precioInmuebleValor', 'pagaExpensas', 'precioExpensas', 'precioExpensasValor', 'codigo', 'estadoVenta', 'linkMaps','urlMaps', 'fotos', 'files']
+    const campos = ['tipoOperacion', 'tipoInmueble', 'zona', 'direccion', 'precioInmueble', 'precioInmuebleValor', 'pagaExpensas', 'precioExpensas', 'precioExpensasValor', 'codigo', 'estadoVenta', 'linkMaps', 'urlMaps', 'fotos', 'files']
 
     const [errors, setErrors] = useState({})
 
-    const { steps, addStep, setProperty, property } = useStore();
+    const { steps, addStep, setProperty, property, clearProperty } = useStore();
 
 
     useEffect(() => {
-        campos.forEach((key) => {
-            if (property[key]) {
-                switchWithAll(key, property[key])
-            }
-        })
-    }, [])
+
+
+        console.log(property)
+
+        if(property){
+
+            campos.forEach((key) => {
+                if (property[key]) {
+                    switchWithAll(key, property[key])
+                }
+            })
+            
+            setLoading(false)
+        }
+    }, [property])
 
 
     useEffect(() => {
         console.log(errors)
     }, [errors])
+
+    const handleBack = () => {
+        clearProperty()
+        router.push('/autogestion')
+    }
 
 
     const switchWithAll = (key, valor) => {
@@ -104,15 +121,27 @@ const StepOne = ({ }) => {
             return
         }
 
+        if(files.length >= 18){
+            Toastify({
+                text: "Ya tienes el limite de imágenes",
+                className: "warning",
+                gravity: "bottom", // `top` or `bottom`
+                style: {
+                    fontSize: '1.5rem'
+                }
+            }).showToast()
+            return 
+        }
+
         const lookingForRepeatImage = files.find(archivo => archivo.name === file.name)
 
-        if(lookingForRepeatImage){
+        if (lookingForRepeatImage) {
             Toastify({
                 text: "Ya subiste esta imagen",
                 className: "warning",
                 gravity: "bottom", // `top` or `bottom`
-                style:{
-                    fontSize:'1.5rem'
+                style: {
+                    fontSize: '1.5rem'
                 }
             }).showToast()
             return
@@ -184,7 +213,6 @@ const StepOne = ({ }) => {
 
 
 
-
     return (
         <>
             <div className="step-one">
@@ -193,8 +221,9 @@ const StepOne = ({ }) => {
                         <label htmlFor="tipoOperacion">Tipo de operación*</label>
                         <select className={`${errors.tipoOperacion ? 'error--empty' : ''}`} value={tipoOperacion} onChange={(e) => { setTipoOperacion(e.target.value); deleteErrorAndClass(e.target.id) }} id="tipoOperacion" name="tipoOperacion" >
                             <option className={`${errors.tipoOperacion ? 'error--empty' : ''}`} value="" disabled>Selecciona una opción</option>
-                            <option className={`${errors.tipoOperacion ? 'error--empty' : ''}`} value="venta">Venta</option>
-                            <option className={`${errors.tipoOperacion ? 'error--empty' : ''}`} value="alquiler">Alquiler</option>
+                            {operations?.map((el, i) => {
+                                return <option key={i} className={`${errors.tipoOperacion ? 'error--empty' : ''}`} value={el.titulo}>{el.titulo}</option>
+                            })}
                         </select>
                         {errors.tipoOperacion && <p className="error--text">Este campo es obligatorio</p>}
 
@@ -204,8 +233,9 @@ const StepOne = ({ }) => {
                         <label htmlFor="tipoInmueble">Tipo de inmueble*</label>
                         <select className={`${errors.tipoInmueble ? 'error--empty' : ''}`} onChange={(e) => { setTipoInmueble(e.target.value); deleteErrorAndClass(e.target.id) }} id="tipoInmueble" name="tipoInmueble" value={tipoInmueble}>
                             <option className={`${errors.tipoInmueble ? 'error--empty' : ''}`} value="" disabled>Selecciona una opción</option>
-                            <option className={`${errors.tipoInmueble ? 'error--empty' : ''}`} value="casa">Casa</option>
-                            <option className={`${errors.tipoInmueble ? 'error--empty' : ''}`} value="departamento">Departamento</option>
+                            {building?.map((el, i) => {
+                                return <option key={i} className={`${errors.tipoInmueble ? 'error--empty' : ''}`} value={el.tipo}>{el.tipo}</option>
+                            })}
                         </select>
                         {errors.tipoInmueble && <p className="error--text">Este campo es obligatorio</p>}
 
@@ -215,12 +245,15 @@ const StepOne = ({ }) => {
                         <label htmlFor="zona">Zona*</label>
                         <select className={`${errors.zona ? 'error--empty' : ''}`} onChange={(e) => { setZona(e.target.value); deleteErrorAndClass(e.target.id) }} id="zona" name="zona" value={zona}>
                             <option className={`${errors.zona ? 'error--empty' : ''}`} value="" disabled>Selecciona una opción</option>
-                            <option className={`${errors.zona ? 'error--empty' : ''}`} value="Martin Coronado">Martín Coronado</option>
+                            {zones.map((z, i) => {
+                                return <option key={i} className={`${errors.zona ? 'error--empty' : ''}`} value={z.titulo}>{z.titulo}</option>
+                            })}
+                            {/* <option className={`${errors.zona ? 'error--empty' : ''}`} value="Martin Coronado">Martín Coronado</option>
                             <option className={`${errors.zona ? 'error--empty' : ''}`} value="Villa Bosch">Villa Bosch</option>
                             <option className={`${errors.zona ? 'error--empty' : ''}`} value="Ciudad Jardin">Ciudad Jardin</option>
                             <option className={`${errors.zona ? 'error--empty' : ''}`} value="Pablo Podesta">Pablo Podesta</option>
                             <option className={`${errors.zona ? 'error--empty' : ''}`} value="Loma Hermosa">Loma Hermosa</option>
-                            <option className={`${errors.zona ? 'error--empty' : ''}`} value="Altos De Podesta">Barrio Altos de Podesta</option>
+                            <option className={`${errors.zona ? 'error--empty' : ''}`} value="Altos De Podesta">Barrio Altos de Podesta</option> */}
                         </select>
                         {errors.zona && <p className="error--text">Este campo es obligatorio</p>}
                     </div>
@@ -239,8 +272,11 @@ const StepOne = ({ }) => {
                                 <label htmlFor="precioInmueble">Precio de inmueble*</label>
                                 <select className={`${errors.precioInmueble ? 'error--empty' : ''}`} onChange={(e) => { setPrecioInmueble(e.target.value); deleteErrorAndClass(e.target.id) }} id="precioInmueble" name="precioInmueble" value={precioInmueble}>
                                     <option className={`${errors.precioInmueble ? 'error--empty' : ''}`} value="" disabled>Moneda</option>
-                                    <option className={`${errors.precioInmueble ? 'error--empty' : ''}`} value="ARS">ARS</option>
-                                    <option className={`${errors.precioInmueble ? 'error--empty' : ''}`} value="USD">USD</option>
+                                    {/* <option className={`${errors.precioInmueble ? 'error--empty' : ''}`} value="ARS">ARS</option>
+                                    <option className={`${errors.precioInmueble ? 'error--empty' : ''}`} value="USD">USD</option> */}
+                                    {money.map((el, i) => {
+                                        return <option key={i} className={`${errors.precioInmueble ? 'error--empty' : ''}`} value={el.tipo}>{el.display}</option>
+                                    })}
                                 </select>
 
                             </div>
@@ -273,8 +309,9 @@ const StepOne = ({ }) => {
                                     <label className="label--hidden" htmlFor="precioExpensas"></label>
                                     <select className={`${errors.precioExpensas ? 'error--empty' : ''}`} disabled={!pagaExpensas} value={precioExpensas} onChange={(e) => { setPrecioExpensas(e.target.value); deleteErrorAndClass(e.target.id) }} id="precioExpensas" name="precioExpensas">
                                         <option value="" disabled>Moneda</option>
-                                        <option value="ARS">ARS</option>
-                                        <option value="USD">USD</option>
+                                        {money.map((el, i) => {
+                                            return <option key={i} className={`${errors.precioInmueble ? 'error--empty' : ''}`} value={el.tipo}>{el.display}</option>
+                                        })}
                                     </select>
 
                                 </div>
@@ -346,7 +383,7 @@ const StepOne = ({ }) => {
             </div>
             {/* <button disabled={steps === 3} type="button" className="button button--next" onClick={() => { handleAddStep() }}>Siguiente paso</button> */}
             <div className="button--bar">
-                <button disabled={steps === 1} type="button" className="button button--previous">Volver al paso anterior</button>
+                <button type="button" className="button button--previous" onClick={() => {handleBack()}}>Volver al menu</button>
                 <button disabled={steps === 3} type="button" className="button button--next" onClick={() => { handleAddStep() }}>Siguiente paso</button>
             </div>
 
