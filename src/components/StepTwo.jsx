@@ -81,6 +81,9 @@ const StepTwo = () => {
             case 'descripcion':
                 setDescripcion(valor)
                 break
+            case 'antiguedad':
+                setAntiguedad(valor)
+                break
             default:
                 return
         }
@@ -102,7 +105,8 @@ const StepTwo = () => {
             orientacion,
             anticipo,
             permiteMascotas,
-            descripcion
+            descripcion,
+            antiguedad
         }
 
         const errores = handleErrorsFromStep2(propertyFromStep2)

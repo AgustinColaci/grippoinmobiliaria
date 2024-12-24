@@ -19,11 +19,11 @@ export const getAllProperties = async () => {
 }
 
 
-export const crearNuevaPropiedad = async(propiedad) => {
+export const crearNuevaPropiedad = async (propiedad) => {
 
   const formData = new FormData();
-  formData.append("propiedad", JSON.stringify(propiedad));
-  
+  formData.append("propiedad", propiedad);
+
   const response = await fetch(`${urlentorno}/api/propiedades`, {
     method: "POST",
     body: formData,
@@ -33,7 +33,7 @@ export const crearNuevaPropiedad = async(propiedad) => {
     }
     return res.json();
   });
-  
+
   revalidatePath('/autogestion/lista-de-propiedades')
   return response
 
@@ -67,7 +67,7 @@ export const getPropertyById = async (id) => {
   return response
 }
 
-export const deleteProperty = async(id) => {
+export const deleteProperty = async (id) => {
   const response = await fetch(`${urlentorno}/api/propiedades/${id}`, {
     method: 'DELETE',
   }).then(res => {
@@ -78,4 +78,26 @@ export const deleteProperty = async(id) => {
   });
   revalidatePath('/autogestion/lista-de-propiedades')
   return response
+}
+
+
+export const editExistingProperty = async (propiedad) => {
+
+  const formData = new FormData();
+  formData.append("propiedad", propiedad);
+
+  const response = await fetch(`${urlentorno}/api/propiedades/${propiedad.id}`, {
+    method: "PUT",
+    body: formData,
+  }).then(res => {
+    if (!res.ok) {
+      throw new Error(`HTTP error! status: ${res.status}`);
+    }
+    return res.json();
+  });
+
+  revalidatePath('/autogestion/lista-de-propiedades')
+  return response
+
+
 }

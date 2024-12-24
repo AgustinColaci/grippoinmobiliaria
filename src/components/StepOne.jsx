@@ -22,7 +22,7 @@ const StepOne = ({ operations, building, zones, money, qRooms, loadedProperty })
     const [estadoVenta, setEstadoVenta] = useState('');
     const [linkMaps, setLinkMaps] = useState('');
     const [urlMaps, setUrlMaps] = useState('');
-    const [fotos, setFotos] = useState([]);
+    const [fotos, setFotos] = useState([]); //ALMACENO LAS IMAGENES YA CARGADAS
     const [loading, setLoading] = useState(true)
     const router = useRouter()
 
@@ -32,30 +32,34 @@ const StepOne = ({ operations, building, zones, money, qRooms, loadedProperty })
 
     const [errors, setErrors] = useState({})
 
-    const { steps, addStep, setProperty, property, clearProperty } = useStore();
+    const { steps, addStep, setProperty, property, clearProperty, setImagesForDelete, setImagesForUpload } = useStore();
 
 
     useEffect(() => {
 
-
-        console.log(property)
-
-        if(property){
+        if (property) {
 
             campos.forEach((key) => {
                 if (property[key]) {
                     switchWithAll(key, property[key])
                 }
+
+                if ((key === 'fotos' || key === 'files') && property[key]) {
+                    const newFiles = [...files, ...property[key]];
+                    const uniqueFiles = Array.from(new Set(newFiles.map(file => file.name)))
+                        .map(name => newFiles.find(file => file.name === name));
+                    setFiles(uniqueFiles);
+                }
+
+                if (key === 'fotos' && property[key]) {
+                    setFotos(property[key])
+                }
             })
-            
+            // setFiles(getImages())
             setLoading(false)
         }
     }, [property])
 
-
-    useEffect(() => {
-        console.log(errors)
-    }, [errors])
 
     const handleBack = () => {
         clearProperty()
@@ -101,12 +105,12 @@ const StepOne = ({ operations, building, zones, money, qRooms, loadedProperty })
             case 'linkMaps':
                 setLinkMaps(valor)
                 break
-            case 'fotos':
-                setFotos(valor)
-                break
-            case 'files':
-                setFiles(valor)
-                break
+            // case 'fotos':
+            //     setFotos(valor)
+            //     break
+            // case 'files':
+            //     setFiles(valor)
+            //     break
             case 'urlMaps':
                 setUrlMaps(valor)
                 break
@@ -121,7 +125,7 @@ const StepOne = ({ operations, building, zones, money, qRooms, loadedProperty })
             return
         }
 
-        if(files.length >= 18){
+        if (files.length >= 18) {
             Toastify({
                 text: "Ya tienes el limite de imágenes",
                 className: "warning",
@@ -130,7 +134,7 @@ const StepOne = ({ operations, building, zones, money, qRooms, loadedProperty })
                     fontSize: '1.5rem'
                 }
             }).showToast()
-            return 
+            return
         }
 
         const lookingForRepeatImage = files.find(archivo => archivo.name === file.name)
@@ -150,10 +154,50 @@ const StepOne = ({ operations, building, zones, money, qRooms, loadedProperty })
         setFiles((prevFiles) => [...prevFiles, file]);
     }
 
+    function compareImageArrays(existingImages, newImages) {
+        // Extraer las URLs de ambos arrays
+        const existingUrls = existingImages.map(image => image.url);
+        const newUrls = newImages.map(image => image.url);
+
+        // Encontrar las URLs que se quedan (están en ambos arrays)
+        const remainingImages = newImages.filter(image => existingUrls.includes(image.url));
+
+        // Encontrar las URLs nuevas (están en el nuevo array pero no en el existente)
+        const newImagesOnly = newImages.filter(image => !existingUrls.includes(image.url));
+
+        // Encontrar las URLs que deben eliminarse (están en el array existente pero no en el nuevo)
+        const imagesToDelete = existingImages.filter(image => !newUrls.includes(image.url));
+
+        return {
+            remainingImages,
+            newImages: newImagesOnly,
+            imagesToDelete
+        };
+    }
 
     const handleAddStep = () => {
 
-        const propertyFromStep1 = { tipoOperacion, tipoInmueble, zona, direccion, precioInmueble, precioInmuebleValor, pagaExpensas, precioExpensas, precioExpensasValor, codigo, estadoVenta, linkMaps, files, urlMaps }
+        const result = compareImageArrays(fotos, files);
+        const propertyFromStep1 = {
+            tipoOperacion,
+            tipoInmueble,
+            zona,
+            direccion,
+            precioInmueble,
+            precioInmuebleValor,
+            pagaExpensas,
+            precioExpensas,
+            precioExpensasValor,
+            codigo,
+            estadoVenta,
+            linkMaps,
+            // files,
+            urlMaps,
+            fotos:[...result.remainingImages, ...result.newImages]
+        }
+
+        setImagesForDelete(result.imagesToDelete)
+        setImagesForUpload(result.newImages)
 
         const errores = handleErrorsFromStep1(propertyFromStep1)
         setErrors({ ...errors, ...errores })
@@ -173,13 +217,18 @@ const StepOne = ({ operations, building, zones, money, qRooms, loadedProperty })
         }
     }
 
-    const deleteErrorAndClass = (id) => {
+    // const deleteErrorAndClass = (id) => {
 
-        const newErrors = errors;
+    //     const newErrors = errors;
+    //     newErrors[id] = false;
+    //     setErrors(newErrors);
+    // }
+
+    const deleteErrorAndClass = (id) => {
+        const newErrors = { ...errors };
         newErrors[id] = false;
         setErrors(newErrors);
     }
-
 
     const handleLinkMaps = (iframeHTML) => {
         deleteErrorAndClass('linkMapsIncorrecto')
@@ -209,7 +258,6 @@ const StepOne = ({ operations, building, zones, money, qRooms, loadedProperty })
         const filteredFiles = files?.filter(file => file.name !== nameFile)
         setFiles(filteredFiles)
     }
-
 
 
 
@@ -248,12 +296,6 @@ const StepOne = ({ operations, building, zones, money, qRooms, loadedProperty })
                             {zones.map((z, i) => {
                                 return <option key={i} className={`${errors.zona ? 'error--empty' : ''}`} value={z.titulo}>{z.titulo}</option>
                             })}
-                            {/* <option className={`${errors.zona ? 'error--empty' : ''}`} value="Martin Coronado">Martín Coronado</option>
-                            <option className={`${errors.zona ? 'error--empty' : ''}`} value="Villa Bosch">Villa Bosch</option>
-                            <option className={`${errors.zona ? 'error--empty' : ''}`} value="Ciudad Jardin">Ciudad Jardin</option>
-                            <option className={`${errors.zona ? 'error--empty' : ''}`} value="Pablo Podesta">Pablo Podesta</option>
-                            <option className={`${errors.zona ? 'error--empty' : ''}`} value="Loma Hermosa">Loma Hermosa</option>
-                            <option className={`${errors.zona ? 'error--empty' : ''}`} value="Altos De Podesta">Barrio Altos de Podesta</option> */}
                         </select>
                         {errors.zona && <p className="error--text">Este campo es obligatorio</p>}
                     </div>
@@ -272,8 +314,6 @@ const StepOne = ({ operations, building, zones, money, qRooms, loadedProperty })
                                 <label htmlFor="precioInmueble">Precio de inmueble*</label>
                                 <select className={`${errors.precioInmueble ? 'error--empty' : ''}`} onChange={(e) => { setPrecioInmueble(e.target.value); deleteErrorAndClass(e.target.id) }} id="precioInmueble" name="precioInmueble" value={precioInmueble}>
                                     <option className={`${errors.precioInmueble ? 'error--empty' : ''}`} value="" disabled>Moneda</option>
-                                    {/* <option className={`${errors.precioInmueble ? 'error--empty' : ''}`} value="ARS">ARS</option>
-                                    <option className={`${errors.precioInmueble ? 'error--empty' : ''}`} value="USD">USD</option> */}
                                     {money.map((el, i) => {
                                         return <option key={i} className={`${errors.precioInmueble ? 'error--empty' : ''}`} value={el.tipo}>{el.display}</option>
                                     })}
@@ -365,7 +405,7 @@ const StepOne = ({ operations, building, zones, money, qRooms, loadedProperty })
                         <input className={`${errors.files ? 'error--empty' : ''} button button--add`} id="files" name="files" type="file" onChange={((e) => { sendImageToFirebase(e.target.files[0]); deleteErrorAndClass(e.target.id) })} />
                         {/* <label htmlFor="fotos">Subí fotos a tu publicación </label> */}
                         <div className="autogestion-img-container">
-                            {files.map((foto, index) => {
+                            {files?.map((foto, index) => {
                                 return (<div key={index} className="autogestion-img">
                                     <p>{foto.name}</p>
                                     <button type="button" onClick={(() => handleDeletePhoto(foto.name))}>X</button>
@@ -381,9 +421,8 @@ const StepOne = ({ operations, building, zones, money, qRooms, loadedProperty })
 
                 </div>
             </div>
-            {/* <button disabled={steps === 3} type="button" className="button button--next" onClick={() => { handleAddStep() }}>Siguiente paso</button> */}
             <div className="button--bar">
-                <button type="button" className="button button--previous" onClick={() => {handleBack()}}>Volver al menu</button>
+                <button type="button" className="button button--previous" onClick={() => { handleBack() }}>Volver al menu</button>
                 <button disabled={steps === 3} type="button" className="button button--next" onClick={() => { handleAddStep() }}>Siguiente paso</button>
             </div>
 

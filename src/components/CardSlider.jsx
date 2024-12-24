@@ -34,20 +34,39 @@ const CardSlider = ({ codigo, images, createURL }) => {
   useEffect(() => {
     if (images) {
 
-      if (createURL) {
-        // Convertir los objetos File a URLs utilizables por el navegador
-        const fileURLs = images.map((file) => URL.createObjectURL(file));
-        setImagesForRender(fileURLs);
+      const newImages = images.map((img) => {
+        if (img?.size) {
+          const url = URL.createObjectURL(img)
+          return url
+        } else {
+          return img
+        }
+      })
 
-        // Liberar memoria cuando el componente se desmonte
-        return () => {
-          fileURLs.forEach((url) => URL.revokeObjectURL(url));
-        };
-      } else {
+      console.log(newImages)
+      setImagesForRender(newImages)
 
-        setImagesFromStorage(images)
 
-      }
+      return () => {
+        newImages.forEach((url) => {
+          if (!url.url) URL.revokeObjectURL(url)
+        });
+      };
+
+      // if (createURL) {
+      //   // Convertir los objetos File a URLs utilizables por el navegador
+      //   const fileURLs = images.map((file) => URL.createObjectURL(file));
+      //   setImagesForRender(fileURLs);
+
+      //   // Liberar memoria cuando el componente se desmonte
+      //   return () => {
+      //     fileURLs.forEach((url) => URL.revokeObjectURL(url));
+      //   };
+      // } else {
+
+      //   setImagesFromStorage(images)
+
+      // }
     }
   }, [images]);
 
@@ -55,6 +74,16 @@ const CardSlider = ({ codigo, images, createURL }) => {
     <div className="slider">
       <Slider {...settings}>
         {
+          imagesForRender.map((image, index) => (
+            <div key={index} onClick={() => handleImageClick(index)}>
+              <div
+                className="image-container"
+                style={{ backgroundImage: `url(${image.url ? image.url : image})` }}
+              ></div>
+            </div>
+          ))
+        }
+        {/* {
           createURL ?
             imagesForRender.map((image, index) => (
               <div key={index} onClick={() => handleImageClick(index)}>
@@ -73,7 +102,7 @@ const CardSlider = ({ codigo, images, createURL }) => {
                 ></div>
               </div>
             ))
-        }
+        } */}
       </Slider>
 
       <div className="slider__pils">

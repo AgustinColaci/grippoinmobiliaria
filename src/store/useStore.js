@@ -4,6 +4,7 @@ const useStore = create((set) => ({
   steps: 1,
   addStep: () => set((state) => ({ steps: state.steps + 1 })),
   substractStep: () => set((state) => ({ steps: state.steps - 1 })),
+  setSteps: (payload) => set(() => ({steps:payload})),
   
   property: {
     tipoOperacion: '',
@@ -28,7 +29,7 @@ const useStore = create((set) => ({
     property:null
   })),
 
-  properties:[],
+  properties:null,
 
   setProperties:(newProperties) => set((state) => ({
     properties: newProperties
@@ -50,6 +51,16 @@ const useStore = create((set) => ({
   similarProperties:[],
   setSimilarProperties:(array) => set(()=> ({
     similarProperties:array
+  })),
+
+  imagesForDelete:[],
+  setImagesForDelete:(array) => set(() => ({
+    imagesForDelete:array
+  })),
+
+  imagesForUpload:[],
+  setImagesForUpload:(array) => set(() => ({
+    imagesForUpload:array
   }))
 
 }));

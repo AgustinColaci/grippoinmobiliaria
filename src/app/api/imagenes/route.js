@@ -1,4 +1,4 @@
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
 import { NextResponse } from "next/server";
 import { firestore, storage } from "@/lib/firebase";
 
@@ -46,3 +46,4 @@ export async function POST(request) {
         return NextResponse.json({ error: "Error uploading file" }, { status: 500 });
     }
 }
+

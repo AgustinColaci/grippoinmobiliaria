@@ -1,4 +1,5 @@
 'use client'
+import { deleteAllImages } from '@/actions/images';
 import { deleteProperty } from '@/actions/propiedades';
 import useStore from '@/store/useStore';
 import { useRouter } from 'next/navigation';
@@ -9,12 +10,13 @@ import "toastify-js/src/toastify.css"
 const BannerAutogestion = ({ isEditing, idProperty }) => {
 
     const [loading, setLoading] = useState(false)
-    const { steps } = useStore();
+    const { steps, property } = useStore();
     const router = useRouter()
 
     const handleDelete = async (id) => {
         setLoading(true)
 
+        const responseImages = await deleteAllImages(property.fotos)
         const response = await deleteProperty(id)
 
         setLoading(false)

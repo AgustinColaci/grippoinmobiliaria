@@ -10,13 +10,16 @@ import useStore from "@/store/useStore"
 const ListProperties = ({ properties }) => {
 
     const router = useRouter()
-    const {property, setProperty, clearProperty} = useStore()
+    const {property, setProperty, clearProperty, setSteps} = useStore()
 
     const handleEdit = (id) => {
         router.push(`/autogestion/editar-propiedad/${id}`)
     }
     
     useEffect(() => {
+
+        setSteps(1)
+        setProperty(null)
 
         return () => {
             setProperty(null)

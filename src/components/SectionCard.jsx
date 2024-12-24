@@ -13,12 +13,18 @@ const SectionCard = ({ properties }) => {
   useEffect(() => {
 
 
-    if (properties.length > 0) {
+    if (properties?.length > 0) {
       setProperties(properties)
       setPropertiesForSale(properties.filter((prop) => prop.tipoOperacion?.toLowerCase() === 'venta'))
       setPorpertiesForRent(properties.filter((prop) => prop.tipoOperacion?.toLowerCase() === 'alquiler'))
       setLoading(false)
     }
+
+    if(properties){
+      setLoading(false)
+    }
+
+    
   }, [])
 
 

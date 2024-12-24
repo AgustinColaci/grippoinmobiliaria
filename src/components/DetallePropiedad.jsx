@@ -56,7 +56,7 @@ const DetallePropiedad = () => {
                             <Image src={iconAmbientes} alt="Icono de ambientes" />
                         </div>
                         <div className='detalle__propiedad--text'>
-                            <span className="text mts">{property.ambientes} Ambientes</span>
+                            <span className="text mts">{property.ambientes} {property.ambientes > 1 ? 'Ambientes' : 'Ambiente'}</span>
                         </div>
                     </div>
 
@@ -65,7 +65,7 @@ const DetallePropiedad = () => {
                             <Image src={iconBano} alt="Icono de baño" />
                         </div>
                         <div className='detalle__propiedad--text'>
-                            <span className="text mts">{property.banos} Baño</span>
+                            <span className="text mts">{property.banos} {property.banos > 1 ? 'Baños' : 'Baño'}</span>
                         </div>
                     </div>
 
@@ -74,7 +74,7 @@ const DetallePropiedad = () => {
                             <Image src={iconCocheras} alt="Icono de cochera" />
                         </div>
                         <div className='detalle__propiedad--text'>
-                            <span className="text mts">{property.tieneCochera ? `${property.cantidadCocheras} Cochera` :  'Sin cochera'}</span>
+                            <span className="text mts">{property.tieneCochera ? `${property.cantidadCochera} ${property.cantidadCochera > 1 ? 'Cocheras' : 'Cochera'}` :  'Sin cochera'}</span>
                         </div>
                     </div>
 
@@ -83,7 +83,7 @@ const DetallePropiedad = () => {
                             <Image src={iconDormitorio} alt="Icono de dormitorio" />
                         </div>
                         <div className='detalle__propiedad--text'>
-                            <span className="text mts">{property.dormitorios} Dormitorio</span>
+                            <span className="text mts">{property.dormitorios} {property.dormitorios > 1 ? 'Domitorios' : 'Dormitorio'}</span>
                         </div>
                     </div>
 
@@ -119,7 +119,7 @@ const DetallePropiedad = () => {
                             <Image src={iconAntiguedad} alt="Icono de antiguedad" />
                         </div>
                         <div className='detalle__propiedad--text'>
-                            <span className="text mts">{property.antiguedad || 'A estrenar'}</span>
+                            <span className="text mts">{property.antiguedad > 0 ? property.antiguedad + ' Años' : 'A estrenar'}</span>
                         </div>
                     </div>
 
