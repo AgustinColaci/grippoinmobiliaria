@@ -1,0 +1,45 @@
+.menu-autogestion{
+    font-size: 26px;
+    display: flex;
+    gap: 10px;
+    min-height: 500px;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu-autogestion a{
+    padding: 5px;
+    border: 1px solid black;
+}
+
+.properties-main {
+    min-height: 50rem;
+    position: relative;
+}
+
+
+.list-properties{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 2.6rem;
+}
+
+.text--propiedad {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.volver--menu {
+    margin-bottom: 2rem;
+    position: absolute;
+    bottom: 0;
+}
+
+.list-properties-all {
+    display: flex;
+    gap: .4rem;
+    margin-bottom: .8rem;
+    padding-bottom: .8rem;
+    border-bottom: .1rem solid var(--color--black);
+}
