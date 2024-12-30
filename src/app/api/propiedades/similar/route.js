@@ -1,6 +1,6 @@
 import { firestore } from "@/lib/firebase";
 import { collection, query, where, getDocs } from "firebase/firestore";
-
+export const dynamic = 'force-dynamic';
 export async function GET(request, { params }) {
     try {
         // Usa request.nextUrl para obtener los parámetros de consulta
