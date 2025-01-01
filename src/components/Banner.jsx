@@ -17,7 +17,6 @@ const Banner = ({ tiposDeOperacion, inmuebles, cantAmbientes, monedas, zonas }) 
 
 
     const handleSearch = () => {
-        console.log(order)
         const objFilters = {tipoOperacion:operacion, tipoInmueble:inmueble, ambientes:ambientes, zona, precioInmueble:moneda}
         const filtered = filtrarPropiedades(properties, objFilters, order)
         const similarProperties = filtrarPropiedadesSimilares(properties, objFilters)
@@ -28,7 +27,6 @@ const Banner = ({ tiposDeOperacion, inmuebles, cantAmbientes, monedas, zonas }) 
     }
 
     useEffect(() => {
-        console.log('cambio en filters', filters)
         if(!filters){
             setAmbientes('')
             setZona('')

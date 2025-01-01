@@ -9,11 +9,6 @@ const FilteredProperties = () => {
     const [loading, isLoading] = useState(true);
     const { filteredProperties, similarProperties, properties } = useStore()
 
-    useEffect(() => {
-        console.log(filteredProperties)
-        console.log(properties)
-    })
-
     return (
         <div>
             <p>LISTADO DE PROPIEDADES FILTRADAS</p>

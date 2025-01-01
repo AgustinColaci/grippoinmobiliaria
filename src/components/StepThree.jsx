@@ -21,7 +21,6 @@ const StepThree = () => {
     let isEditing = true
     delete property.files
 
-    console.log(property.id)
 
     if (!property.id) {
       property.id = Date.now();
@@ -44,7 +43,6 @@ const StepThree = () => {
       //ELIMINAR LAS FOTOS
       for (let img of imagesForDelete) {
         const response = await deleteImagesFromFirebase(img.name)
-        console.log(response)
       }
     }
 
@@ -109,11 +107,6 @@ const StepThree = () => {
 
   };
 
-  useEffect(() => {
-    console.log(imagesForDelete)
-    console.log(imagesForUpload)
-  }
-    , [])
 
 
   const uploadPhotos = async (files) => {
