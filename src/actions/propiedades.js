@@ -1,103 +1,160 @@
 'use server'
 
+import { auth, firestore } from "@/lib/firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { collection, deleteDoc, doc, getDoc, getDocs, query, setDoc, updateDoc, where } from "firebase/firestore";
 import { revalidatePath } from "next/cache";
 
 const urlentorno = process.env.URL_ENTORNO
 
-
 export const getAllProperties = async () => {
-  const response = await fetch(`${urlentorno}/api/propiedades`, {
-    method: 'GET',
-  }).then(res => {
-    if (!res.ok) {
-      throw new Error(`HTTP error! status: ${res.status}`);
-    }
-    return res.json();
-  });
 
-  return response
+  if(!auth.currentUser){
+    const email = process.env.FIREBASE_ADMIN_EMAIL
+    const password = process.env.FIREBASE_ADMIN_PASSWORD
+
+    console.log('se inicio sesion en este usuario:', email)
+    await signInWithEmailAndPassword(auth, email, password)
 }
+
+  const docsSnap = await getDocs(collection(firestore, "Propiedades"));
+  let properties = []
+
+  docsSnap.forEach((doc) => {
+    properties.push(doc.data())
+  })
+  return properties
+}
+
 
 
 export const crearNuevaPropiedad = async (propiedad) => {
 
-  const formData = new FormData();
-  formData.append("propiedad", propiedad);
+  if(!auth.currentUser){
+    const email = process.env.FIREBASE_ADMIN_EMAIL
+    const password = process.env.FIREBASE_ADMIN_PASSWORD
 
-  const response = await fetch(`${urlentorno}/api/propiedades`, {
-    method: "POST",
-    body: formData,
-  }).then(res => {
-    if (!res.ok) {
-      throw new Error(`HTTP error! status: ${res.status}`);
-    }
-    return res.json();
-  });
+    console.log('se inicio sesion en este usuario:', email)
+    await signInWithEmailAndPassword(auth, email, password)
+}
 
-  revalidatePath('/autogestion/lista-de-propiedades')
-  return response
+  try {
+    const snap = await setDoc(doc(firestore, 'Propiedades', JSON.stringify(propiedad.id)), propiedad)
+    revalidatePath('/autogestion/lista-de-propiedades')
+    return { message: 'propiedad creada' }
 
+  } catch (error) {
+    console.error(error)
+    revalidatePath('/autogestion/lista-de-propiedades')
+    return { error: 'error al crear la propiedad' }
+  }
 }
 
 
 export const getSimilarProperties = async (zona, operacion, id) => {
-  const response = await fetch(`${urlentorno}/api/propiedades/similar?zona=${encodeURIComponent(zona)}&operacion=${encodeURIComponent(operacion)}&id=${encodeURIComponent(id)}`, {
-    method: 'GET',
-  }).then(res => {
-    if (!res.ok) {
-      throw new Error(`HTTP error! status: ${res.status}`);
-    }
-    return res.json();
-  });
 
-  return response
+  if(!auth.currentUser){
+    const email = process.env.FIREBASE_ADMIN_EMAIL
+    const password = process.env.FIREBASE_ADMIN_PASSWORD
+
+    console.log('se inicio sesion en este usuario:', email)
+    await signInWithEmailAndPassword(auth, email, password)
+}
+
+  const propiedadesRef = collection(firestore, "Propiedades");
+  const q = query(
+    propiedadesRef,
+    where("zona", "==", zona),
+    where("tipoOperacion", "==", operacion)
+  );
+
+  const querySnapshot = await getDocs(q);
+  const resultados = [];
+  querySnapshot.forEach((doc) => {
+    if (Number(doc.id) !== Number(id)) {
+      resultados.push({ id: doc.id, ...doc.data() });
+    }
+  });
+  revalidatePath('/autogestion/lista-de-propiedades')
+
+  return resultados
+
 }
 
 
 export const getPropertyById = async (id) => {
-  const response = await fetch(`${urlentorno}/api/propiedades/${id}`, {
-    method: 'GET',
-  }).then(res => {
-    if (!res.ok) {
-      throw new Error(`HTTP error! status: ${res.status}`);
-    }
-    return res.json();
-  });
 
-  return response
+  if(!auth.currentUser){
+    const email = process.env.FIREBASE_ADMIN_EMAIL
+    const password = process.env.FIREBASE_ADMIN_PASSWORD
+
+    console.log('se inicio sesion en este usuario:', email)
+    await signInWithEmailAndPassword(auth, email, password)
+}
+
+  const docRef = doc(firestore, 'Propiedades', id);
+  const docSnap = await getDoc(docRef)
+  if (docSnap.exists()) {
+    revalidatePath('/autogestion/lista-de-propiedades')
+    return { message: `propiedad con ID ${id}`, data: docSnap.data() }
+  } else {
+    revalidatePath('/autogestion/lista-de-propiedades')
+    return { error: `propiedad con ID ${id} no encontrada` }
+  }
 }
 
 export const deleteProperty = async (id) => {
-  const response = await fetch(`${urlentorno}/api/propiedades/${id}`, {
-    method: 'DELETE',
-  }).then(res => {
-    if (!res.ok) {
-      throw new Error(`HTTP error! status: ${res.status}`);
-    }
-    return res.json();
-  });
-  revalidatePath('/autogestion/lista-de-propiedades')
-  return response
+
+  if(!auth.currentUser){
+    const email = process.env.FIREBASE_ADMIN_EMAIL
+    const password = process.env.FIREBASE_ADMIN_PASSWORD
+
+    console.log('se inicio sesion en este usuario:', email)
+    await signInWithEmailAndPassword(auth, email, password)
+}
+
+  const docRef = doc(firestore, 'Propiedades', JSON.stringify(id));
+  try {
+    const response = await deleteDoc(docRef)
+    revalidatePath('/autogestion/lista-de-propiedades')
+
+    return { message: `propiedad con ID ${id} eliminado` }
+
+  } catch (error) {
+    console.log("No such document!");
+    revalidatePath('/autogestion/lista-de-propiedades')
+
+    return { error: `propiedad con ID ${id} no encontrada` }
+  }
+
 }
 
 
 export const editExistingProperty = async (propiedad) => {
 
-  const formData = new FormData();
-  formData.append("propiedad", propiedad);
+  if (!propiedad || !propiedad.id) {
+    return { error: 'Propiedad inválida o ID no proporcionado' };
+  }
 
-  const response = await fetch(`${urlentorno}/api/propiedades/${propiedad.id}`, {
-    method: "PUT",
-    body: formData,
-  }).then(res => {
-    if (!res.ok) {
-      throw new Error(`HTTP error! status: ${res.status}`);
-    }
-    return res.json();
-  });
+  if(!auth.currentUser){
+    const email = process.env.FIREBASE_ADMIN_EMAIL
+    const password = process.env.FIREBASE_ADMIN_PASSWORD
 
-  revalidatePath('/autogestion/lista-de-propiedades')
-  return response
+    console.log('se inicio sesion en este usuario:', email)
+    await signInWithEmailAndPassword(auth, email, password)
+}
+
+  try {
+    const snap = await updateDoc(doc(firestore, 'Propiedades', JSON.stringify(propiedad.id)), propiedad)
+    revalidatePath('/autogestion/lista-de-propiedades')
+
+    return { message: 'propiedad editada'}
+  } catch (error) {
+    console.log(error)
+    revalidatePath('/autogestion/lista-de-propiedades')
+
+    return { message: 'error editando la propiedad'}
+  }
 
 
 }

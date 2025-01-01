@@ -9,7 +9,7 @@ const ListaDePropiedades = async () => {
     const properties = await getAllProperties()
 
     return (
-      <ListProperties properties={properties.data} />
+      <ListProperties properties={properties} />
     )
 
   } catch (error) {

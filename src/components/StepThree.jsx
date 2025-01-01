@@ -8,7 +8,7 @@ import Toastify from 'toastify-js'
 import "toastify-js/src/toastify.css"
 import { revalidatePath } from 'next/cache';
 import { crearNuevaPropiedad, editExistingProperty } from '@/actions/propiedades';
-import { deleteImagesFromFirebase } from '@/actions/images';
+import { deleteImagesFromFirebase, sendImageToFirebase } from '@/actions/images';
 
 const StepThree = () => {
 
@@ -21,6 +21,7 @@ const StepThree = () => {
     let isEditing = true
     delete property.files
 
+    console.log(property.id)
 
     if (!property.id) {
       property.id = Date.now();
@@ -50,7 +51,7 @@ const StepThree = () => {
     if (isEditing) {
       try {
 
-        const response = await editExistingProperty(JSON.stringify(property))
+        const response = await editExistingProperty(property)
 
         if (response.error) {
           Toastify({
@@ -79,7 +80,7 @@ const StepThree = () => {
     } else {
       try {
 
-        const response = await crearNuevaPropiedad(JSON.stringify(property))
+        const response = await crearNuevaPropiedad(property)
 
         if (response.error) {
           Toastify({
@@ -120,18 +121,15 @@ const StepThree = () => {
     const fotos = []
 
     for (let file of files) {
+
       const formData = new FormData();
       formData.append("file", file);
-      try {
-        const response = await fetch(`/api/imagenes`, {
-          method: "POST",
-          body: formData,
-        });
 
+      try {
+        const response = await sendImageToFirebase(formData, property.direccion)
 
         if (response.ok) {
-          const data = await response.json();
-          fotos.push({ url: data.url, name: data.name })
+          fotos.push({ url: response.url, name: response.name })
           // property.fotos.push({ url: data.url, name: file.name })
         } else {
           console.error("Error al subir la imagen");

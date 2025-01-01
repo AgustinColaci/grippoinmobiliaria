@@ -36,11 +36,11 @@ const ContainerForm = ({tiposDeOperacion, zonas, monedas, cantAmbientes, inmuebl
             <form>
 
                 {steps === 1 && <StepOne
-                qRooms={cantAmbientes.data}
-                zones={zonas.data}
-                operations={tiposDeOperacion.data}
-                building={inmuebles.data}
-                money={monedas.data}
+                qRooms={cantAmbientes}
+                zones={zonas}
+                operations={tiposDeOperacion}
+                building={inmuebles}
+                money={monedas}
                 loadedProperty={loadedProperty}
                 />}
                 {steps === 2 && <StepTwo />}

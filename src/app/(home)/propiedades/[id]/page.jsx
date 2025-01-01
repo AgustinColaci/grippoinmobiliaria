@@ -1,6 +1,6 @@
 'use server'
 
-import { getSimilarProperties } from "@/actions/propiedades"
+import { getPropertyById, getSimilarProperties } from "@/actions/propiedades"
 import BannerDetalle from "@/components/BannerDetalle"
 import Link from "next/link"
 
@@ -11,7 +11,7 @@ const PropiedadesPorId = async ({ params }) => {
   const { id } = params
   const urlentorno = process.env.NEXT_URL_ENTORNO
 
-  const property = await fetch(`${urlentorno}/api/propiedades/${id}`).then((res) => res.json() )
+  const property = await getPropertyById(id)
 
   const similarProperties = await getSimilarProperties(property.data.zona, property.data.tipoOperacion, property.data.id || 0)
 
