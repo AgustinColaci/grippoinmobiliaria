@@ -1,4 +1,9 @@
+import { getAmbientes } from "@/actions/ambientes"
+import { getInmuebles } from "@/actions/inmuebles"
+import { getMonedas } from "@/actions/monedas"
 import { getPropertyById } from "@/actions/propiedades"
+import { getOperaciones } from "@/actions/tipoOperacion"
+import { getZonas } from "@/actions/zonas"
 import BannerAutogestion from "@/components/BannerAutogestion"
 import ContainerForm from "@/components/ContainerForm"
 
@@ -10,51 +15,16 @@ const EditarPropiedad = async ({ params }) => {
 
     const loadedProperty = await getPropertyById(id)
 
-    const tiposDeOperacion = await fetch(`${urlentorno}/api/tipo-operacion`, {
-        method: 'GET',
-    }).then(res => {
-        if (!res.ok) {
-            throw new Error(`HTTP error! status: ${res.status}`);
-        }
-        return res.json();
-    });
+    const tiposDeOperacion = await getOperaciones()
 
 
-    const inmuebles = await fetch(`${urlentorno}/api/inmuebles`, {
-        method: 'GET',
-    }).then(res => {
-        if (!res.ok) {
-            throw new Error(`HTTP error! status: ${res.status}`);
-        }
-        return res.json();
-    });
+    const inmuebles = await getInmuebles()
 
-    const cantAmbientes = await fetch(`${urlentorno}/api/ambientes`, {
-        method: 'GET',
-    }).then(res => {
-        if (!res.ok) {
-            throw new Error(`HTTP error! status: ${res.status}`);
-        }
-        return res.json();
-    });
+    const cantAmbientes = await getAmbientes()
 
-    const monedas = await fetch(`${urlentorno}/api/monedas`, {
-        method: 'GET',
-    }).then(res => {
-        if (!res.ok) {
-            throw new Error(`HTTP error! status: ${res.status}`);
-        }
-        return res.json();
-    });
+    const monedas = await getMonedas()
 
-    const zonas = await fetch(`${urlentorno}/api/zonas`, {
-        method: 'GET',
-    }).then(res => {
-        if (!res.ok) {
-            throw new Error(`HTTP error! status: ${res.status}`);
-        }
-        return res.json();
-    });
+    const zonas = await getZonas()
 
     return (
         <>

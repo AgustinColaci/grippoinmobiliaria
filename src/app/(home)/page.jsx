@@ -3,81 +3,45 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Banner from '@/components/Banner'
 import SectionCard from '@/components/SectionCard'
+import { getAmbientes } from '@/actions/ambientes';
+import { getAllProperties } from '@/actions/propiedades';
+import { getOperaciones } from '@/actions/tipoOperacion';
+import { getInmuebles } from '@/actions/inmuebles';
+import { getMonedas } from '@/actions/monedas';
+import { getZonas } from '@/actions/zonas';
 
 export default async function Home() {
 
   const urlentorno = process.env.NEXT_URL_ENTORNO
 
-  const properties = await fetch(`${urlentorno}/api/propiedades`, {
-    method: 'GET',
-  }).then(res => {
-    if (!res.ok) {
-      throw new Error(`HTTP error! status: ${res.status}`);
-    }
-    return res.json();
-  });
+  const properties = await getAllProperties()
 
 
-  const tiposDeOperacion = await fetch(`${urlentorno}/api/tipo-operacion`, {
-    method: 'GET',
-  }).then(res => {
-    if (!res.ok) {
-      throw new Error(`HTTP error! status: ${res.status}`);
-    }
-    return res.json();
-  });
+  const tiposDeOperacion = await getOperaciones()
 
 
-  const inmuebles = await fetch(`${urlentorno}/api/inmuebles`, {
-    method: 'GET',
-  }).then(res => {
-    if (!res.ok) {
-      throw new Error(`HTTP error! status: ${res.status}`);
-    }
-    return res.json();
-  });
+  const inmuebles = await getInmuebles()
 
-  const cantAmbientes = await fetch(`${urlentorno}/api/ambientes`, {
-    method: 'GET',
-  }).then(res => {
-    if (!res.ok) {
-      throw new Error(`HTTP error! status: ${res.status}`);
-    }
-    return res.json();
-  });
+  const cantAmbientes = await getAmbientes()
 
-  const monedas = await fetch(`${urlentorno}/api/monedas`, {
-    method: 'GET',
-  }).then(res => {
-    if (!res.ok) {
-      throw new Error(`HTTP error! status: ${res.status}`);
-    }
-    return res.json();
-  });
+  const monedas = await getMonedas()
 
-  const zonas = await fetch(`${urlentorno}/api/zonas`, {
-    method: 'GET',
-  }).then(res => {
-    if (!res.ok) {
-      throw new Error(`HTTP error! status: ${res.status}`);
-    }
-    return res.json();
-  });
+  const zonas = await getZonas()
 
   
 
   return (
     <>
       <Banner
-        tiposDeOperacion={tiposDeOperacion.data}
-        inmuebles={inmuebles.data}
-        cantAmbientes={cantAmbientes.data}
-        monedas={monedas.data}
-        zonas={zonas.data}
+        tiposDeOperacion={tiposDeOperacion}
+        inmuebles={inmuebles}
+        cantAmbientes={cantAmbientes}
+        monedas={monedas}
+        zonas={zonas}
       />
 
       <SectionCard
-        properties={properties.data}
+        properties={properties}
       />
     </>
   );

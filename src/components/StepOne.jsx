@@ -315,7 +315,7 @@ const StepOne = ({ operations, building, zones, money, qRooms, loadedProperty })
                                 <select className={`${errors.precioInmueble ? 'error--empty' : ''}`} onChange={(e) => { setPrecioInmueble(e.target.value); deleteErrorAndClass(e.target.id) }} id="precioInmueble" name="precioInmueble" value={precioInmueble}>
                                     <option className={`${errors.precioInmueble ? 'error--empty' : ''}`} value="" disabled>Moneda</option>
                                     {money.map((el, i) => {
-                                        return <option key={i} className={`${errors.precioInmueble ? 'error--empty' : ''}`} value={el.tipo}>{el.display}</option>
+                                        return <option key={i} className={`${errors.precioInmueble ? 'error--empty' : ''}`} value={el.display}>{el.tipo}</option>
                                     })}
                                 </select>
 
