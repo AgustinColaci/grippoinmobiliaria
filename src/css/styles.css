@@ -921,7 +921,7 @@ p {
 }
 
 .slick-slide.slick-cloned {
-    display: none;
+    display: none!important;
 }
 
 .banner__detalle .image-container,
