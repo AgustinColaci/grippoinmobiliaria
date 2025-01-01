@@ -244,6 +244,7 @@ p {
     border: .1rem solid var(--color--azul);
     color: var(--color--azul);
     transition: all ease .3s;
+    cursor: pointer;
 }
 
 .banner__autogestion .button.button--delete:hover,
@@ -1026,9 +1027,18 @@ p {
     padding-top: .2rem;
     padding-bottom: .2rem;
     border-radius: .4rem;
-
+    cursor: pointer;
+    transition: all .3s;
 }
 
+.button--editar:hover {
+    background-color: #13AA66;
+}
+
+.button--editar:focus,
+.button--editar:active {
+    background-color: var(--color--azul);
+}
 
 .container__filtered-properties{
     display: flex;

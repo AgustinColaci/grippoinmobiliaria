@@ -44,6 +44,14 @@
     text-align: center;
     font-weight: bold;
   }
+
+  form.form-new-user {
+    min-height: calc(100vh - 34.9rem);
+    max-width: 36%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 6rem;
+  }
   
   .form-group {
     margin-bottom: 1.6rem;

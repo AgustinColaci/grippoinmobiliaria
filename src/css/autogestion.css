@@ -5,6 +5,8 @@
     min-height: 500px;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
+    min-height: calc(100vh - 34.9rem);
 }
 
 .menu-autogestion a{
@@ -13,7 +15,7 @@
 }
 
 .properties-main {
-    min-height: 50rem;
+    min-height: calc(100vh - 34.9rem);
     position: relative;
 }
 

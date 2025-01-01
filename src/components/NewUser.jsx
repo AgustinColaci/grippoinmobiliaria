@@ -41,7 +41,7 @@ const NewUser = () => {
             <p>Creando usuario</p>
             <div className="loader"></div>
           </div>}
-        <form onSubmit={handleSubmit} className="">
+        <form onSubmit={handleSubmit} className="form-new-user">
             <h1 className="login-title">Nuevo usuario</h1>
             {error && <p className="error-message">{error}</p>}
             <div className="form-group">
