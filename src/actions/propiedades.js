@@ -41,11 +41,13 @@ export const crearNuevaPropiedad = async (propiedad) => {
   try {
     const snap = await setDoc(doc(firestore, 'Propiedades', JSON.stringify(propiedad.id)), propiedad)
     revalidatePath('/autogestion/lista-de-propiedades')
+    revalidatePath('/')
     return { message: 'propiedad creada' }
 
   } catch (error) {
     console.error(error)
     revalidatePath('/autogestion/lista-de-propiedades')
+    revalidatePath('/')
     return { error: 'error al crear la propiedad' }
   }
 }
@@ -76,6 +78,8 @@ export const getSimilarProperties = async (zona, operacion, id) => {
     }
   });
   revalidatePath('/autogestion/lista-de-propiedades')
+  revalidatePath('/')
+
 
   return resultados
 
@@ -96,9 +100,13 @@ export const getPropertyById = async (id) => {
   const docSnap = await getDoc(docRef)
   if (docSnap.exists()) {
     revalidatePath('/autogestion/lista-de-propiedades')
+    revalidatePath('/')
+
     return { message: `propiedad con ID ${id}`, data: docSnap.data() }
   } else {
     revalidatePath('/autogestion/lista-de-propiedades')
+    revalidatePath('/')
+
     return { error: `propiedad con ID ${id} no encontrada` }
   }
 }
@@ -117,12 +125,15 @@ export const deleteProperty = async (id) => {
   try {
     const response = await deleteDoc(docRef)
     revalidatePath('/autogestion/lista-de-propiedades')
+    revalidatePath('/')
+
 
     return { message: `propiedad con ID ${id} eliminado` }
 
   } catch (error) {
     console.log("No such document!");
     revalidatePath('/autogestion/lista-de-propiedades')
+    revalidatePath('/')
 
     return { error: `propiedad con ID ${id} no encontrada` }
   }
@@ -147,11 +158,15 @@ export const editExistingProperty = async (propiedad) => {
   try {
     const snap = await updateDoc(doc(firestore, 'Propiedades', JSON.stringify(propiedad.id)), propiedad)
     revalidatePath('/autogestion/lista-de-propiedades')
+    revalidatePath('/')
+
 
     return { message: 'propiedad editada'}
   } catch (error) {
     console.log(error)
     revalidatePath('/autogestion/lista-de-propiedades')
+    revalidatePath('/')
+
 
     return { message: 'error editando la propiedad'}
   }

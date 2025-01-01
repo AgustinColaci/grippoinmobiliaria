@@ -20,7 +20,6 @@ const BannerAutogestion = ({ isEditing, idProperty }) => {
         const response = await deleteProperty(id)
 
         setLoading(false)
-        console.log(response)
 
         Toastify({
             text: response.message,

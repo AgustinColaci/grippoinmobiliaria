@@ -43,7 +43,6 @@ const CardSlider = ({ codigo, images, createURL }) => {
         }
       })
 
-      console.log(newImages)
       setImagesForRender(newImages)
 
 

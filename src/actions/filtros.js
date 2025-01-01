@@ -12,7 +12,6 @@ export const filtrarPropiedades = (propiedades, criterios, orden) => {
 
     // Ordenar según la variable "orden"
     if (orden == 'valor-min') {
-        console.log('acaaaa')
         filtradas.sort((a, b) => Number(a.precioInmuebleValor) - Number(b.precioInmuebleValor)); // Reemplaza 'precio' con la propiedad que quieras ordenar
     } else if (orden === 'valor-max') {
         filtradas.sort((a, b) => Number(b.precioInmuebleValor) - Number(a.precioInmuebleValor)); // Reemplaza 'precio' con la propiedad que quieras ordenar
