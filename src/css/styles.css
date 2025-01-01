@@ -920,6 +920,10 @@ p {
     border-radius: .8rem;
 }
 
+.slick-slide.slick-cloned {
+    display: none;
+}
+
 .banner__detalle .image-container,
 .banner__detalle .modal-image-container {
     height: 43.2rem;
