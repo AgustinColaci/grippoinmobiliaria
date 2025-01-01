@@ -19,7 +19,7 @@ export const handleErrorsFromStep1 = (propiedad) => {
         }
 
         if (key === 'fotos') {
-            if (propiedad[key].length == 0) {
+            if (propiedad[key].length == 1) {
                 return errors[key] = true
             } else {
                 return errors[key] = false
