@@ -172,11 +172,13 @@ const DetallePropiedad = () => {
                     <p className='paragraph'>{property.descripcion}</p>
                 </div>
                 {similarProperties?.length > 0 && <section className='section__similares'>
-                    <h2 className='title'>Propiedades Similares</h2>
-                    {/* <Card /> */}
-                    {similarProperties.map((el) =>{
-                        return <Card propiedad={el} key={el.id} />
-                    })}
+                <h2 className='title'>Propiedades Similares</h2>
+                    <section className='section__similares--cards'>
+                        {/* <Card /> */}
+                        {similarProperties.map((el) =>{
+                            return <Card propiedad={el} key={el.id} />
+                        })}
+                    </section>
                 </section>}
             </section>
         </>

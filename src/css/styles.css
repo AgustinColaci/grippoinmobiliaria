@@ -496,6 +496,13 @@ p {
     gap: 3rem;
 }
 
+.section__similares--cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 3rem;
+}
+
+
 .title--2 {
     font-size: 2.4rem;
     font-weight: 700;
@@ -845,6 +852,12 @@ p {
         justify-items: center;
     }
 
+    .section__similares--cards {
+        grid-template-columns: 1fr;
+        justify-items: center;
+    }
+    
+
     .filtros {
         display: grid;
         grid-template-columns: 1fr;
@@ -900,10 +913,12 @@ p {
 
 /* Tablet */
 @media (min-width: 768px) and (max-width: 1200px) {
-    .section__cards {
+    .section__cards,
+    .section__similares--cards {
         grid-template-columns: 1fr 1fr;
         justify-items: center;
     }
+
 }
 
 
